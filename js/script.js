@@ -39,6 +39,12 @@ enterGlow.addEventListener("click", () => {
 
 skipIntro.addEventListener("click", () => {
 
+    cinematicIntro.classList.add("skip-intro-now");
+
+});
+
+skipIntro.addEventListener("click", () => {
+
     cinematicIntro.style.animation = "none";
     cinematicIntro.style.transition = "none";
 
