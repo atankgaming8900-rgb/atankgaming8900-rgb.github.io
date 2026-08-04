@@ -52,10 +52,6 @@ skipIntro.addEventListener("click", () => {
 
     cinematicIntro.classList.add("skip-intro-now");
 
-});
-
-skipIntro.addEventListener("click", () => {
-
     cinematicIntro.style.animation = "none";
     cinematicIntro.style.transition = "none";
 
@@ -64,6 +60,10 @@ skipIntro.addEventListener("click", () => {
     cinematicIntro.style.opacity = "0";
     cinematicIntro.style.visibility = "hidden";
     cinematicIntro.style.pointerEvents = "none";
+
+    // Unlock page scrolling immediately
+    document.documentElement.classList.remove("intro-active");
+    document.body.classList.remove("intro-active");
 
 });
 
