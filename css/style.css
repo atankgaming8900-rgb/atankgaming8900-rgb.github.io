@@ -1560,3 +1560,461 @@ body.intro-playing footer {
     visibility: hidden !important;
     pointer-events: none !important;
 }
+
+/* =========================================================
+   CINEMATIC MINECRAFT INTRO — BLACK HOLE SCENE
+   ========================================================= */
+
+.cinematic-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #000;
+
+    transition:
+        opacity 2.2s ease,
+        visibility 2.2s ease;
+}
+
+
+/* Main Minecraft scene */
+
+.intro-scene {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        url("../black-hole-intro.png");
+
+    background-size: cover;
+    background-position: center;
+
+    transform: scale(1.03);
+
+    animation:
+        introSceneFloat 12s ease-in-out infinite alternate;
+
+    will-change: transform;
+}
+
+
+@keyframes introSceneFloat {
+
+    from {
+        transform: scale(1.03);
+    }
+
+    to {
+        transform: scale(1.09);
+    }
+
+}
+
+
+/* Cinematic darkness around edges */
+
+.intro-vignette {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 35%,
+            rgba(0, 0, 0, 0.18) 60%,
+            rgba(0, 0, 0, 0.78) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Subtle moving stars */
+
+.intro-stars {
+    position: absolute;
+    inset: -20%;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.7) 0 1px,
+            transparent 1.5px
+        );
+
+    background-size: 180px 180px;
+
+    opacity: 0.18;
+
+    animation:
+        starsDrift 18s linear infinite;
+
+    mix-blend-mode: screen;
+}
+
+
+@keyframes starsDrift {
+
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(-80px, 40px, 0) scale(1.08);
+    }
+
+}
+
+
+/* =========================================================
+   BLACK HOLE
+   ========================================================= */
+
+.intro-black-hole {
+    position: absolute;
+
+    width: min(16vw, 170px);
+    height: min(16vw, 170px);
+
+    left: 50%;
+    top: 22%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #000 0 32%,
+            rgba(0,0,0,0.95) 42%,
+            rgba(255,255,255,0.12) 55%,
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,0.12),
+        0 0 70px rgba(120,150,190,0.16),
+        0 0 130px rgba(80,110,150,0.12);
+
+    animation:
+        blackHolePulse 5s ease-in-out infinite alternate;
+
+    pointer-events: none;
+}
+
+
+@keyframes blackHolePulse {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            scale(0.94)
+            rotate(0deg);
+
+        filter: brightness(0.9);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            scale(1.08)
+            rotate(8deg);
+
+        filter: brightness(1.15);
+    }
+
+}
+
+
+/* =========================================================
+   INTRO CONTENT
+   ========================================================= */
+
+.intro-content {
+    position: relative;
+
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    margin-top: 30vh;
+
+    animation:
+        introContentIn 1.4s ease forwards;
+}
+
+
+@keyframes introContentIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+.intro-label {
+    color: #c4c9d1;
+
+    font-size: 0.68rem;
+    font-weight: 700;
+
+    letter-spacing: 0.32em;
+}
+
+
+.intro-content h1 {
+    margin-top: 10px;
+
+    font-size: clamp(4rem, 12vw, 9rem);
+
+    line-height: 0.85;
+
+    letter-spacing: -0.08em;
+
+    color: #f5f7fa;
+
+    text-shadow:
+        0 0 25px rgba(255,255,255,0.08);
+}
+
+
+.intro-subtitle {
+    margin-top: 20px;
+
+    color: #b1b7c0;
+
+    font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   ENTER BUTTON
+   ========================================================= */
+
+.intro-button {
+    margin-top: 35px;
+
+    padding: 13px 30px;
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    border-radius: 999px;
+
+    background: rgba(0,0,0,0.28);
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    letter-spacing: 0.13em;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.intro-button:hover {
+
+    transform: translateY(-3px);
+
+    background: rgba(255,255,255,0.1);
+
+    border-color: rgba(255,255,255,0.45);
+
+    box-shadow:
+        0 12px 40px rgba(0,0,0,0.4);
+}
+
+
+/* =========================================================
+   SKIP
+   ========================================================= */
+
+.skip-intro {
+    position: absolute;
+
+    right: 30px;
+    bottom: 25px;
+
+    z-index: 20;
+
+    border: none;
+
+    background: transparent;
+
+    color: rgba(255,255,255,0.55);
+
+    font-family: inherit;
+
+    font-size: 0.72rem;
+
+    cursor: pointer;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.skip-intro:hover {
+    color: #fff;
+
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   ENTER GLOW — CAMERA FLIES INTO BLACK HOLE
+   ========================================================= */
+
+.cinematic-intro.intro-exit {
+    animation:
+        cinematicExit 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
+
+    pointer-events: none;
+}
+
+
+.cinematic-intro.intro-exit .intro-scene {
+    animation:
+        blackHoleTravel 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
+}
+
+
+.cinematic-intro.intro-exit .intro-content {
+    animation:
+        introContentExit 0.7s ease forwards;
+}
+
+
+@keyframes blackHoleTravel {
+
+    0% {
+        transform: scale(1.03);
+        filter: brightness(1);
+    }
+
+    35% {
+        transform: scale(1.12);
+        filter: brightness(1.05);
+    }
+
+    65% {
+        transform: scale(1.55);
+        filter: brightness(1.25);
+    }
+
+    85% {
+        transform: scale(2.8);
+        filter: brightness(1.7);
+    }
+
+    100% {
+        transform: scale(7);
+        filter: brightness(2.5);
+    }
+
+}
+
+
+@keyframes cinematicExit {
+
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    72% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+}
+
+
+@keyframes introContentExit {
+
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .intro-scene {
+        background-position: center;
+    }
+
+    .intro-black-hole {
+        width: 100px;
+        height: 100px;
+
+        top: 22%;
+    }
+
+    .intro-content {
+        margin-top: 38vh;
+
+        padding: 0 20px;
+    }
+
+    .intro-content h1 {
+        font-size: clamp(4rem, 20vw, 7rem);
+    }
+
+    .intro-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .skip-intro {
+        right: 20px;
+        bottom: 20px;
+    }
+
+   }
