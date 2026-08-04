@@ -18,10 +18,17 @@ const skipIntro =
 
 function exitIntro() {
 
+    document.body.classList.add("intro-playing");
+
     cinematicIntro.classList.add("intro-exit");
 
-}
+    setTimeout(() => {
 
+        document.body.classList.remove("intro-playing");
+
+    }, 2400);
+
+}
 
 enterGlow.addEventListener("click", () => {
 
