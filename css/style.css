@@ -1389,11 +1389,28 @@ footer {
 }
 
 .cinematic-intro.intro-exit {
-    opacity: 0;
-    visibility: hidden;
+    animation: introFadeOut 2.4s ease forwards;
     pointer-events: none;
 }
 
+@keyframes introFadeOut {
+
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    70% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+}
 
 /* Forward movement */
 
