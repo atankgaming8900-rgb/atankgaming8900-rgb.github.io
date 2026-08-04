@@ -2212,3 +2212,6 @@ body.intro-active {
         font-size: 0.9rem;
     }
 
+   .intro-black-hole {
+    display: none;
+   }
