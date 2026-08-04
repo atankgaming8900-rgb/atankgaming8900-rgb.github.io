@@ -1547,3 +1547,16 @@ body.intro-playing footer {
     }
 
 }
+
+/* =========================================================
+   INSTANT SKIP INTRO
+   ========================================================= */
+
+.cinematic-intro.skip-intro-now {
+    animation: none !important;
+    transition: none !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
