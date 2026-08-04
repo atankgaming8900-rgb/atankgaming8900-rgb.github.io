@@ -1,4 +1,11 @@
 /* =========================================================
+   LOCK PAGE DURING CINEMATIC INTRO
+   ========================================================= */
+
+document.documentElement.classList.add("intro-active");
+document.body.classList.add("intro-active");
+
+/* =========================================================
    GLOW — WEBSITE INTERACTIONS
    ========================================================= */
 
