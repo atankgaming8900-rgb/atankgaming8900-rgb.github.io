@@ -39,7 +39,11 @@ enterGlow.addEventListener("click", () => {
 
 skipIntro.addEventListener("click", () => {
 
-    exitIntro();
+    cinematicIntro.classList.remove("intro-exit");
+
+    cinematicIntro.style.opacity = "0";
+    cinematicIntro.style.visibility = "hidden";
+    cinematicIntro.style.pointerEvents = "none";
 
 });
 
