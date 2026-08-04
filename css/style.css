@@ -1992,3 +1992,14 @@ body.intro-playing footer {
     }
 
    }
+
+/* =========================================================
+   LOCK PAGE WHILE CINEMATIC INTRO IS ACTIVE
+   ========================================================= */
+
+html.intro-active,
+body.intro-active {
+    overflow: hidden !important;
+    height: 100%;
+    touch-action: none;
+}
