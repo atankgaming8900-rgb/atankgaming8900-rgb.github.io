@@ -1465,6 +1465,10 @@ body.intro-playing footer {
 
 /* Main Minecraft scene */
 
+/* =========================================================
+   INTRO SCENE
+   ========================================================= */
+
 .intro-scene {
     position: absolute;
     inset: 0;
@@ -1477,15 +1481,14 @@ body.intro-playing footer {
 
     transform: scale(1.03);
 
-    animation:
-        introSceneFloat 12s ease-in-out infinite alternate;
+    animation: introSceneFloat 12s ease-in-out infinite alternate;
 
     will-change: transform;
+
+    z-index: 0;
 }
 
-
 @keyframes introSceneFloat {
-
     from {
         transform: scale(1.03);
     }
@@ -1493,7 +1496,6 @@ body.intro-playing footer {
     to {
         transform: scale(1.09);
     }
-
 }
 
 
@@ -1506,14 +1508,15 @@ body.intro-playing footer {
     background:
         radial-gradient(
             ellipse at center,
-            transparent 35%,
-            rgba(0, 0, 0, 0.18) 60%,
-            rgba(0, 0, 0, 0.78) 100%
+            transparent 45%,
+            rgba(0, 0, 0, 0.20) 70%,
+            rgba(0, 0, 0, 0.72) 100%
         );
 
     pointer-events: none;
-}
 
+    z-index: 1;
+}
 
 /* Subtle moving stars */
 
