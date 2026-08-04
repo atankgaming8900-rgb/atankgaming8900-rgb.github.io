@@ -821,25 +821,20 @@ input {
 
     border: 1px solid var(--line);
     border-radius: 18px;
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
 }
 
-.release-label {
-    color: var(--muted);
+.release:hover {
+    transform: translateY(-6px);
 
-    font-size: 0.68rem;
-    font-weight: 700;
+    border-color: rgba(255, 255, 255, 0.18);
 
-    letter-spacing: 0.16em;
-}
-
-.release h3 {
-    margin-top: 5px;
-
-    font-size: 1.5rem;
-}
-
-.release p:not(.release-label) {
-    color: var(--muted);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
 .release-version {
@@ -851,6 +846,19 @@ input {
     color: var(--muted);
 
     font-size: 0.75rem;
+
+    transition:
+        border-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.release:hover .release-version {
+    transform: translateX(-3px);
+
+    border-color: rgba(255, 255, 255, 0.2);
+
+    color: var(--text);
 }
 
 
