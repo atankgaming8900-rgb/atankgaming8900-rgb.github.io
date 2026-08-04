@@ -3,10 +3,8 @@
    ========================================================= */
 
 document.documentElement.classList.add("intro-active");
+document.body.classList.add("intro-active");
 
-/* =========================================================
-   GLOW — WEBSITE INTERACTIONS
-   ========================================================= */
 
 /* =========================================================
    CINEMATIC INTRO
@@ -22,7 +20,19 @@ const skipIntro =
     document.getElementById("skipIntro");
 
 
-function exitIntro() {
+function unlockPage() {
+
+    document.documentElement.classList.remove("intro-active");
+    document.body.classList.remove("intro-active");
+
+}
+
+
+/* =========================================================
+   ENTER GLOW
+   ========================================================= */
+
+enterGlow.addEventListener("click", () => {
 
     document.body.classList.add("intro-playing");
 
@@ -30,24 +40,24 @@ function exitIntro() {
 
     setTimeout(() => {
 
+        cinematicIntro.style.display = "none";
+
         document.body.classList.remove("intro-playing");
 
-        document.documentElement.classList.remove("intro-active");
+        unlockPage();
 
     }, 2400);
-
-}
-
-enterGlow.addEventListener("click", () => {
-
-    exitIntro();
 
 });
 
 
+/* =========================================================
+   SKIP INTRO
+   ========================================================= */
+
 skipIntro.addEventListener("click", () => {
 
-    cinematicIntro.classList.add("skip-intro-now");
+    /* Immediately remove intro */
 
     cinematicIntro.style.animation = "none";
     cinematicIntro.style.transition = "none";
@@ -58,7 +68,10 @@ skipIntro.addEventListener("click", () => {
     cinematicIntro.style.visibility = "hidden";
     cinematicIntro.style.pointerEvents = "none";
 
-    document.documentElement.classList.remove("intro-active");
+    /* IMPORTANT:
+       Unlock scrolling */
+
+    unlockPage();
 
 });
 
