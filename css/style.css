@@ -932,6 +932,25 @@ input {
     letter-spacing: -0.06em;
 }
 
+.final-cta h2 {
+    margin-top: 15px;
+
+    font-size: clamp(3rem, 8vw, 7rem);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.06em;
+
+    transition:
+        transform 0.5s ease,
+        letter-spacing 0.5s ease;
+}
+
+.final-cta:hover h2 {
+    transform: scale(1.015);
+
+    letter-spacing: -0.065em;
+}
 
 /* =========================================================
    FOOTER
