@@ -2217,3 +2217,19 @@ body.intro-active {
    .intro-black-hole {
     display: none;
    }
+
+   /* TEST — force cinematic intro content to exact center */
+
+.cinematic-intro {
+    display: grid !important;
+    place-items: center !important;
+}
+
+.intro-content {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+
+    margin: 0 !important;
+}
