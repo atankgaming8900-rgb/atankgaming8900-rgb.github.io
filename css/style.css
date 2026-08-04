@@ -1377,3 +1377,19 @@ footer {
 
     transform: translateX(3px);
 }
+
+/* =========================================================
+   CINEMATIC INTRO EXIT
+   ========================================================= */
+
+.cinematic-intro {
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.cinematic-intro.intro-exit {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
