@@ -2270,3 +2270,86 @@ body.intro-active {
     }
 
 }
+
+/* =========================================================
+   CINEMATIC INTRO — STAGGERED TEXT
+   ========================================================= */
+
+.intro-label {
+    opacity: 0;
+
+    animation: introTextFade 0.8s ease forwards;
+    animation-delay: 0.5s;
+}
+
+.intro-content h1 {
+    opacity: 0;
+
+    animation: introTitleFade 1s ease forwards;
+    animation-delay: 0.7s;
+}
+
+.intro-subtitle {
+    opacity: 0;
+
+    animation: introTextFade 0.8s ease forwards;
+    animation-delay: 1s;
+}
+
+.intro-button {
+    opacity: 0;
+
+    animation: introButtonFade 0.8s ease forwards;
+    animation-delay: 1.3s;
+}
+
+
+/* Small text animation */
+
+@keyframes introTextFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* GLOW title animation */
+
+@keyframes introTitleFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* Button animation */
+
+@keyframes introButtonFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
