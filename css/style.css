@@ -2000,6 +2000,4 @@ body.intro-playing footer {
 html.intro-active,
 body.intro-active {
     overflow: hidden !important;
-    height: 100%;
-    touch-action: none;
 }
