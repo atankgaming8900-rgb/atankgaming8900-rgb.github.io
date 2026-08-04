@@ -1473,7 +1473,8 @@ body.intro-playing footer {
     position: absolute;
     inset: 0;
 
-    background-image: None;
+    background-image:
+       url("../black-hole-intro.png");
     background-size: cover;
     background-position: center;
 
