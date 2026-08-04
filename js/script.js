@@ -443,20 +443,3 @@ document.querySelectorAll('a[href="#"]').forEach(link => {
     });
 
 });
-
-/* =========================================================
-   CINEMATIC INTRO — ENTER ZOOM
-   ========================================================= */
-
-const cinematicIntro = document.getElementById("cinematicIntro");
-const enterGlow = document.getElementById("enterGlow");
-
-if (cinematicIntro && enterGlow) {
-
-    enterGlow.addEventListener("click", () => {
-
-        cinematicIntro.classList.add("intro-zoom");
-
-    });
-
-}
