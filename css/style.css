@@ -956,7 +956,7 @@ input {
    FOOTER
    ========================================================= */
 
-.footer {
+footer {
     padding: 70px 5% 30px;
 
     border-top: 1px solid var(--line);
@@ -989,11 +989,15 @@ input {
 
     font-size: 0.85rem;
 
-    transition: color 0.3s ease;
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
 }
 
 .footer-links a:hover {
     color: var(--text);
+
+    transform: translateY(-2px);
 }
 
 .footer-bottom {
