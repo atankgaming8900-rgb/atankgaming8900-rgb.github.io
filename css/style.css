@@ -1209,32 +1209,6 @@ footer {
 
 }
 
-
-/* Dark center */
-
-.intro-space::after {
-    content: "";
-
-    position: absolute;
-
-    width: 110px;
-    height: 110px;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background: #000;
-
-    box-shadow:
-        0 0 35px rgba(255, 255, 255, 0.08),
-        0 0 100px rgba(150, 170, 200, 0.08);
-}
-
-
 /* Intro content */
 
 .intro-content {
