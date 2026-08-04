@@ -3,7 +3,6 @@
    ========================================================= */
 
 document.documentElement.classList.add("intro-active");
-document.body.classList.add("intro-active");
 
 /* =========================================================
    GLOW — WEBSITE INTERACTIONS
@@ -33,9 +32,7 @@ function exitIntro() {
 
         document.body.classList.remove("intro-playing");
 
-        // Unlock page scrolling
         document.documentElement.classList.remove("intro-active");
-        document.body.classList.remove("intro-active");
 
     }, 2400);
 
@@ -61,9 +58,7 @@ skipIntro.addEventListener("click", () => {
     cinematicIntro.style.visibility = "hidden";
     cinematicIntro.style.pointerEvents = "none";
 
-    // Unlock page scrolling immediately
     document.documentElement.classList.remove("intro-active");
-    document.body.classList.remove("intro-active");
 
 });
 
