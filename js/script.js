@@ -33,6 +33,10 @@ function exitIntro() {
 
         document.body.classList.remove("intro-playing");
 
+        // Unlock page scrolling
+        document.documentElement.classList.remove("intro-active");
+        document.body.classList.remove("intro-active");
+
     }, 2400);
 
 }
