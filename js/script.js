@@ -2,6 +2,39 @@
    GLOW — WEBSITE INTERACTIONS
    ========================================================= */
 
+/* =========================================================
+   CINEMATIC INTRO
+   ========================================================= */
+
+const cinematicIntro =
+    document.getElementById("cinematicIntro");
+
+const enterGlow =
+    document.getElementById("enterGlow");
+
+const skipIntro =
+    document.getElementById("skipIntro");
+
+
+function exitIntro() {
+
+    cinematicIntro.classList.add("intro-exit");
+
+}
+
+
+enterGlow.addEventListener("click", () => {
+
+    exitIntro();
+
+});
+
+
+skipIntro.addEventListener("click", () => {
+
+    exitIntro();
+
+});
 
 /* =========================================================
    HERO SLIDESHOW
