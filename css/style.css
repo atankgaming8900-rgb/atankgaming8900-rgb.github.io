@@ -2001,3 +2001,306 @@ html.intro-active,
 body.intro-active {
     overflow: hidden !important;
 }
+
+/* =========================================================
+   GLOW — CINEMATIC INTRO FINAL POLISH
+   ========================================================= */
+
+/* Remove the artificial black circle.
+   The black hole is already part of the background image. */
+
+.intro-space::after {
+    display: none !important;
+}
+
+
+/* =========================================================
+   INTRO CONTENT POSITION
+   ========================================================= */
+
+.intro-content {
+    position: relative;
+    z-index: 10;
+
+    width: min(90%, 700px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    /* Move the content upward */
+    transform: translateY(-7vh);
+
+    /* Make the content easier to read */
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.75),
+        0 4px 30px rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================================
+   WELCOME TO
+   ========================================================= */
+
+.intro-label {
+    position: relative;
+    z-index: 2;
+
+    margin-bottom: 8px;
+
+    color: rgba(255, 255, 255, 0.95);
+
+    font-size: clamp(0.65rem, 2vw, 0.85rem);
+    font-weight: 600;
+
+    letter-spacing: 0.32em;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.9),
+        0 0 18px rgba(255, 255, 255, 0.25);
+}
+
+
+/* =========================================================
+   GLOW TITLE
+   ========================================================= */
+
+.intro-content h1 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: clamp(4.5rem, 17vw, 9rem);
+    line-height: 0.85;
+
+    font-weight: 800;
+
+    letter-spacing: -0.055em;
+
+    /* Actual cinematic glow */
+
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.9),
+        0 0 15px rgba(255, 255, 255, 0.75),
+        0 0 35px rgba(255, 255, 255, 0.45),
+        0 0 70px rgba(255, 255, 255, 0.22);
+
+    filter:
+        drop-shadow(0 5px 20px rgba(0, 0, 0, 0.55));
+
+    animation: glowTitlePulse 4s ease-in-out infinite alternate;
+}
+
+
+@keyframes glowTitlePulse {
+
+    from {
+        text-shadow:
+            0 0 5px rgba(255, 255, 255, 0.85),
+            0 0 15px rgba(255, 255, 255, 0.65),
+            0 0 35px rgba(255, 255, 255, 0.35),
+            0 0 60px rgba(255, 255, 255, 0.18);
+    }
+
+    to {
+        text-shadow:
+            0 0 8px rgba(255, 255, 255, 1),
+            0 0 22px rgba(255, 255, 255, 0.8),
+            0 0 45px rgba(255, 255, 255, 0.5),
+            0 0 90px rgba(255, 255, 255, 0.25);
+    }
+
+}
+
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.intro-subtitle {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 28px;
+
+    color: rgba(255, 255, 255, 0.95);
+
+    font-size: clamp(0.95rem, 3vw, 1.2rem);
+
+    letter-spacing: 0.02em;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.95),
+        0 4px 25px rgba(0, 0, 0, 0.75);
+}
+
+
+/* =========================================================
+   ENTER GLOW BUTTON
+   ========================================================= */
+
+.intro-button {
+    position: relative;
+    z-index: 5;
+
+    margin-top: 38px;
+
+    min-width: 190px;
+    min-height: 54px;
+
+    padding: 14px 30px;
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 999px;
+
+    background:
+        rgba(5, 6, 8, 0.42);
+
+    color: #ffffff;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    letter-spacing: 0.18em;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 8px 35px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(255, 255, 255, 0.08);
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.8);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.intro-button:hover {
+    transform: translateY(-3px) scale(1.03);
+
+    background:
+        rgba(255, 255, 255, 0.16);
+
+    border-color: rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 10px 45px rgba(0, 0, 0, 0.5),
+        0 0 35px rgba(255, 255, 255, 0.22);
+}
+
+
+.intro-button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================================
+   SKIP INTRO
+   ========================================================= */
+
+.skip-intro {
+    position: absolute;
+
+    right: 28px;
+    bottom: 25px;
+
+    z-index: 20;
+
+    padding: 10px 8px;
+
+    border: none;
+
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 0.85rem;
+
+    letter-spacing: 0.03em;
+
+    cursor: pointer;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.9);
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+
+.skip-intro:hover {
+    color: #ffffff;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .intro-content {
+        width: 92%;
+
+        /* Move content higher on phone */
+        transform: translateY(-8vh);
+    }
+
+    .intro-label {
+        margin-bottom: 7px;
+
+        letter-spacing: 0.28em;
+    }
+
+    .intro-content h1 {
+        font-size: clamp(4.2rem, 20vw, 6.5rem);
+
+        letter-spacing: -0.06em;
+    }
+
+    .intro-subtitle {
+        margin-top: 24px;
+
+        font-size: 0.95rem;
+
+        white-space: nowrap;
+    }
+
+    .intro-button {
+        margin-top: 34px;
+
+        min-width: 205px;
+        min-height: 56px;
+
+        padding: 15px 30px;
+
+        font-size: 0.82rem;
+    }
+
+    .skip-intro {
+        right: 20px;
+        bottom: 20px;
+
+        padding: 12px 6px;
+
+        font-size: 0.9rem;
+    }
+
