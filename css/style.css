@@ -3500,3 +3500,211 @@ body.intro-playing footer {
         padding: 12px 6px;
     }
 }
+
+/* =========================================================
+   GLOW — FINAL INTRO OVERRIDE
+   JAVASCRIPT CONTROLS THE ENTIRE CAMERA SHOT
+   ========================================================= */
+
+/* Stop every previous CSS transition animation */
+
+.cinematic-intro.intro-exit {
+    animation: none !important;
+    transition: none !important;
+}
+
+
+/* =========================================================
+   CAMERA
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-scene {
+    animation: none !important;
+    transition: none !important;
+
+    will-change: transform;
+
+    transform-origin: 50% 22% !important;
+}
+
+
+/* =========================================================
+   BLACK HOLE
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-black-hole {
+    animation: none !important;
+    transition: none !important;
+
+    will-change: transform;
+
+    /*
+       JavaScript controls the scale.
+       No CSS animation is allowed to
+       modify it simultaneously.
+    */
+}
+
+
+/* =========================================================
+   OLD PSEUDO RING — DISABLE IT
+   ========================================================= */
+
+.cinematic-intro .intro-black-hole::before,
+.cinematic-intro .intro-black-hole::after {
+    animation: none !important;
+    content: none !important;
+}
+
+
+/* =========================================================
+   SINGLE RING
+   ========================================================= */
+
+.cinematic-intro .black-hole-ring {
+
+    animation: none !important;
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 155%;
+    height: 42%;
+
+    transform:
+        translate3d(-50%, -50%, 0)
+        rotate(-12deg);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 0 35%,
+            rgba(230,235,242,0.20) 44%,
+            rgba(180,195,215,0.13) 51%,
+            rgba(100,120,145,0.06) 60%,
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 12px rgba(220,230,240,0.10),
+        0 0 30px rgba(150,175,205,0.08);
+
+    opacity: 0.9;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CORE
+   ========================================================= */
+
+.cinematic-intro .black-hole-core {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 58%;
+    height: 58%;
+
+    transform:
+        translate3d(-50%, -50%, 0);
+
+    border-radius: 50%;
+
+    background: #000;
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,1),
+        0 0 65px rgba(0,0,0,0.95);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   BLACK HOLE GLOW
+   ========================================================= */
+
+.cinematic-intro .black-hole-glow {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 120%;
+    height: 120%;
+
+    transform:
+        translate3d(-50%, -50%, 0);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 45%,
+            rgba(120,150,180,0.055) 58%,
+            rgba(80,110,145,0.025) 70%,
+            transparent 78%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SKIP BUTTON
+   ========================================================= */
+
+.cinematic-intro .skip-intro {
+
+    z-index: 999999 !important;
+
+    pointer-events: auto !important;
+
+    visibility: visible !important;
+}
+
+
+/* During transition it must STILL be clickable */
+
+.cinematic-intro.intro-exit .skip-intro {
+
+    z-index: 999999 !important;
+
+    pointer-events: auto !important;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+}
+
+
+/* =========================================================
+   FINAL BLACK
+   ========================================================= */
+
+.cinematic-intro .intro-black-screen {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1000000;
+
+    background: #000;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    will-change: opacity;
+}
