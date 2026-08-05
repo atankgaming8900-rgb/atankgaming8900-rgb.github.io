@@ -935,6 +935,16 @@ input {
     line-height: 0.95;
 
     letter-spacing: -0.06em;
+}
+
+.final-cta h2 {
+    margin-top: 15px;
+
+    font-size: clamp(3rem, 8vw, 7rem);
+
+    line-height: 0.95;
+
+    letter-spacing: -0.06em;
 
     transition:
         transform 0.5s ease,
@@ -1092,634 +1102,397 @@ footer {
 
 
 /* =========================================================
-   =========================================================
-   CINEMATIC INTRO — CLEAN SINGLE-SCENE SYSTEM
-   =========================================================
-   ========================================================= */
-
-
-/* =========================================================
-   INTRO ROOT
+   CINEMATIC INTRO — SINGLE-SOURCE CINEMATIC SHOT
    ========================================================= */
 
 .cinematic-intro {
     position: fixed;
     inset: 0;
-
     z-index: 9999;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
-
     background: #020305;
-
-    opacity: 1;
-    visibility: visible;
-
     isolation: isolate;
 }
-
-
-/* =========================================================
-   INTRO SCENE
-   ========================================================= */
 
 .intro-scene {
     position: absolute;
     inset: 0;
-
     z-index: 0;
-
-    background-image:
-        url("../black-hole-intro.png");
-
+    background-image: url("../black-hole-intro.png");
     background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-
-    transform:
-        translate3d(0, 0, 0)
-        scale(1.035);
-
-    transform-origin: 50% 22%;
-
+    background-position: center;
+    transform: scale(1.03);
+    transform-origin: 52% 22%;
     will-change: transform, filter;
-
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
 }
-
-
-/* =========================================================
-   SUBTLE SCENE MOVEMENT
-   ========================================================= */
-
-.intro-scene::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at 50% 22%,
-            transparent 0%,
-            transparent 42%,
-            rgba(0, 0, 0, 0.10) 72%,
-            rgba(0, 0, 0, 0.55) 100%
-        );
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   STARS
-   ========================================================= */
-
-.intro-stars {
-    position: absolute;
-
-    inset: -20%;
-
-    background-image:
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.7) 0 1px,
-            transparent 1.5px
-        );
-
-    background-size: 180px 180px;
-
-    opacity: 0.16;
-
-    mix-blend-mode: screen;
-
-    pointer-events: none;
-
-    will-change: transform;
-}
-
-
-/* =========================================================
-   VIGNETTE
-   ========================================================= */
 
 .intro-vignette {
     position: absolute;
     inset: 0;
-
+    z-index: 1;
+    pointer-events: none;
     background:
         radial-gradient(
-            ellipse at center,
-            transparent 35%,
-            rgba(0, 0, 0, 0.10) 58%,
-            rgba(0, 0, 0, 0.48) 82%,
+            ellipse at 52% 23%,
+            transparent 30%,
+            rgba(0, 0, 0, 0.16) 60%,
             rgba(0, 0, 0, 0.78) 100%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.12),
+            transparent 35%,
+            rgba(0, 0, 0, 0.28)
         );
-
-    pointer-events: none;
 }
 
+.intro-stars {
+    position: absolute;
+    inset: -20%;
+    z-index: 2;
+    pointer-events: none;
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.62) 0 1px,
+            transparent 1.5px
+        );
+    background-size: 180px 180px;
+    opacity: 0.16;
+    mix-blend-mode: screen;
+    animation: starsDrift 22s linear infinite;
+}
 
-/* =========================================================
-   BLACK HOLE — ONE REAL OBJECT
-   ========================================================= */
+@keyframes starsDrift {
+    from { transform: translate3d(0,0,0); }
+    to { transform: translate3d(-45px,22px,0); }
+}
+
+/* ---------------------------------------------------------
+   ONE BLACK HOLE — FIXED IN SPACE
+   --------------------------------------------------------- */
 
 .intro-black-hole {
     position: absolute;
-
-    left: 50%;
+    left: 52%;
     top: 22%;
-
-    width: clamp(135px, 16vw, 190px);
-    height: clamp(135px, 16vw, 190px);
-
-    transform:
-        translate3d(-50%, -50%, 0)
-        scale(1);
-
-    transform-origin: center center;
-
-    z-index: 5;
-
+    width: min(18vw, 190px);
+    aspect-ratio: 1;
+    z-index: 6;
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    transform-origin: center;
     border-radius: 50%;
-
     pointer-events: none;
-
-    will-change: transform, filter;
-
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-
-    filter: brightness(1);
-
-    /*
-       The black hole itself stays black.
-       The rings provide the visual structure.
-    */
-
+    will-change: transform, filter, opacity;
     background:
         radial-gradient(
             circle,
-            #000000 0%,
-            #000000 34%,
-            rgba(0, 0, 0, 0.99) 43%,
-            rgba(4, 5, 8, 0.98) 48%,
-            rgba(10, 12, 17, 0.75) 52%,
-            transparent 68%
+            #000 0 27%,
+            #020204 35%,
+            rgba(0,0,0,0.98) 42%,
+            rgba(4,5,8,0.9) 47%,
+            rgba(255,255,255,0.10) 51%,
+            rgba(170,195,225,0.08) 58%,
+            rgba(80,110,150,0.04) 67%,
+            transparent 75%
         );
-
     box-shadow:
-        0 0 22px rgba(255, 255, 255, 0.08),
-        0 0 55px rgba(120, 145, 180, 0.14),
-        0 0 105px rgba(80, 110, 150, 0.10),
-        0 0 170px rgba(50, 80, 120, 0.07);
+        0 0 20px rgba(255,255,255,0.07),
+        0 0 55px rgba(150,180,220,0.12),
+        0 0 120px rgba(80,110,160,0.10);
 }
-
-
-/* =========================================================
-   BLACK HOLE CORE
-   ========================================================= */
 
 .black-hole-core {
     position: absolute;
-
     left: 50%;
     top: 50%;
-
-    width: 43%;
-    height: 43%;
-
-    transform:
-        translate3d(-50%, -50%, 0);
-
+    width: 52%;
+    height: 52%;
+    transform: translate(-50%, -50%);
     border-radius: 50%;
-
-    background: #000000;
-
+    background: #000;
     box-shadow:
-        0 0 18px rgba(0, 0, 0, 1),
-        0 0 40px rgba(0, 0, 0, 0.95);
-
-    z-index: 5;
+        0 0 16px rgba(0,0,0,0.95),
+        0 0 30px rgba(0,0,0,0.75);
 }
-
-
-/* =========================================================
-   ACCRETION RINGS
-   ========================================================= */
 
 .black-hole-ring {
     position: absolute;
-
     left: 50%;
     top: 50%;
-
     border-radius: 50%;
-
+    transform: translate(-50%, -50%);
     pointer-events: none;
-
-    transform:
-        translate3d(-50%, -50%, 0)
-        rotateX(68deg);
-
-    transform-origin: center center;
-
-    will-change: transform, opacity, filter;
-
-    mix-blend-mode: screen;
+    will-change: transform;
 }
-
-
-/* =========================================================
-   OUTER RING
-   ========================================================= */
 
 .ring-outer {
-    width: 150%;
-    height: 44%;
-
-    border:
-        2px solid
-        rgba(185, 205, 230, 0.18);
-
+    width: 104%;
+    height: 42%;
+    border: 1px solid rgba(210,225,245,0.17);
     box-shadow:
-        0 0 10px rgba(180, 200, 225, 0.15),
-        0 0 30px rgba(130, 160, 200, 0.14),
-        0 0 65px rgba(90, 120, 165, 0.09);
-
-    opacity: 0.68;
-
-    z-index: 1;
+        0 0 12px rgba(170,195,225,0.14),
+        0 0 28px rgba(100,130,170,0.08);
+    filter: blur(0.35px);
+    animation: ringRotateOuter 7s linear infinite;
 }
-
-
-/* =========================================================
-   MIDDLE RING
-   ========================================================= */
 
 .ring-middle {
-    width: 124%;
-    height: 36%;
-
-    border:
-        4px solid
-        rgba(230, 235, 245, 0.22);
-
+    width: 88%;
+    height: 31%;
+    border: 2px solid rgba(225,235,248,0.16);
     box-shadow:
-        0 0 8px rgba(255, 255, 255, 0.18),
-        0 0 22px rgba(200, 220, 240, 0.18),
-        0 0 45px rgba(120, 150, 190, 0.12);
-
-    opacity: 0.84;
-
-    z-index: 2;
+        0 0 14px rgba(190,215,240,0.16),
+        inset 0 0 10px rgba(190,215,240,0.07);
+    filter: blur(0.5px);
+    animation: ringRotateMiddle 5.2s linear infinite reverse;
 }
-
-
-/* =========================================================
-   INNER RING
-   ========================================================= */
 
 .ring-inner {
-    width: 96%;
-    height: 29%;
-
-    border:
-        5px solid
-        rgba(255, 255, 255, 0.34);
-
-    box-shadow:
-        0 0 8px rgba(255, 255, 255, 0.30),
-        0 0 18px rgba(220, 230, 245, 0.24),
-        0 0 35px rgba(150, 180, 215, 0.18);
-
-    opacity: 0.92;
-
-    z-index: 3;
+    width: 69%;
+    height: 23%;
+    border: 1px solid rgba(255,255,255,0.22);
+    box-shadow: 0 0 12px rgba(210,225,245,0.15);
+    filter: blur(0.4px);
+    animation: ringRotateInner 3.8s linear infinite;
 }
 
+@keyframes ringRotateOuter {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
 
-/* =========================================================
+@keyframes ringRotateMiddle {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes ringRotateInner {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ---------------------------------------------------------
    INTRO CONTENT
-   ========================================================= */
+   --------------------------------------------------------- */
 
 .cinematic-intro .intro-content {
     position: absolute;
-
     top: 50%;
     left: 50%;
-
+    z-index: 10;
     width: min(900px, 100%);
     max-width: 900px;
-
     margin: 0;
     padding: 20px;
-
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     text-align: center;
-
-    transform:
-        translate3d(-50%, -50%, 0);
-
-    z-index: 10;
-
-    will-change:
-        opacity,
-        transform,
-        filter;
+    transform: translate3d(-50%, -50%, 0);
+    will-change: opacity, transform, filter;
+    animation: introContentIn 1.4s ease forwards;
 }
 
-
-/* =========================================================
-   WELCOME TO
-   ========================================================= */
+@keyframes introContentIn {
+    from {
+        opacity: 0;
+        transform: translate3d(-50%, calc(-50% + 20px), 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(-50%, -50%, 0);
+    }
+}
 
 .intro-label {
     position: relative;
     z-index: 2;
-
     margin-bottom: 8px;
-
-    color: rgba(255, 255, 255, 0.95);
-
+    color: rgba(255,255,255,0.95);
     font-size: clamp(0.65rem, 2vw, 0.85rem);
     font-weight: 600;
-
     letter-spacing: 0.32em;
-
     text-align: center;
-
     text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9),
-        0 0 18px rgba(255, 255, 255, 0.25);
-
+        0 2px 10px rgba(0,0,0,0.9),
+        0 0 18px rgba(255,255,255,0.25);
+    animation: introTextFade 0.8s ease 0.5s forwards;
     opacity: 0;
-
-    animation:
-        introTextFade
-        0.8s
-        ease
-        0.5s
-        forwards;
 }
-
-
-/* =========================================================
-   GLOW TITLE
-   ========================================================= */
 
 .intro-content h1 {
     position: relative;
     z-index: 2;
-
     margin: 0;
-
-    color: #ffffff;
-
+    color: #fff;
     font-size: clamp(4.5rem, 17vw, 9rem);
-
     line-height: 0.85;
-
     font-weight: 800;
-
     letter-spacing: -0.055em;
-
     text-align: center;
-
     text-shadow:
-        0 0 5px rgba(255, 255, 255, 0.9),
-        0 0 15px rgba(255, 255, 255, 0.75),
-        0 0 35px rgba(255, 255, 255, 0.45),
-        0 0 70px rgba(255, 255, 255, 0.22);
-
-    filter:
-        drop-shadow(0 5px 20px rgba(0, 0, 0, 0.55));
-
-    opacity: 0;
-
+        0 0 5px rgba(255,255,255,0.9),
+        0 0 15px rgba(255,255,255,0.75),
+        0 0 35px rgba(255,255,255,0.45),
+        0 0 70px rgba(255,255,255,0.22);
+    filter: drop-shadow(0 5px 20px rgba(0,0,0,0.55));
     animation:
-        introTitleFade
-        1s
-        ease
-        0.7s
-        forwards;
+        introTitleFade 1s ease 0.7s forwards,
+        glowTitlePulse 4s ease-in-out 1.7s infinite alternate;
+    opacity: 0;
 }
 
+@keyframes introTextFade {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-/* =========================================================
-   SUBTITLE
-   ========================================================= */
+@keyframes introTitleFade {
+    from { opacity: 0; transform: translateY(25px) scale(0.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes glowTitlePulse {
+    from {
+        text-shadow:
+            0 0 5px rgba(255,255,255,0.85),
+            0 0 15px rgba(255,255,255,0.65),
+            0 0 35px rgba(255,255,255,0.35),
+            0 0 60px rgba(255,255,255,0.18);
+    }
+    to {
+        text-shadow:
+            0 0 8px rgba(255,255,255,1),
+            0 0 22px rgba(255,255,255,0.8),
+            0 0 45px rgba(255,255,255,0.5),
+            0 0 90px rgba(255,255,255,0.25);
+    }
+}
 
 .intro-subtitle {
     position: relative;
     z-index: 2;
-
     margin-top: 28px;
-
-    color: rgba(255, 255, 255, 0.95);
-
+    color: rgba(255,255,255,0.95);
     font-size: clamp(0.95rem, 3vw, 1.2rem);
-
     letter-spacing: 0.02em;
-
     text-align: center;
-
     text-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.95),
-        0 4px 25px rgba(0, 0, 0, 0.75);
-
+        0 2px 12px rgba(0,0,0,0.95),
+        0 4px 25px rgba(0,0,0,0.75);
+    animation: introTextFade 0.8s ease 1s forwards;
     opacity: 0;
-
-    animation:
-        introTextFade
-        0.8s
-        ease
-        1s
-        forwards;
 }
-
-
-/* =========================================================
-   ENTER BUTTON
-   ========================================================= */
 
 .intro-button {
     position: relative;
-    z-index: 20;
-
+    z-index: 5;
     margin-top: 38px;
-
     min-width: 190px;
     min-height: 54px;
-
     padding: 14px 30px;
-
-    border: 1px solid rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255,255,255,0.65);
     border-radius: 999px;
-
-    background:
-        rgba(5, 6, 8, 0.42);
-
-    color: #ffffff;
-
+    background: rgba(5,6,8,0.42);
+    color: #fff;
     font-size: 0.85rem;
     font-weight: 700;
-
     letter-spacing: 0.18em;
-
     text-align: center;
-
     cursor: pointer;
-
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
     box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.08),
-        0 8px 35px rgba(0, 0, 0, 0.45),
-        0 0 30px rgba(255, 255, 255, 0.08);
-
-    text-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.8);
-
-    opacity: 0;
-
-    animation:
-        introButtonFade
-        0.8s
-        ease
-        1.3s
-        forwards;
-
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 8px 35px rgba(0,0,0,0.45),
+        0 0 30px rgba(255,255,255,0.08);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     transition:
         transform 0.3s ease,
         background 0.3s ease,
         box-shadow 0.3s ease,
         border-color 0.3s ease;
+    animation: introButtonFade 0.8s ease 1.3s forwards;
+    opacity: 0;
 }
 
 .intro-button:hover {
     transform: translateY(-3px) scale(1.03);
-
-    background:
-        rgba(255, 255, 255, 0.16);
-
-    border-color: rgba(255, 255, 255, 0.95);
-
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(255,255,255,0.95);
     box-shadow:
-        0 10px 45px rgba(0, 0, 0, 0.5),
-        0 0 35px rgba(255, 255, 255, 0.22);
+        0 10px 45px rgba(0,0,0,0.5),
+        0 0 35px rgba(255,255,255,0.22);
 }
 
-.intro-button:active {
-    transform: scale(0.97);
+.intro-button:active { transform: scale(0.97); }
+
+@keyframes introButtonFade {
+    from { opacity: 0; transform: translateY(15px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-
-/* =========================================================
-   SKIP INTRO
-   ========================================================= */
+/* ---------------------------------------------------------
+   SKIP — ALWAYS ABOVE THE CINEMATIC LAYERS
+   --------------------------------------------------------- */
 
 .skip-intro {
     position: absolute;
-
     right: 28px;
     bottom: 25px;
-
-    z-index: 100;
-
+    z-index: 10000;
     padding: 10px 8px;
-
     border: none;
-
     background: transparent;
-
-    color: rgba(255, 255, 255, 0.78);
-
+    color: rgba(255,255,255,0.82);
     font-size: 0.85rem;
-
     letter-spacing: 0.03em;
-
     cursor: pointer;
-
-    text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9);
-
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9);
     opacity: 1;
-
     visibility: visible;
-
     pointer-events: auto;
-
-    transition:
-        color 0.3s ease,
-        transform 0.3s ease,
-        opacity 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .skip-intro:hover {
-    color: #ffffff;
-
+    color: #fff;
     transform: translateY(-2px);
 }
 
+/* ---------------------------------------------------------
+   CINEMATIC EXIT — CONTROLLED BY ONE REQUESTANIMATIONFRAME
+   --------------------------------------------------------- */
 
-/* =========================================================
-   SPACE STREAKS
-   ========================================================= */
+.cinematic-intro.intro-exit {
+    pointer-events: auto;
+}
 
-.space-streaks {
+.cinematic-intro.intro-exit .intro-content {
+    animation: none;
+    opacity: 0;
+    filter: blur(1.5px);
+    transform: translate3d(-50%, -50%, 0) scale(0.985);
+    transition:
+        opacity 0.55s cubic-bezier(0.22,1,0.36,1),
+        filter 0.55s ease,
+        transform 0.55s cubic-bezier(0.22,1,0.36,1);
+}
+
+.cinematic-black-screen {
     position: absolute;
-
-    inset: -50%;
-
-    background:
-        linear-gradient(
-            105deg,
-            transparent 0%,
-            transparent 48%,
-            rgba(255, 255, 255, 0.035) 49%,
-            transparent 50%
-        ),
-        linear-gradient(
-            75deg,
-            transparent 0%,
-            transparent 53%,
-            rgba(180, 200, 220, 0.025) 54%,
-            transparent 55%
-        );
-
-    opacity: 0.25;
-
+    inset: 0;
+    z-index: 9000;
+    background: #000;
+    opacity: 0;
     pointer-events: none;
-
-    z-index: 4;
+    will-change: opacity;
 }
-
-
-/* =========================================================
-   PAGE LOCK
-   ========================================================= */
-
-html.intro-active,
-body.intro-active {
-    overflow: hidden !important;
-}
-
-
-/* =========================================================
-   HOMEPAGE HIDDEN DURING INTRO
-   ========================================================= */
 
 body.intro-playing .navbar,
 body.intro-playing .hero,
@@ -1729,246 +1502,62 @@ body.intro-playing footer {
     visibility: hidden !important;
 }
 
-
-/* =========================================================
-   CINEMATIC EXIT STATE
-   ========================================================= */
-
-.cinematic-intro.intro-exit {
-    pointer-events: none;
+html.intro-active,
+body.intro-active {
+    overflow: hidden !important;
 }
 
-
-/* =========================================================
-   TEXT EXIT
-   ========================================================= */
-
-.cinematic-intro.intro-exit .intro-content {
-    animation: none !important;
-
-    opacity: 0;
-
-    filter: blur(2px);
-
-    transform:
-        translate3d(-50%, -50%, 0)
-        scale(0.985);
-}
-
-
-/* =========================================================
-   FINAL BLACK SCREEN
-   ========================================================= */
-
-.cinematic-black-screen {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 500;
-
-    background: #000000;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    will-change: opacity;
-}
-
-
-/* =========================================================
-   INTRO FINISHED
-   ========================================================= */
-
-.cinematic-intro.intro-finished {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   INTRO TEXT ANIMATIONS
-   ========================================================= */
-
-@keyframes introTextFade {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translate3d(0, 12px, 0);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translate3d(0, 0, 0);
-    }
-
-}
-
-
-@keyframes introTitleFade {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translate3d(0, 25px, 0)
-            scale(0.94);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translate3d(0, 0, 0)
-            scale(1);
-    }
-
-}
-
-
-@keyframes introButtonFade {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translate3d(0, 15px, 0)
-            scale(0.96);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translate3d(0, 0, 0)
-            scale(1);
-    }
-
-}
-
-
-/* =========================================================
-   RESPONSIVE — INTRO MOBILE
-   ========================================================= */
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
 
 @media (max-width: 650px) {
-
-    .intro-scene {
-        background-position: center center;
-    }
+    .intro-scene { background-position: center; }
 
     .intro-black-hole {
         width: 105px;
-        height: 105px;
-
-        left: 50%;
+        left: 52%;
         top: 22%;
-    }
-
-    .ring-outer {
-        width: 155%;
-    }
-
-    .ring-middle {
-        width: 128%;
-    }
-
-    .ring-inner {
-        width: 98%;
     }
 
     .cinematic-intro .intro-content {
         top: 50%;
         left: 50%;
-
         width: 92%;
         max-width: 900px;
-
         margin: 0;
-
         padding: 0 20px;
-
-        transform:
-            translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, -50%, 0);
     }
 
     .intro-label {
         margin-bottom: 7px;
-
         letter-spacing: 0.28em;
     }
 
     .intro-content h1 {
         font-size: clamp(4.2rem, 20vw, 6.5rem);
-
         letter-spacing: -0.06em;
     }
 
     .intro-subtitle {
         margin-top: 24px;
-
         font-size: 0.95rem;
-
         white-space: nowrap;
     }
 
     .intro-button {
         margin-top: 34px;
-
         min-width: 205px;
         min-height: 56px;
-
         padding: 15px 30px;
-
         font-size: 0.82rem;
     }
 
     .skip-intro {
         right: 20px;
         bottom: 20px;
-
         padding: 12px 6px;
-
         font-size: 0.9rem;
     }
-
-}
-
-
-/* =========================================================
-   SCROLL REVEAL
-   ========================================================= */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(45px) scale(0.98);
-
-    transition:
-        opacity 0.9s ease,
-        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.revealed {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-
-/* =========================================================
-   INSTANT SKIP
-   ========================================================= */
-
-.cinematic-intro.skip-intro-now {
-    animation: none !important;
-    transition: none !important;
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
 }
