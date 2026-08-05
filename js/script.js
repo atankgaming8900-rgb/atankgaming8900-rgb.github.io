@@ -1,10 +1,10 @@
 /* =========================================================
-   GLOW — CINEMATIC INTRO + MAIN WEBSITE SCRIPT
+   GLOW — CINEMATIC INTRO + WEBSITE SCRIPT
    ========================================================= */
 
 
 /* =========================================================
-   LOCK PAGE DURING CINEMATIC INTRO
+   LOCK PAGE DURING INTRO
    ========================================================= */
 
 document.documentElement.classList.add("intro-active");
@@ -25,12 +25,18 @@ const skipIntro =
     document.getElementById("skipIntro");
 
 
+/* =========================================================
+   INTRO STATE
+   ========================================================= */
+
 let introFinished = false;
 let introTransitionRunning = false;
 
+let introTimers = [];
+
 
 /* =========================================================
-   UNLOCK PAGE
+   PAGE UNLOCK
    ========================================================= */
 
 function unlockPage() {
@@ -42,10 +48,25 @@ function unlockPage() {
 
 
 /* =========================================================
-   SHOW HOMEPAGE
+   CLEAR INTRO TIMERS
    ========================================================= */
 
-function showHomepage() {
+function clearIntroTimers() {
+
+    introTimers.forEach(timer => {
+        clearTimeout(timer);
+    });
+
+    introTimers = [];
+
+}
+
+
+/* =========================================================
+   FINISH INTRO
+   ========================================================= */
+
+function finishIntro() {
 
     if (introFinished) {
         return;
@@ -53,12 +74,20 @@ function showHomepage() {
 
     introFinished = true;
 
-    document.body.classList.remove("intro-playing");
+    clearIntroTimers();
 
     cinematicIntro.classList.remove("intro-exit");
-    cinematicIntro.classList.remove("intro-skip");
 
-    cinematicIntro.style.display = "none";
+    cinematicIntro.classList.add("skip-intro-now");
+
+    cinematicIntro.style.animation = "none";
+    cinematicIntro.style.transition = "none";
+
+    cinematicIntro.style.opacity = "0";
+    cinematicIntro.style.visibility = "hidden";
+    cinematicIntro.style.pointerEvents = "none";
+
+    document.body.classList.remove("intro-playing");
 
     unlockPage();
 
@@ -76,20 +105,23 @@ function skipCinematicIntro() {
     }
 
     introFinished = true;
+
+    clearIntroTimers();
+
     introTransitionRunning = false;
 
     /*
-       Remove every intro animation immediately.
+       Immediately stop every intro animation.
     */
 
     cinematicIntro.classList.remove("intro-exit");
-    cinematicIntro.classList.add("intro-skip");
+    cinematicIntro.classList.remove("intro-zoom");
 
     cinematicIntro.style.animation = "none";
     cinematicIntro.style.transition = "none";
 
     /*
-       Force the intro to disappear.
+       Hide the intro immediately.
     */
 
     cinematicIntro.style.opacity = "0";
@@ -97,7 +129,7 @@ function skipCinematicIntro() {
     cinematicIntro.style.pointerEvents = "none";
 
     /*
-       Make sure the homepage is visible.
+       Show homepage immediately.
     */
 
     document.body.classList.remove("intro-playing");
@@ -113,7 +145,7 @@ function skipCinematicIntro() {
 
 if (skipIntro) {
 
-    skipIntro.addEventListener("click", function (event) {
+    skipIntro.addEventListener("click", event => {
 
         event.preventDefault();
         event.stopPropagation();
@@ -131,15 +163,10 @@ if (skipIntro) {
 
 if (enterGlow) {
 
-    enterGlow.addEventListener("click", function (event) {
+    enterGlow.addEventListener("click", event => {
 
         event.preventDefault();
         event.stopPropagation();
-
-        /*
-           Prevent double-clicking the button from
-           starting multiple transitions.
-        */
 
         if (introFinished || introTransitionRunning) {
             return;
@@ -147,37 +174,43 @@ if (enterGlow) {
 
         introTransitionRunning = true;
 
-        /*
-           Hide homepage while cinematic transition
-           is happening.
-        */
-
         document.body.classList.add("intro-playing");
 
         /*
-           Start the cinematic camera sequence.
+           Start the cinematic sequence.
+
+           CSS controls the actual camera movement.
+           JavaScript only controls timing/state.
         */
 
         cinematicIntro.classList.add("intro-exit");
 
+
         /*
-           Transition duration:
-           
-           ~2.8s camera movement
-           ~0.4s black screen
-           
-           Total ≈ 3.2 seconds.
+           Keep skip available during the entire
+           cinematic transition.
         */
 
-        setTimeout(function () {
+        const finishTimer = setTimeout(() => {
 
-            if (introFinished) {
-                return;
+            if (!introFinished) {
+
+                cinematicIntro.style.display = "none";
+
+                document.body.classList.remove(
+                    "intro-playing"
+                );
+
+                unlockPage();
+
+                introFinished = true;
+                introTransitionRunning = false;
+
             }
 
-            showHomepage();
-
         }, 3200);
+
+        introTimers.push(finishTimer);
 
     });
 
@@ -218,6 +251,10 @@ let currentSlide = 0;
 let slideTimer;
 
 
+/* =========================================================
+   HERO ELEMENTS
+   ========================================================= */
+
 const heroBackground =
     document.querySelector(".hero-background");
 
@@ -242,13 +279,16 @@ function setHeroImage(image) {
     }
 
     heroBackground.style.backgroundImage = `
+
         linear-gradient(
             90deg,
             rgba(5, 6, 8, 0.88) 0%,
             rgba(5, 6, 8, 0.55) 45%,
             rgba(5, 6, 8, 0.15) 100%
         ),
+
         url("${image}")
+
     `;
 
 }
@@ -258,7 +298,7 @@ function setHeroImage(image) {
    PRELOAD HERO IMAGES
    ========================================================= */
 
-slides.forEach(function (slide) {
+slides.forEach(slide => {
 
     const image = new Image();
 
@@ -276,11 +316,12 @@ function showSlide(index) {
     currentSlide =
         (index + slides.length) % slides.length;
 
-    const slide = slides[currentSlide];
+    const slide =
+        slides[currentSlide];
 
 
     /*
-       Fade text and background out.
+       Fade current content out.
     */
 
     if (heroTitle) {
@@ -297,13 +338,14 @@ function showSlide(index) {
 
 
     /*
-       Change image and text after fade.
+       Change content after fade.
     */
 
-    setTimeout(function () {
+    setTimeout(() => {
 
         if (heroTitle) {
-            heroTitle.textContent = slide.title;
+            heroTitle.textContent =
+                slide.title;
         }
 
         if (heroDescription) {
@@ -333,7 +375,7 @@ function showSlide(index) {
        Update slider dots.
     */
 
-    sliderDots.forEach(function (dot, i) {
+    sliderDots.forEach((dot, i) => {
 
         dot.classList.toggle(
             "active",
@@ -349,7 +391,7 @@ function showSlide(index) {
 
     clearTimeout(slideTimer);
 
-    slideTimer = setTimeout(function () {
+    slideTimer = setTimeout(() => {
 
         showSlide(currentSlide + 1);
 
@@ -359,12 +401,12 @@ function showSlide(index) {
 
 
 /* =========================================================
-   HERO DOT NAVIGATION
+   DOT NAVIGATION
    ========================================================= */
 
-sliderDots.forEach(function (dot, index) {
+sliderDots.forEach((dot, index) => {
 
-    dot.addEventListener("click", function () {
+    dot.addEventListener("click", () => {
 
         showSlide(index);
 
@@ -380,7 +422,7 @@ sliderDots.forEach(function (dot, index) {
 setHeroImage(slides[0].image);
 
 
-sliderDots.forEach(function (dot, i) {
+sliderDots.forEach((dot, i) => {
 
     dot.classList.toggle(
         "active",
@@ -390,7 +432,7 @@ sliderDots.forEach(function (dot, i) {
 });
 
 
-slideTimer = setTimeout(function () {
+slideTimer = setTimeout(() => {
 
     showSlide(1);
 
@@ -423,11 +465,11 @@ const searchResults =
 
 if (searchButton) {
 
-    searchButton.addEventListener("click", function () {
+    searchButton.addEventListener("click", () => {
 
         searchOverlay.classList.add("active");
 
-        setTimeout(function () {
+        setTimeout(() => {
 
             if (searchInput) {
                 searchInput.focus();
@@ -444,44 +486,44 @@ if (searchButton) {
    CLOSE SEARCH
    ========================================================= */
 
+function closeSearchOverlay() {
+
+    if (!searchOverlay) {
+        return;
+    }
+
+    searchOverlay.classList.remove("active");
+
+    if (searchInput) {
+        searchInput.value = "";
+    }
+
+    if (searchResults) {
+        searchResults.innerHTML = "";
+    }
+
+}
+
+
 if (closeSearch) {
 
-    closeSearch.addEventListener("click", function () {
-
-        searchOverlay.classList.remove("active");
-
-        searchInput.value = "";
-        searchResults.innerHTML = "";
-
-    });
+    closeSearch.addEventListener(
+        "click",
+        closeSearchOverlay
+    );
 
 }
 
 
 /* =========================================================
-   CLOSE SEARCH WITH ESCAPE
+   ESCAPE KEY
    ========================================================= */
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", event => {
 
     if (event.key === "Escape") {
 
-        if (
-            searchOverlay &&
-            searchOverlay.classList.contains("active")
-        ) {
-
-            searchOverlay.classList.remove("active");
-
-            if (searchInput) {
-                searchInput.value = "";
-            }
-
-            if (searchResults) {
-                searchResults.innerHTML = "";
-            }
-
-        }
+        closeSearchOverlay();
 
     }
 
@@ -517,104 +559,124 @@ const shaders = [
 
 if (searchInput) {
 
-    searchInput.addEventListener("input", function () {
+    searchInput.addEventListener(
+        "input",
+        () => {
 
-        const query =
-            searchInput.value
-                .toLowerCase()
-                .trim();
+            const query =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+            if (searchResults) {
+                searchResults.innerHTML = "";
+            }
+
+            if (!query) {
+                return;
+            }
 
 
-        searchResults.innerHTML = "";
+            const results =
+                shaders.filter(shader => {
+
+                    return (
+
+                        shader.name
+                            .toLowerCase()
+                            .includes(query)
+
+                        ||
+
+                        shader.category
+                            .toLowerCase()
+                            .includes(query)
+
+                        ||
+
+                        shader.description
+                            .toLowerCase()
+                            .includes(query)
+
+                    );
+
+                });
 
 
-        if (!query) {
-            return;
-        }
+            /*
+               No results.
+            */
+
+            if (results.length === 0) {
+
+                searchResults.innerHTML = `
+
+                    <p style="
+                        margin-top: 25px;
+                        color: #9da3ad;
+                    ">
+
+                        No shaders found.
+
+                    </p>
+
+                `;
+
+                return;
+
+            }
 
 
-        const results =
-            shaders.filter(function (shader) {
+            /*
+               Display results.
+            */
 
-                return (
-                    shader.name
-                        .toLowerCase()
-                        .includes(query) ||
+            results.forEach(shader => {
 
-                    shader.category
-                        .toLowerCase()
-                        .includes(query) ||
+                const result =
+                    document.createElement("div");
 
-                    shader.description
-                        .toLowerCase()
-                        .includes(query)
+
+                result.style.marginTop =
+                    "25px";
+
+                result.style.padding =
+                    "20px";
+
+                result.style.border =
+                    "1px solid rgba(255,255,255,0.09)";
+
+                result.style.borderRadius =
+                    "14px";
+
+
+                result.innerHTML = `
+
+                    <strong>
+                        ${shader.name}
+                    </strong>
+
+                    <p style="
+                        margin-top: 5px;
+                        color: #9da3ad;
+                        font-size: 0.85rem;
+                    ">
+
+                        ${shader.description}
+
+                    </p>
+
+                `;
+
+
+                searchResults.appendChild(
+                    result
                 );
 
             });
 
-
-        /*
-           No results.
-        */
-
-        if (results.length === 0) {
-
-            searchResults.innerHTML = `
-                <p style="
-                    margin-top: 25px;
-                    color: #9da3ad;
-                ">
-                    No shaders found.
-                </p>
-            `;
-
-            return;
-
         }
-
-
-        /*
-           Display results.
-        */
-
-        results.forEach(function (shader) {
-
-            const result =
-                document.createElement("div");
-
-
-            result.style.marginTop = "25px";
-
-            result.style.padding = "20px";
-
-            result.style.border =
-                "1px solid rgba(255,255,255,0.09)";
-
-            result.style.borderRadius = "14px";
-
-
-            result.innerHTML = `
-
-                <strong>
-                    ${shader.name}
-                </strong>
-
-                <p style="
-                    margin-top: 5px;
-                    color: #9da3ad;
-                    font-size: 0.85rem;
-                ">
-                    ${shader.description}
-                </p>
-
-            `;
-
-
-            searchResults.appendChild(result);
-
-        });
-
-    });
+    );
 
 }
 
@@ -629,16 +691,12 @@ const revealElements =
     );
 
 
-/* =========================================================
-   INTERSECTION OBSERVER
-   ========================================================= */
-
 const revealObserver =
     new IntersectionObserver(
 
-        function (entries, observer) {
+        (entries, observer) => {
 
-            entries.forEach(function (entry) {
+            entries.forEach(entry => {
 
                 if (entry.isIntersecting) {
 
@@ -663,11 +721,7 @@ const revealObserver =
     );
 
 
-/* =========================================================
-   INITIALIZE REVEAL
-   ========================================================= */
-
-revealElements.forEach(function (element) {
+revealElements.forEach(element => {
 
     element.classList.add("reveal");
 
@@ -677,7 +731,7 @@ revealElements.forEach(function (element) {
 
 
 /* =========================================================
-   ADD REVEAL STYLES
+   REVEAL STYLES
    ========================================================= */
 
 const revealStyle =
@@ -696,13 +750,8 @@ revealStyle.textContent = `
 
         transition:
             opacity 0.9s ease,
-            transform
-            0.9s cubic-bezier(
-                0.22,
-                1,
-                0.36,
-                1
-            );
+            transform 0.9s
+            cubic-bezier(0.22, 1, 0.36, 1);
 
     }
 
@@ -720,20 +769,22 @@ revealStyle.textContent = `
 `;
 
 
-document.head.appendChild(revealStyle);
+document.head.appendChild(
+    revealStyle
+);
 
 
 /* =========================================================
-   PREVENT EMPTY HASH LINKS FROM JUMPING
+   PREVENT EMPTY HASH LINKS
    ========================================================= */
 
 document
     .querySelectorAll('a[href="#"]')
-    .forEach(function (link) {
+    .forEach(link => {
 
         link.addEventListener(
             "click",
-            function (event) {
+            event => {
 
                 event.preventDefault();
 
@@ -744,46 +795,5 @@ document
 
 
 /* =========================================================
-   SAFETY — IF INTRO ELEMENTS ARE MISSING
+   END
    ========================================================= */
-
-if (!cinematicIntro) {
-
-    unlockPage();
-
-}
-
-
-/* =========================================================
-   SAFETY — PAGE LOAD
-   ========================================================= */
-
-/*
-   Keep the intro active until the user either:
-
-   1. Clicks ENTER GLOW
-   2. Clicks SKIP INTRO
-
-   This prevents the homepage from appearing underneath
-   the cinematic sequence.
-*/
-
-
-window.addEventListener("load", function () {
-
-    /*
-       Make sure the intro is visible when the page loads.
-    */
-
-    if (
-        cinematicIntro &&
-        !introFinished
-    ) {
-
-        cinematicIntro.style.display = "flex";
-        cinematicIntro.style.visibility = "visible";
-        cinematicIntro.style.opacity = "1";
-
-    }
-
-});
