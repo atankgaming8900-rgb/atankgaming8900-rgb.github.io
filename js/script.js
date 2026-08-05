@@ -650,45 +650,24 @@ function startCinematicIntro() {
             `;
 
         /* =================================================
-           FINAL BLACK
-           ================================================= */
+   FINAL BLACK
+   ================================================= */
 
-        /*
-           Don't turn black until the black hole
-           is almost completely filling the frame.
-        */
+/*
+   Keep the screen completely clear while
+   approaching the black hole.
 
-        const blackStart =
-            0.995;
+   Only switch to black AFTER the black hole
+   has reached the camera.
+*/
 
+if (cinematicBlackScreen) {
 
-        const blackRaw =
-            clamp01(
-                (
-                    cameraRaw -
-                    blackStart
-                ) /
-                (
-                    1 -
-                    blackStart
-                )
-            );
-
-
-        const blackOpacity =
-            cinematicEase(
-                blackRaw
-            );
-
-
-        if (cinematicBlackScreen) {
-
-            cinematicBlackScreen.style.opacity =
-                String(
-                    blackOpacity
-                );
-        }
-
+    cinematicBlackScreen.style.opacity =
+        cameraRaw >= 0.999
+            ? "1"
+            : "0";
+}
 
         /* =================================================
            FINISH
