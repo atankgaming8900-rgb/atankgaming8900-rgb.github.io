@@ -3562,9 +3562,6 @@ body.intro-playing footer {
    ========================================================= */
 
 .cinematic-intro .black-hole-ring {
-
-    animation: none !important;
-
     position: absolute;
 
     left: 50%;
@@ -3576,6 +3573,8 @@ body.intro-playing footer {
     transform:
         translate3d(-50%, -50%, 0)
         rotate(-12deg);
+
+    transform-origin: center center;
 
     border-radius: 50%;
 
@@ -3596,6 +3595,33 @@ body.intro-playing footer {
     opacity: 0.9;
 
     pointer-events: none;
+
+    /*
+       IMPORTANT:
+       Ring rotates BEFORE ENTER.
+    */
+
+    animation:
+        glowRingIdle
+        12s
+        linear
+        infinite;
+}
+
+
+@keyframes glowRingIdle {
+
+    from {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotate(-12deg);
+    }
+
+    to {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotate(348deg);
+    }
 }
 
 
