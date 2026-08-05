@@ -40,6 +40,7 @@ const introBlackHole =
 
 let introFinished = false;
 let introTransitioning = false;
+let introExitTimer = null;
 
 
 /* =========================================================
@@ -65,6 +66,12 @@ function finishIntro() {
     }
 
     introFinished = true;
+    introTransitioning = false;
+
+    if (introExitTimer) {
+        clearTimeout(introExitTimer);
+        introExitTimer = null;
+    }
 
     cinematicIntro.classList.remove("intro-exit");
     cinematicIntro.classList.remove("intro-zoom");
@@ -102,39 +109,66 @@ function skipCinematicIntro() {
     introFinished = true;
     introTransitioning = false;
 
-    /* Stop every intro animation immediately */
+    if (introExitTimer) {
+        clearTimeout(introExitTimer);
+        introExitTimer = null;
+    }
+
+
+    /* -----------------------------------------------------
+       STOP INTRO ANIMATIONS
+       ----------------------------------------------------- */
+
+    cinematicIntro.classList.remove("intro-exit");
+    cinematicIntro.classList.remove("intro-zoom");
 
     cinematicIntro.style.animation = "none";
     cinematicIntro.style.transition = "none";
 
+
     if (introScene) {
+
         introScene.style.animation = "none";
+        introScene.style.transition = "none";
         introScene.style.transform = "none";
         introScene.style.filter = "none";
+
     }
+
 
     if (introBlackHole) {
+
         introBlackHole.style.animation = "none";
+        introBlackHole.style.transition = "none";
+
         introBlackHole.style.transform =
             "translate(-50%, -50%) scale(1)";
+
     }
+
 
     if (introContent) {
+
         introContent.style.animation = "none";
+        introContent.style.transition = "none";
         introContent.style.opacity = "0";
+
     }
 
-    /* Hide intro */
 
-    cinematicIntro.classList.remove("intro-exit");
-    cinematicIntro.classList.remove("intro-zoom");
+    /* -----------------------------------------------------
+       HIDE INTRO IMMEDIATELY
+       ----------------------------------------------------- */
 
     cinematicIntro.style.opacity = "0";
     cinematicIntro.style.visibility = "hidden";
     cinematicIntro.style.pointerEvents = "none";
     cinematicIntro.style.display = "none";
 
-    /* Show homepage */
+
+    /* -----------------------------------------------------
+       SHOW HOMEPAGE
+       ----------------------------------------------------- */
 
     document.body.classList.remove("intro-playing");
 
@@ -179,7 +213,7 @@ document.addEventListener("keydown", function(event) {
 
 
 /* =========================================================
-   ENTER GLOW
+   ENTER GLOW — CINEMATIC BLACK HOLE TRANSITION
    ========================================================= */
 
 if (enterGlow) {
@@ -187,67 +221,86 @@ if (enterGlow) {
     enterGlow.addEventListener("click", function(event) {
 
         event.preventDefault();
+        event.stopPropagation();
+
 
         if (introFinished || introTransitioning) {
             return;
         }
 
+
         introTransitioning = true;
+
+
+        /* -------------------------------------------------
+           KEEP PAGE LOCKED
+           ------------------------------------------------- */
+
+        document.documentElement.classList.add("intro-active");
+        document.body.classList.add("intro-active");
 
         document.body.classList.add("intro-playing");
 
-        /*
-           The CSS handles the cinematic sequence:
 
-           0.00s
-           Text begins disappearing.
-
-           0.35s
-           Camera begins moving toward the black hole.
-
-           ~2.4s
-           Black hole begins expanding rapidly.
-
-           ~2.8s
-           Black hole fills the screen.
-
-           ~3.0s
-           Complete black.
-
-           ~3.8s
-           Homepage appears.
-        */
-
-        cinematicIntro.classList.add("intro-exit");
-
-        /*
-           Keep Skip Intro above the transition.
-           This means the user can still skip while
-           the cinematic animation is running.
-        */
+        /* -------------------------------------------------
+           KEEP SKIP BUTTON ABOVE EVERYTHING
+           ------------------------------------------------- */
 
         if (skipIntro) {
 
             skipIntro.style.opacity = "1";
             skipIntro.style.visibility = "visible";
             skipIntro.style.pointerEvents = "auto";
+            skipIntro.style.display = "block";
             skipIntro.style.zIndex = "100000";
 
         }
 
-        /*
-           CSS transition duration.
-           The timeout only removes the intro after
-           the cinematic animation has completed.
-        */
 
-        setTimeout(function() {
+        /* -------------------------------------------------
+           START CINEMATIC TRANSITION
+
+           CSS controls the actual cinematic movement:
+
+           0.00s
+           Text begins disappearing.
+
+           0.35s
+           Camera starts moving toward the black hole.
+
+           1.80s
+           Camera is very close.
+
+           2.20s
+           Black hole starts filling the frame.
+
+           2.65s
+           Black hole covers the screen.
+
+           2.70–2.90s
+           Short complete black moment.
+
+           2.90s+
+           Homepage appears.
+        ------------------------------------------------- */
+
+        cinematicIntro.classList.add("intro-exit");
+
+
+        /* -------------------------------------------------
+           SAFETY TIMER
+
+           The CSS animation is intentionally around 3 seconds.
+           This timer simply removes the intro after it finishes.
+        ------------------------------------------------- */
+
+        introExitTimer = setTimeout(function() {
 
             if (!introFinished) {
                 finishIntro();
             }
 
-        }, 3800);
+        }, 3000);
 
     });
 
