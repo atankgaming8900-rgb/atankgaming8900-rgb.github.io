@@ -5,12 +5,16 @@
 
 /* =========================================================
    GLOW — CINEMATIC INTRO
-   FINAL VERSION
+   FINAL CAMERA SHOT
    ========================================================= */
 
 document.documentElement.classList.add("intro-active");
 document.body.classList.add("intro-active");
 
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
 
 const cinematicIntro =
     document.getElementById("cinematicIntro");
@@ -30,9 +34,29 @@ const introContent =
 const introBlackHole =
     document.getElementById("introBlackHole");
 
-const cinematicBlackScreen =
-    document.getElementById("cinematicBlackScreen");
+/*
+   IMPORTANT:
 
+   Your HTML uses:
+
+   <div class="intro-black-screen"></div>
+
+   It does NOT have an id.
+
+   Therefore we use querySelector().
+*/
+
+const cinematicBlackScreen =
+    cinematicIntro.querySelector(".intro-black-screen");
+
+
+const introRing =
+    cinematicIntro.querySelector(".black-hole-ring");
+
+
+/* =========================================================
+   STATE
+   ========================================================= */
 
 let introStarted = false;
 let introFinished = false;
@@ -45,7 +69,47 @@ let finishTimer = null;
 
 
 /* =========================================================
-   PAGE LOCK
+   HELPERS
+   ========================================================= */
+
+function clamp01(value) {
+
+    return Math.max(
+        0,
+        Math.min(1, value)
+    );
+}
+
+
+/*
+   Very smooth easing.
+
+   This is used for the camera itself.
+
+   There are NO separate zoom stages.
+*/
+
+function cinematicEase(value) {
+
+    const t =
+        clamp01(value);
+
+    return (
+        t * t * t *
+        (
+            t *
+            (
+                t * 6 -
+                15
+            ) +
+            10
+        )
+    );
+}
+
+
+/* =========================================================
+   PAGE UNLOCK
    ========================================================= */
 
 function unlockPage() {
@@ -61,188 +125,35 @@ function unlockPage() {
 
 
 /* =========================================================
-   CLAMP
+   SKIP BUTTON
    ========================================================= */
 
-function clamp01(value) {
-
-    return Math.max(
-        0,
-        Math.min(1, value)
-    );
-}
-
-
-/* =========================================================
-   SMOOTH EASING
-
-   One continuous curve.
-
-   No stages.
-   No pauses.
-   No jumps.
-   ========================================================= */
-
-function smoothCamera(value) {
-
-    const t = clamp01(value);
-
-    /*
-       Smooth acceleration.
-
-       The derivative never suddenly changes
-       between separate animation stages.
-    */
-
-    return (
-        t * t * (
-            3 - 2 * t
-        )
-    );
-}
-
-
-/* =========================================================
-   CAMERA — SINGLE CONTINUOUS FORWARD MOVEMENT
-   ========================================================= */
-
-const progress = cinematicEase(raw);
-
-
-/*
-   The scene itself is the camera.
-
-   The black hole does NOT independently
-   grow anymore.
-
-   This makes the black hole feel like a
-   real fixed object in space that we are
-   physically approaching.
-*/
-
-const cameraScale =
-    1.03 *
-    Math.pow(
-        9.8 / 1.03,
-        progress
-    );
-
-
-scene.style.transform =
-    `translate3d(0,0,0) scale(${cameraScale})`;
-
-
-/*
-   Very subtle cinematic exposure change.
-*/
-
-scene.style.filter =
-    `
-    brightness(${1 + progress * 0.055})
-    contrast(${1 + progress * 0.025})
-    `;
-
-
-/* =========================================================
-   BLACK HOLE
-   ========================================================= */
-
-
-/*
-   IMPORTANT:
-
-   The black hole stays physically fixed
-   inside the scene.
-
-   We do NOT apply another giant scale to it.
-
-   The camera zoom naturally makes it
-   become larger on screen.
-*/
-
-introBlackHole.style.transform =
-    `
-    translate3d(-50%,-50%,0)
-    rotate(${elapsed * 0.012}deg)
-    scale(1)
-    `;
-
-
-/*
-   Very subtle intensity increase.
-*/
-
-introBlackHole.style.filter =
-    `
-    brightness(${1 + progress * 0.04})
-    `;
-
-/* =========================================================
-   TEXT FADE
-   ========================================================= */
-
-function getTextFade(progress) {
-
-    const fadeProgress =
-        clamp01(
-            progress / 0.13
-        );
-
-    return smoothCamera(
-        fadeProgress
-    );
-}
-
-
-/* =========================================================
-   FINAL BLACK
-   ========================================================= */
-
-function getBlackScreenOpacity(progress) {
-
-    /*
-       Black starts extremely late.
-
-       This prevents the old:
-       black → pause → black
-       feeling.
-    */
-
-    const start = 0.965;
-
-    const local =
-        clamp01(
-            (progress - start) /
-            (1 - start)
-        );
-
-    return smoothCamera(local);
-}
-
-
-/* =========================================================
-   SKIP STATE
-   ========================================================= */
-
-function setSkipEnabled(enabled) {
+function setSkipState(
+    visible,
+    clickable
+) {
 
     if (!skipIntro) {
         return;
     }
 
     skipIntro.style.opacity =
-        "1";
+        visible
+            ? "1"
+            : "0";
 
     skipIntro.style.visibility =
-        "visible";
+        visible
+            ? "visible"
+            : "hidden";
 
     skipIntro.style.pointerEvents =
-        enabled
+        clickable
             ? "auto"
             : "none";
 
     skipIntro.style.zIndex =
-        "99999";
+        "999999";
 }
 
 
@@ -280,12 +191,20 @@ function finishCinematicIntro() {
 
 
     /*
-       Keep black for only a very short moment.
+       Keep the screen completely black
+       for only a few milliseconds.
     */
 
-    cinematicBlackScreen.style.opacity =
-        "1";
+    if (cinematicBlackScreen) {
 
+        cinematicBlackScreen.style.opacity =
+            "1";
+    }
+
+
+    /*
+       Remove intro.
+    */
 
     cinematicIntro.style.opacity =
         "0";
@@ -310,14 +229,7 @@ function finishCinematicIntro() {
 
 
 /* =========================================================
-   SKIP INTRO
-
-   THIS IS AN IMMEDIATE SKIP.
-
-   It works:
-   - before ENTER
-   - during camera movement
-   - while black hole is expanding
+   SKIP
    ========================================================= */
 
 function skipCinematicIntro() {
@@ -325,7 +237,6 @@ function skipCinematicIntro() {
     if (introFinished) {
         return;
     }
-
 
     introFinished = true;
 
@@ -351,13 +262,8 @@ function skipCinematicIntro() {
 
 
     /*
-       Stop all visual animation immediately.
+       Stop everything immediately.
     */
-
-    cinematicIntro.classList.remove(
-        "intro-exit"
-    );
-
 
     cinematicIntro.style.animation =
         "none";
@@ -369,33 +275,16 @@ function skipCinematicIntro() {
     introScene.style.animation =
         "none";
 
-    introScene.style.transform =
-        "none";
-
-    introScene.style.filter =
+    introScene.style.transition =
         "none";
 
 
     introBlackHole.style.animation =
         "none";
 
-    introBlackHole.style.transform =
-        "translate3d(-50%,-50%,0) scale(1)";
-
-
-    introContent.style.animation =
-        "none";
-
-    introContent.style.opacity =
-        "0";
-
-
-    cinematicBlackScreen.style.opacity =
-        "0";
-
 
     /*
-       Remove intro completely.
+       Hide intro immediately.
     */
 
     cinematicIntro.style.opacity =
@@ -421,7 +310,7 @@ function skipCinematicIntro() {
 
 
 /* =========================================================
-   START CINEMATIC INTRO
+   START INTRO
    ========================================================= */
 
 function startCinematicIntro() {
@@ -443,44 +332,108 @@ function startCinematicIntro() {
     );
 
 
+    /*
+       This class is only used to
+       identify that the cinematic
+       transition is running.
+
+       JavaScript controls the actual
+       camera movement.
+    */
+
     cinematicIntro.classList.add(
         "intro-exit"
     );
 
 
     /*
-       Skip remains usable for the
-       entire cinematic sequence.
+       Skip remains clickable during
+       the entire transition.
     */
 
-    setSkipEnabled(true);
+    setSkipState(
+        true,
+        true
+    );
 
 
     /*
-       Reset visual state.
+       Reset everything.
     */
 
-    introScene.style.transform =
-        "scale(1.03)";
+    cinematicIntro.style.opacity =
+        "1";
 
-    introScene.style.filter =
-        "brightness(1) contrast(1)";
+    cinematicIntro.style.visibility =
+        "visible";
 
-
-    introBlackHole.style.transform =
-        "translate3d(-50%,-50%,0) scale(1)";
+    cinematicIntro.style.display =
+        "block";
 
 
     introContent.style.opacity =
         "1";
 
+    introContent.style.transform =
+        "translate3d(-50%, -50%, 0) scale(1)";
 
-    cinematicBlackScreen.style.opacity =
-        "0";
+    introContent.style.filter =
+        "blur(0px)";
 
 
     /*
-       Start the ONE continuous animation.
+       CAMERA STARTS AT NORMAL SIZE.
+    */
+
+    introScene.style.transform =
+        "translate3d(0,0,0) scale(1)";
+
+    introScene.style.filter =
+        "brightness(1) contrast(1)";
+
+
+    /*
+       VERY IMPORTANT:
+
+       The black hole itself does NOT grow.
+
+       The camera moves toward it.
+
+       This makes the black hole appear
+       larger naturally.
+    */
+
+    introBlackHole.style.transform =
+        "translate3d(-50%, -50%, 0) scale(1)";
+
+    introBlackHole.style.filter =
+        "brightness(1)";
+
+
+    /*
+       Reset ring.
+    */
+
+    if (introRing) {
+
+        introRing.style.transform =
+            "translate3d(-50%, -50%, 0) rotate(-12deg)";
+    }
+
+
+    /*
+       Black screen starts invisible.
+    */
+
+    if (cinematicBlackScreen) {
+
+        cinematicBlackScreen.style.opacity =
+            "0";
+    }
+
+
+    /*
+       Start timing.
     */
 
     introStartTime =
@@ -488,23 +441,39 @@ function startCinematicIntro() {
 
 
     /*
-       3.2 seconds for the camera shot.
+       Total cinematic shot.
 
-       This is deliberately a single
-       requestAnimationFrame timeline.
+       0.00 — 0.65 sec
+       Text disappears.
+
+       0.65 — 3.85 sec
+       Camera continuously moves
+       toward black hole.
+
+       3.85 — 4.00 sec
+       Black hole covers screen.
+
+       Then a few milliseconds of black.
     */
 
-    const DURATION = 3200;
+    const TEXT_DURATION =
+        650;
+
+    const CAMERA_DURATION =
+        3200;
+
+    const BLACK_HOLD =
+        45;
 
 
-    /*
-       Very short black frame.
+    const TOTAL_DURATION =
+        TEXT_DURATION +
+        CAMERA_DURATION;
 
-       NOT a long black screen.
-    */
 
-    const BLACK_HOLD = 90;
-
+    /* =====================================================
+       ANIMATION LOOP
+       ===================================================== */
 
     function animate(now) {
 
@@ -518,147 +487,261 @@ function startCinematicIntro() {
             introStartTime;
 
 
-        const rawProgress =
+        /* =================================================
+           PHASE 1
+           TEXT DISAPPEARS
+           ================================================= */
+
+        const textProgress =
             clamp01(
                 elapsed /
-                DURATION
+                TEXT_DURATION
             );
 
 
-        /*
-           ONE continuous camera curve.
-        */
-
-        const progress =
-            smoothCamera(
-                rawProgress
-            );
-
-
-        /* =====================================================
-           CAMERA
-           ===================================================== */
-
-        const cameraScale =
-            getCameraScale(
-                progress
-            );
-
-
-        introScene.style.transform =
-            `scale(${cameraScale})`;
-
-
-        /*
-           Very subtle exposure change.
-
-           Cinematic rather than game-like.
-        */
-
-        const brightness =
-            1 +
-            progress *
-            0.055;
-
-
-        const contrast =
-            1 +
-            progress *
-            0.018;
-
-
-        introScene.style.filter =
-            `brightness(${brightness}) contrast(${contrast})`;
-
-
-        /* =====================================================
-           BLACK HOLE
-           ===================================================== */
-
-        const holeScale =
-            getBlackHoleScale(
-                progress
-            );
-
-
-        /*
-           IMPORTANT:
-
-           The black hole NEVER translates.
-
-           It stays at exactly the same
-           sky position.
-
-           Only apparent size changes.
-        */
-
-        introBlackHole.style.transform =
-            `translate3d(-50%,-50%,0) scale(${holeScale})`;
-
-
-        /*
-           Slight natural exposure increase.
-        */
-
-        introBlackHole.style.filter =
-            `brightness(${1 + progress * 0.045})`;
-
-
-        /* =====================================================
-           TEXT
-           ===================================================== */
-
-        const textFade =
-            getTextFade(
-                rawProgress
+        const textEase =
+            cinematicEase(
+                textProgress
             );
 
 
         introContent.style.opacity =
             String(
-                1 - textFade
+                1 -
+                textEase
             );
 
 
         introContent.style.transform =
-            `translate3d(-50%,-50%,0) scale(${
-                1 -
-                textFade *
-                0.018
-            })`;
+            `
+            translate3d(-50%, -50%, 0)
+            scale(${1 - textEase * 0.025})
+            `;
 
 
         introContent.style.filter =
-            `blur(${textFade * 1.8}px)`;
+            `
+            blur(${textEase * 2}px)
+            `;
 
 
-        /* =====================================================
-           FINAL BLACK
-           ===================================================== */
-
-        const blackOpacity =
-            getBlackScreenOpacity(
-                rawProgress
-            );
-
-
-        cinematicBlackScreen.style.opacity =
-            String(
-                blackOpacity
-            );
-
-
-        /* =====================================================
-           END
-           ===================================================== */
+        /*
+           Camera stays completely still
+           while text disappears.
+        */
 
         if (
-            rawProgress >= 1
+            elapsed <
+            TEXT_DURATION
         ) {
 
-            cinematicBlackScreen.style.opacity =
-                "1";
+            introScene.style.transform =
+                "translate3d(0,0,0) scale(1)";
 
+            introScene.style.filter =
+                "brightness(1) contrast(1)";
+
+
+            introFrame =
+                requestAnimationFrame(
+                    animate
+                );
+
+            return;
+        }
+
+
+        /* =================================================
+           PHASE 2
+           CAMERA FLIGHT
+           ================================================= */
+
+        const cameraElapsed =
+            elapsed -
+            TEXT_DURATION;
+
+
+        const cameraRaw =
+            clamp01(
+                cameraElapsed /
+                CAMERA_DURATION
+            );
+
+
+        /*
+           ONE continuous camera curve.
+
+           No:
+           zoom → pause → zoom.
+
+           Just one continuous movement.
+        */
+
+        const cameraProgress =
+            cinematicEase(
+                cameraRaw
+            );
+
+
+        /* =================================================
+           CAMERA SCALE
+           ================================================= */
+
+        /*
+           Black hole is positioned at roughly
+           52% horizontal / 22% vertical.
+
+           The scene origin is placed at the
+           black hole's position.
+
+           Therefore the camera moves directly
+           toward it.
+        */
+
+        const startScale =
+            1;
+
+        const finalScale =
+            13;
+
+
+        const scale =
+            startScale *
+            Math.pow(
+                finalScale /
+                startScale,
+                cameraProgress
+            );
+
+
+        introScene.style.transform =
+            `
+            translate3d(0,0,0)
+            scale(${scale})
+            `;
+
+
+        /*
+           Very subtle cinematic exposure.
+        */
+
+        introScene.style.filter =
+            `
+            brightness(${1 + cameraProgress * 0.06})
+            contrast(${1 + cameraProgress * 0.025})
+            `;
+
+
+        /* =================================================
+           BLACK HOLE
+           ================================================= */
+
+        /*
+           DO NOT SCALE THE BLACK HOLE.
+
+           The camera is moving toward it.
+
+           This is the critical difference.
+        */
+
+        introBlackHole.style.transform =
+            `
+            translate3d(-50%, -50%, 0)
+            scale(1)
+            `;
+
+
+        /*
+           Slight brightness increase
+           as we approach the event horizon.
+        */
+
+        introBlackHole.style.filter =
+            `
+            brightness(${1 + cameraProgress * 0.05})
+            `;
+
+
+        /* =================================================
+           RING ROTATION
+           ================================================= */
+
+        if (introRing) {
+
+            const rotation =
+                -12 +
+                cameraElapsed *
+                0.045;
+
+
+            introRing.style.transform =
+                `
+                translate3d(-50%, -50%, 0)
+                rotate(${rotation}deg)
+                `;
+        }
+
+
+        /* =================================================
+           FINAL BLACK
+           ================================================= */
+
+        /*
+           Don't turn black until the black hole
+           is almost completely filling the frame.
+        */
+
+        const blackStart =
+            0.965;
+
+
+        const blackRaw =
+            clamp01(
+                (
+                    cameraRaw -
+                    blackStart
+                ) /
+                (
+                    1 -
+                    blackStart
+                )
+            );
+
+
+        const blackOpacity =
+            cinematicEase(
+                blackRaw
+            );
+
+
+        if (cinematicBlackScreen) {
+
+            cinematicBlackScreen.style.opacity =
+                String(
+                    blackOpacity
+                );
+        }
+
+
+        /* =================================================
+           FINISH
+           ================================================= */
+
+        if (
+            elapsed >=
+            TOTAL_DURATION
+        ) {
+
+            if (cinematicBlackScreen) {
+
+                cinematicBlackScreen.style.opacity =
+                    "1";
+            }
+
+
+            /*
+               Only a few milliseconds of pure black.
+            */
 
             finishTimer =
                 setTimeout(
@@ -675,13 +758,6 @@ function startCinematicIntro() {
         }
 
 
-        /*
-           Continue on the next browser frame.
-
-           This gives one uninterrupted
-           60fps animation timeline.
-        */
-
         introFrame =
             requestAnimationFrame(
                 animate
@@ -697,7 +773,7 @@ function startCinematicIntro() {
 
 
 /* =========================================================
-   ENTER GLOW
+   ENTER BUTTON
    ========================================================= */
 
 enterGlow.addEventListener(
@@ -712,7 +788,7 @@ enterGlow.addEventListener(
 
 
 /* =========================================================
-   SKIP INTRO
+   SKIP BUTTON
    ========================================================= */
 
 skipIntro.addEventListener(
@@ -729,7 +805,7 @@ skipIntro.addEventListener(
 
 
 /* =========================================================
-   ESC = SKIP
+   ESCAPE
    ========================================================= */
 
 document.addEventListener(
@@ -751,7 +827,10 @@ document.addEventListener(
    INITIAL STATE
    ========================================================= */
 
-setSkipEnabled(true);
+setSkipState(
+    true,
+    true
+);
 
 
 /* =========================================================
