@@ -264,19 +264,27 @@ input {
 
     transform: scale(1.03);
 
-    animation: heroZoom 12s ease-in-out infinite alternate;
+    animation:
+        heroZoom
+        12s
+        ease-in-out
+        infinite
+        alternate;
 
     opacity: 1;
 
-    transition: opacity 1s ease-in-out;
+    transition:
+        opacity 1s ease-in-out;
 }
 
 #heroTitle,
 #heroDescription {
-    transition: opacity 0.7s ease-in-out;
+    transition:
+        opacity 0.7s ease-in-out;
 }
 
 @keyframes heroZoom {
+
     from {
         transform: scale(1.03);
     }
@@ -284,9 +292,11 @@ input {
     to {
         transform: scale(1.08);
     }
+
 }
 
 @keyframes backgroundPulse {
+
     from {
         transform: scale(1);
         opacity: 0.8;
@@ -296,6 +306,7 @@ input {
         transform: scale(1.08);
         opacity: 1;
     }
+
 }
 
 .hero-content {
@@ -304,10 +315,15 @@ input {
 
     max-width: 700px;
 
-    animation: heroEnter 1.2s ease forwards;
+    animation:
+        heroEnter
+        1.2s
+        ease
+        forwards;
 }
 
 @keyframes heroEnter {
+
     from {
         opacity: 0;
         transform: translateY(30px);
@@ -317,6 +333,7 @@ input {
         opacity: 1;
         transform: translateY(0);
     }
+
 }
 
 .hero-label,
@@ -332,7 +349,13 @@ input {
 .hero h1 {
     margin: 15px 0;
 
-    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-size:
+        clamp(
+            3.5rem,
+            9vw,
+            8rem
+        );
+
     line-height: 0.95;
 
     letter-spacing: -0.05em;
@@ -409,6 +432,7 @@ input {
 
 .slider-dots button.active {
     width: 24px;
+
     border-radius: 10px;
 
     background: var(--text);
@@ -420,7 +444,11 @@ input {
    ========================================================= */
 
 .section {
-    width: min(var(--max-width), 90%);
+    width:
+        min(
+            var(--max-width),
+            90%
+        );
 
     margin: 0 auto;
 
@@ -434,7 +462,12 @@ input {
 .section-heading h2 {
     margin-top: 8px;
 
-    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-size:
+        clamp(
+            2.2rem,
+            5vw,
+            4rem
+        );
 
     letter-spacing: -0.04em;
 }
@@ -453,7 +486,8 @@ input {
 .category-grid {
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
 
     gap: 14px;
 }
@@ -488,7 +522,8 @@ input {
 .category-card:hover {
     transform: translateY(-8px);
 
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color:
+        rgba(255, 255, 255, 0.22);
 
     background:
         linear-gradient(
@@ -514,7 +549,9 @@ input {
 }
 
 .category-card:hover .category-icon {
-    transform: translateY(-5px) scale(1.08);
+    transform:
+        translateY(-5px)
+        scale(1.08);
 
     opacity: 1;
 
@@ -545,7 +582,8 @@ input {
 .shader-grid {
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
 
     gap: 20px;
 }
@@ -567,7 +605,8 @@ input {
 .shader-card:hover {
     transform: translateY(-8px);
 
-    border-color: rgba(255, 255, 255, 0.18);
+    border-color:
+        rgba(255, 255, 255, 0.18);
 
     box-shadow:
         0 18px 45px rgba(0, 0, 0, 0.35);
@@ -600,7 +639,8 @@ input {
 }
 
 .shader-image {
-    transition: transform 0.7s ease;
+    transition:
+        transform 0.7s ease;
 }
 
 .shader-card:hover .shader-image {
@@ -668,6 +708,7 @@ input {
     margin-top: 8px;
 
     font-size: 1.45rem;
+
     letter-spacing: -0.02em;
 
     transition:
@@ -675,11 +716,14 @@ input {
         transform 0.3s ease;
 }
 
-.shader-card:hover .shader-info h3 {
-    transform: translateX(2px);
+.shader-card:hover
+.shader-info h3 {
+    transform:
+        translateX(2px);
 }
 
-.shader-info > p:not(.shader-category) {
+.shader-info >
+p:not(.shader-category) {
     margin-top: 10px;
 
     color: var(--muted);
@@ -700,12 +744,16 @@ input {
         opacity 0.3s ease;
 }
 
-.shader-card:hover .shader-link {
-    transform: translateX(4px);
+.shader-card:hover
+.shader-link {
+    transform:
+        translateX(4px);
 }
 
 .shader-link:hover {
-    transform: translateX(7px);
+    transform:
+        translateX(7px);
+
     opacity: 0.8;
 }
 
@@ -730,9 +778,11 @@ input {
 }
 
 .outline-button:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background:
+        rgba(255, 255, 255, 0.06);
 
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color:
+        rgba(255, 255, 255, 0.2);
 }
 
 
@@ -751,13 +801,18 @@ input {
 }
 
 .features-grid {
-    width: min(var(--max-width), 90%);
+    width:
+        min(
+            var(--max-width),
+            90%
+        );
 
     margin: 0 auto;
 
     display: grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:
+        repeat(4, 1fr);
 
     gap: 25px;
 }
@@ -781,11 +836,14 @@ input {
 }
 
 .feature:hover {
-    transform: translateY(-6px);
+    transform:
+        translateY(-6px);
 }
 
 .feature:hover > span {
-    transform: translateY(-4px) scale(1.1);
+    transform:
+        translateY(-4px)
+        scale(1.1);
 
     text-shadow:
         0 0 10px rgba(255, 255, 255, 0.3),
@@ -795,11 +853,13 @@ input {
 .feature h3 {
     margin-top: 20px;
 
-    transition: transform 0.4s ease;
+    transition:
+        transform 0.4s ease;
 }
 
 .feature:hover h3 {
-    transform: translateX(2px);
+    transform:
+        translateX(2px);
 }
 
 .feature p {
@@ -834,9 +894,11 @@ input {
 }
 
 .release:hover {
-    transform: translateY(-6px);
+    transform:
+        translateY(-6px);
 
-    border-color: rgba(255, 255, 255, 0.18);
+    border-color:
+        rgba(255, 255, 255, 0.18);
 
     box-shadow:
         0 16px 40px rgba(0, 0, 0, 0.3);
@@ -858,10 +920,13 @@ input {
         transform 0.3s ease;
 }
 
-.release:hover .release-version {
-    transform: translateX(-3px);
+.release:hover
+.release-version {
+    transform:
+        translateX(-3px);
 
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color:
+        rgba(255, 255, 255, 0.2);
 
     color: var(--text);
 }
@@ -887,7 +952,8 @@ input {
 
     overflow: hidden;
 
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 }
 
 .cta-glow {
@@ -907,22 +973,34 @@ input {
 
     filter: blur(30px);
 
-    animation: ctaPulse 6s ease-in-out infinite alternate;
+    animation:
+        ctaPulse
+        6s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 @keyframes ctaPulse {
+
     from {
-        transform: scale(0.85);
+        transform:
+            scale(0.85);
+
         opacity: 0.4;
     }
 
     to {
-        transform: scale(1.15);
+        transform:
+            scale(1.15);
+
         opacity: 0.8;
     }
+
 }
 
-.final-cta > *:not(.cta-glow) {
+.final-cta >
+*:not(.cta-glow) {
     position: relative;
     z-index: 2;
 }
@@ -930,17 +1008,12 @@ input {
 .final-cta h2 {
     margin-top: 15px;
 
-    font-size: clamp(3rem, 8vw, 7rem);
-
-    line-height: 0.95;
-
-    letter-spacing: -0.06em;
-}
-
-.final-cta h2 {
-    margin-top: 15px;
-
-    font-size: clamp(3rem, 8vw, 7rem);
+    font-size:
+        clamp(
+            3rem,
+            8vw,
+            7rem
+        );
 
     line-height: 0.95;
 
@@ -952,9 +1025,11 @@ input {
 }
 
 .final-cta:hover h2 {
-    transform: scale(1.015);
+    transform:
+        scale(1.015);
 
-    letter-spacing: -0.065em;
+    letter-spacing:
+        -0.065em;
 }
 
 
@@ -963,9 +1038,11 @@ input {
    ========================================================= */
 
 footer {
-    padding: 70px 5% 30px;
+    padding:
+        70px 5% 30px;
 
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 
     background: #030405;
 }
@@ -1003,7 +1080,8 @@ footer {
 .footer-links a:hover {
     color: var(--text);
 
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 }
 
 .footer-bottom {
@@ -1011,7 +1089,8 @@ footer {
 
     padding-top: 20px;
 
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 
     color: #666c75;
 
@@ -1030,15 +1109,18 @@ footer {
     }
 
     .category-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .shader-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .features-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
 }
@@ -1047,7 +1129,8 @@ footer {
 @media (max-width: 650px) {
 
     .navbar {
-        padding: 0 20px;
+        padding:
+            0 20px;
     }
 
     .nav-links {
@@ -1066,13 +1149,15 @@ footer {
     }
 
     .section {
-        padding: 80px 0;
+        padding:
+            80px 0;
     }
 
     .category-grid,
     .shader-grid,
     .features-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .category-card {
@@ -1085,6 +1170,7 @@ footer {
 
     .release {
         align-items: flex-start;
+
         flex-direction: column;
 
         gap: 20px;
@@ -1118,6 +1204,10 @@ footer {
     overflow: hidden;
 
     background: #020305;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 
@@ -1135,23 +1225,34 @@ footer {
     background-size: cover;
     background-position: center;
 
-    transform: scale(1.03);
+    transform:
+        scale(1.03);
 
-    animation: introSceneFloat 12s ease-in-out infinite alternate;
+    animation:
+        introSceneFloat
+        12s
+        ease-in-out
+        infinite
+        alternate;
 
-    will-change: transform;
+    will-change:
+        transform;
 
     z-index: 0;
 }
 
 @keyframes introSceneFloat {
+
     from {
-        transform: scale(1.03);
+        transform:
+            scale(1.03);
     }
 
     to {
-        transform: scale(1.09);
+        transform:
+            scale(1.09);
     }
+
 }
 
 
@@ -1192,12 +1293,16 @@ footer {
             transparent 1.5px
         );
 
-    background-size: 180px 180px;
+    background-size:
+        180px 180px;
 
     opacity: 0.18;
 
     animation:
-        starsDrift 18s linear infinite;
+        starsDrift
+        18s
+        linear
+        infinite;
 
     mix-blend-mode: screen;
 }
@@ -1205,11 +1310,15 @@ footer {
 @keyframes starsDrift {
 
     from {
-        transform: translate3d(0, 0, 0) scale(1);
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
     }
 
     to {
-        transform: translate3d(-80px, 40px, 0) scale(1.08);
+        transform:
+            translate3d(-80px, 40px, 0)
+            scale(1.08);
     }
 
 }
@@ -1222,13 +1331,25 @@ footer {
 .intro-black-hole {
     position: absolute;
 
-    width: min(16vw, 170px);
-    height: min(16vw, 170px);
+    width:
+        min(
+            16vw,
+            170px
+        );
+
+    height:
+        min(
+            16vw,
+            170px
+        );
 
     left: 50%;
     top: 22%;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%)
+        scale(1)
+        rotate(0deg);
 
     border-radius: 50%;
 
@@ -1242,36 +1363,36 @@ footer {
         );
 
     box-shadow:
-        0 0 25px rgba(255,255,255,0.12),
-        0 0 70px rgba(120,150,190,0.16),
-        0 0 130px rgba(80,110,150,0.12);
+        0 0 25px
+            rgba(255,255,255,0.12),
 
-    animation:
-        blackHolePulse 5s ease-in-out infinite alternate;
+        0 0 70px
+            rgba(120,150,190,0.16),
+
+        0 0 130px
+            rgba(80,110,150,0.12);
+
+    /*
+       IMPORTANT:
+
+       No floating animation.
+
+       The black hole remains physically
+       locked in the sky.
+
+       JavaScript controls:
+       - rotation
+       - expansion
+    */
+
+    animation: none;
 
     pointer-events: none;
-}
 
-@keyframes blackHolePulse {
+    z-index: 5;
 
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(0.94)
-            rotate(0deg);
-
-        filter: brightness(0.9);
-    }
-
-    to {
-        transform:
-            translate(-50%, -50%)
-            scale(1.08)
-            rotate(8deg);
-
-        filter: brightness(1.15);
-    }
-
+    will-change:
+        transform;
 }
 
 
@@ -1290,7 +1411,12 @@ footer {
 
     z-index: 10;
 
-    width: min(900px, 100%);
+    width:
+        min(
+            900px,
+            100%
+        );
+
     max-width: 900px;
 
     margin: 0;
@@ -1304,25 +1430,40 @@ footer {
 
     text-align: center;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate(-50%, -50%);
 
-    animation: introContentIn 1.4s ease forwards;
+    animation:
+        introContentIn
+        1.4s
+        ease
+        forwards;
 }
 
 @keyframes introContentIn {
 
     from {
+
         opacity: 0;
 
         transform:
-            translate(-50%, calc(-50% + 20px));
+            translate(
+                -50%,
+                calc(-50% + 20px)
+            );
+
     }
 
     to {
+
         opacity: 1;
 
         transform:
-            translate(-50%, -50%);
+            translate(
+                -50%,
+                -50%
+            );
+
     }
 
 }
@@ -1338,18 +1479,29 @@ footer {
 
     margin-bottom: 8px;
 
-    color: rgba(255, 255, 255, 0.95);
+    color:
+        rgba(255, 255, 255, 0.95);
 
-    font-size: clamp(0.65rem, 2vw, 0.85rem);
+    font-size:
+        clamp(
+            0.65rem,
+            2vw,
+            0.85rem
+        );
+
     font-weight: 600;
 
-    letter-spacing: 0.32em;
+    letter-spacing:
+        0.32em;
 
     text-align: center;
 
     text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9),
-        0 0 18px rgba(255, 255, 255, 0.25);
+        0 2px 10px
+            rgba(0, 0, 0, 0.9),
+
+        0 0 18px
+            rgba(255, 255, 255, 0.25);
 }
 
 
@@ -1365,45 +1517,83 @@ footer {
 
     color: #ffffff;
 
-    font-size: clamp(4.5rem, 17vw, 9rem);
+    font-size:
+        clamp(
+            4.5rem,
+            17vw,
+            9rem
+        );
 
     line-height: 0.85;
 
     font-weight: 800;
 
-    letter-spacing: -0.055em;
+    letter-spacing:
+        -0.055em;
 
     text-align: center;
 
     text-shadow:
-        0 0 5px rgba(255, 255, 255, 0.9),
-        0 0 15px rgba(255, 255, 255, 0.75),
-        0 0 35px rgba(255, 255, 255, 0.45),
-        0 0 70px rgba(255, 255, 255, 0.22);
+        0 0 5px
+            rgba(255, 255, 255, 0.9),
+
+        0 0 15px
+            rgba(255, 255, 255, 0.75),
+
+        0 0 35px
+            rgba(255, 255, 255, 0.45),
+
+        0 0 70px
+            rgba(255, 255, 255, 0.22);
 
     filter:
-        drop-shadow(0 5px 20px rgba(0, 0, 0, 0.55));
+        drop-shadow(
+            0 5px 20px
+            rgba(0, 0, 0, 0.55)
+        );
 
     animation:
-        glowTitlePulse 4s ease-in-out infinite alternate;
+        glowTitlePulse
+        4s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 @keyframes glowTitlePulse {
 
     from {
+
         text-shadow:
-            0 0 5px rgba(255, 255, 255, 0.85),
-            0 0 15px rgba(255, 255, 255, 0.65),
-            0 0 35px rgba(255, 255, 255, 0.35),
-            0 0 60px rgba(255, 255, 255, 0.18);
+            0 0 5px
+                rgba(255, 255, 255, 0.85),
+
+            0 0 15px
+                rgba(255, 255, 255, 0.65),
+
+            0 0 35px
+                rgba(255, 255, 255, 0.35),
+
+            0 0 60px
+                rgba(255, 255, 255, 0.18);
+
     }
 
     to {
+
         text-shadow:
-            0 0 8px rgba(255, 255, 255, 1),
-            0 0 22px rgba(255, 255, 255, 0.8),
-            0 0 45px rgba(255, 255, 255, 0.5),
-            0 0 90px rgba(255, 255, 255, 0.25);
+            0 0 8px
+                rgba(255, 255, 255, 1),
+
+            0 0 22px
+                rgba(255, 255, 255, 0.8),
+
+            0 0 45px
+                rgba(255, 255, 255, 0.5),
+
+            0 0 90px
+                rgba(255, 255, 255, 0.25);
+
     }
 
 }
@@ -1419,17 +1609,26 @@ footer {
 
     margin-top: 28px;
 
-    color: rgba(255, 255, 255, 0.95);
+    color:
+        rgba(255, 255, 255, 0.95);
 
-    font-size: clamp(0.95rem, 3vw, 1.2rem);
+    font-size:
+        clamp(
+            0.95rem,
+            3vw,
+            1.2rem
+        );
 
     letter-spacing: 0.02em;
 
     text-align: center;
 
     text-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.95),
-        0 4px 25px rgba(0, 0, 0, 0.75);
+        0 2px 12px
+            rgba(0, 0, 0, 0.95),
+
+        0 4px 25px
+            rgba(0, 0, 0, 0.75);
 }
 
 
@@ -1448,7 +1647,10 @@ footer {
 
     padding: 14px 30px;
 
-    border: 1px solid rgba(255, 255, 255, 0.65);
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.65);
+
     border-radius: 999px;
 
     background:
@@ -1465,16 +1667,25 @@ footer {
 
     cursor: pointer;
 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
 
     box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.08),
-        0 8px 35px rgba(0, 0, 0, 0.45),
-        0 0 30px rgba(255, 255, 255, 0.08);
+        0 0 0 1px
+            rgba(255, 255, 255, 0.08),
+
+        0 8px 35px
+            rgba(0, 0, 0, 0.45),
+
+        0 0 30px
+            rgba(255, 255, 255, 0.08);
 
     text-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.8);
+        0 2px 8px
+            rgba(0, 0, 0, 0.8);
 
     transition:
         transform 0.3s ease,
@@ -1484,20 +1695,27 @@ footer {
 }
 
 .intro-button:hover {
-    transform: translateY(-3px) scale(1.03);
+    transform:
+        translateY(-3px)
+        scale(1.03);
 
     background:
         rgba(255, 255, 255, 0.16);
 
-    border-color: rgba(255, 255, 255, 0.95);
+    border-color:
+        rgba(255, 255, 255, 0.95);
 
     box-shadow:
-        0 10px 45px rgba(0, 0, 0, 0.5),
-        0 0 35px rgba(255, 255, 255, 0.22);
+        0 10px 45px
+            rgba(0, 0, 0, 0.5),
+
+        0 0 35px
+            rgba(255, 255, 255, 0.22);
 }
 
 .intro-button:active {
-    transform: scale(0.97);
+    transform:
+        scale(0.97);
 }
 
 
@@ -1519,7 +1737,8 @@ footer {
 
     background: transparent;
 
-    color: rgba(255, 255, 255, 0.78);
+    color:
+        rgba(255, 255, 255, 0.78);
 
     font-size: 0.85rem;
 
@@ -1528,7 +1747,8 @@ footer {
     cursor: pointer;
 
     text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9);
+        0 2px 10px
+            rgba(0, 0, 0, 0.9);
 
     transition:
         color 0.3s ease,
@@ -1539,220 +1759,8 @@ footer {
 .skip-intro:hover {
     color: #ffffff;
 
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   ENTER GLOW — CAMERA FLIES INTO BLACK HOLE
-   ========================================================= */
-
-.cinematic-intro.intro-exit {
-    animation:
-        cinematicExit 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
-
-    pointer-events: none;
-}
-
-.cinematic-intro.intro-exit .intro-scene {
-
-    animation:
-        cameraIntoBlackHole
-        2.8s
-        cubic-bezier(0.65, 0, 0.15, 1)
-        forwards !important;
-
-    transform-origin: 54% 20%;
-
-    will-change: transform, filter;
-}
-
-.cinematic-intro.intro-exit .intro-content {
-    animation:
-        introContentExit 0.7s ease forwards;
-}
-
-@keyframes blackHoleTravel {
-
-    0% {
-        transform: scale(1.03);
-        filter: brightness(1);
-    }
-
-    35% {
-        transform: scale(1.12);
-        filter: brightness(1.05);
-    }
-
-    65% {
-        transform: scale(1.55);
-        filter: brightness(1.25);
-    }
-
-    85% {
-        transform: scale(2.8);
-        filter: brightness(1.7);
-    }
-
-    100% {
-        transform: scale(7);
-        filter: brightness(2.5);
-    }
-
-}
-
-@keyframes cinematicExit {
-
-    0% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    72% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-}
-
-@keyframes introContentExit {
-
-    from {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(1);
-    }
-
-    to {
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%) scale(0.7);
-    }
-
-}
-
-
-/* =========================================================
-   SPACE STREAKS
-   ========================================================= */
-
-.space-streaks {
-    position: absolute;
-
-    inset: -50%;
-
-    background:
-        linear-gradient(
-            105deg,
-            transparent 0%,
-            transparent 48%,
-            rgba(255, 255, 255, 0.035) 49%,
-            transparent 50%
-        ),
-        linear-gradient(
-            75deg,
-            transparent 0%,
-            transparent 53%,
-            rgba(180, 200, 220, 0.025) 54%,
-            transparent 55%
-        );
-
-    opacity: 0.45;
-
-    pointer-events: none;
-}
-
-.cinematic-intro.intro-exit .space-streaks {
-    animation:
-        spaceStreakWarp
-        2.4s
-        cubic-bezier(0.65, 0, 0.2, 1)
-        forwards;
-}
-
-@keyframes spaceStreakWarp {
-
-    0% {
-        transform: scale(1);
-        opacity: 0.25;
-    }
-
-    45% {
-        transform: scale(1.25);
-        opacity: 0.4;
-    }
-
-    75% {
-        transform: scale(2);
-        opacity: 0.65;
-    }
-
-    100% {
-        transform: scale(4);
-        opacity: 0;
-    }
-
-}
-
-
-/* =========================================================
-   INTRO TRANSITION
-   ========================================================= */
-
-.cinematic-intro {
-    transition:
-        opacity 0.8s ease 1.7s,
-        visibility 0s linear 2.5s;
-}
-
-.cinematic-intro.intro-exit {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   HIDE HOMEPAGE DURING INTRO
-   ========================================================= */
-
-body.intro-playing .navbar,
-body.intro-playing .hero,
-body.intro-playing .section,
-body.intro-playing .final-cta,
-body.intro-playing footer {
-    visibility: hidden;
-}
-
-
-/* =========================================================
-   INSTANT SKIP INTRO
-   ========================================================= */
-
-.cinematic-intro.skip-intro-now {
-    animation: none !important;
-    transition: none !important;
-
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-
-/* =========================================================
-   LOCK PAGE WHILE CINEMATIC INTRO IS ACTIVE
-   ========================================================= */
-
-html.intro-active,
-body.intro-active {
-    overflow: hidden !important;
+    transform:
+        translateY(-2px);
 }
 
 
@@ -1769,7 +1777,8 @@ body.intro-active {
         ease
         forwards;
 
-    animation-delay: 0.5s;
+    animation-delay:
+        0.5s;
 }
 
 .intro-content h1 {
@@ -1781,7 +1790,8 @@ body.intro-active {
         ease
         forwards;
 
-    animation-delay: 0.7s;
+    animation-delay:
+        0.7s;
 }
 
 .intro-subtitle {
@@ -1793,7 +1803,8 @@ body.intro-active {
         ease
         forwards;
 
-    animation-delay: 1s;
+    animation-delay:
+        1s;
 }
 
 .intro-button {
@@ -1805,7 +1816,8 @@ body.intro-active {
         ease
         forwards;
 
-    animation-delay: 1.3s;
+    animation-delay:
+        1.3s;
 }
 
 
@@ -1816,13 +1828,21 @@ body.intro-active {
 @keyframes introTextFade {
 
     from {
+
         opacity: 0;
-        transform: translateY(12px);
+
+        transform:
+            translateY(12px);
+
     }
 
     to {
+
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
+
     }
 
 }
@@ -1835,13 +1855,23 @@ body.intro-active {
 @keyframes introTitleFade {
 
     from {
+
         opacity: 0;
-        transform: translateY(25px) scale(0.94);
+
+        transform:
+            translateY(25px)
+            scale(0.94);
+
     }
 
     to {
+
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
+
     }
 
 }
@@ -1854,27 +1884,104 @@ body.intro-active {
 @keyframes introButtonFade {
 
     from {
+
         opacity: 0;
-        transform: translateY(15px) scale(0.96);
+
+        transform:
+            translateY(15px)
+            scale(0.96);
+
     }
 
     to {
+
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
+
     }
 
 }
 
 
 /* =========================================================
-   BLACK HOLE ZOOM
+   CINEMATIC EXIT
    ========================================================= */
 
-.cinematic-intro.intro-zoom .intro-scene {
-    transform: scale(7);
+/*
+   IMPORTANT:
 
-    transition:
-        transform 3.2s cubic-bezier(0.65, 0, 0.15, 1);
+   The camera movement itself is controlled by JavaScript
+   using requestAnimationFrame.
+
+   This prevents multiple CSS animations from fighting
+   with each other and removes the previous "pause then
+   zoom again" effect.
+*/
+
+.cinematic-intro.intro-exit {
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CINEMATIC BLACK SCREEN
+   ========================================================= */
+
+.cinematic-black-screen {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    background: #000000;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    will-change: opacity;
+}
+
+
+/* =========================================================
+   HOMEPAGE HIDDEN DURING INTRO
+   ========================================================= */
+
+body.intro-playing .navbar,
+body.intro-playing .hero,
+body.intro-playing .section,
+body.intro-playing .final-cta,
+body.intro-playing footer {
+    visibility: hidden !important;
+}
+
+
+/* =========================================================
+   PAGE LOCK
+   ========================================================= */
+
+html.intro-active,
+body.intro-active {
+    overflow: hidden !important;
+}
+
+
+/* =========================================================
+   INSTANT SKIP
+   ========================================================= */
+
+.cinematic-intro.skip-intro-now {
+    animation: none !important;
+    transition: none !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+
+    pointer-events: none !important;
 }
 
 
@@ -1885,7 +1992,8 @@ body.intro-active {
 @media (max-width: 650px) {
 
     .intro-scene {
-        background-position: center;
+        background-position:
+            center;
     }
 
     .intro-black-hole {
@@ -1894,12 +2002,6 @@ body.intro-active {
 
         top: 22%;
     }
-
-    /*
-       IMPORTANT:
-       Keep the intro content exactly centered on mobile.
-       Do not use margin-top here.
-    */
 
     .cinematic-intro .intro-content {
         position: absolute;
@@ -1912,22 +2014,33 @@ body.intro-active {
 
         margin: 0;
 
-        padding: 0 20px;
+        padding:
+            0 20px;
 
         transform:
-            translate(-50%, -50%);
+            translate(
+                -50%,
+                -50%
+            );
     }
 
     .intro-label {
         margin-bottom: 7px;
 
-        letter-spacing: 0.28em;
+        letter-spacing:
+            0.28em;
     }
 
     .intro-content h1 {
-        font-size: clamp(4.2rem, 20vw, 6.5rem);
+        font-size:
+            clamp(
+                4.2rem,
+                20vw,
+                6.5rem
+            );
 
-        letter-spacing: -0.06em;
+        letter-spacing:
+            -0.06em;
     }
 
     .intro-subtitle {
@@ -1944,7 +2057,8 @@ body.intro-active {
         min-width: 205px;
         min-height: 56px;
 
-        padding: 15px 30px;
+        padding:
+            15px 30px;
 
         font-size: 0.82rem;
     }
@@ -1953,957 +2067,42 @@ body.intro-active {
         right: 20px;
         bottom: 20px;
 
-        padding: 12px 6px;
+        padding:
+            12px 6px;
 
         font-size: 0.9rem;
     }
 
-    .intro-black-hole {
-        display: none;
-    }
-
 }
 
 
 /* =========================================================
-   GLOW — FINAL BLACK HOLE CINEMATIC TRANSITION
-   =========================================================
+   SCROLL REVEAL
+   ========================================================= */
 
-   Sequence:
-
-   0.00s — normal intro
-   0.00–2.40s — camera rushes toward black hole
-   2.40–2.80s — black hole fills the screen
-   2.80–3.20s — complete black screen
-   3.20s — homepage appears
-*/
-
-
-/* ---------------------------------------------------------
-   MAIN CINEMATIC TRANSITION
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit {
-
-    pointer-events: none;
-
-    animation:
-        cinematicBlackHoleExit
-        3.2s
-        cubic-bezier(0.65,0,0.15,1)
-        forwards !important;
-}
-
-
-/* ---------------------------------------------------------
-   CAMERA MOVEMENT
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit .intro-scene {
-
-    animation:
-        cameraIntoBlackHole
-        2.8s
-        cubic-bezier(0.65, 0, 0.15, 1)
-        forwards !important;
-
-    transform-origin: 50% 22%;
-
-    will-change: transform, filter;
-}
-
-
-/* ---------------------------------------------------------
-   BLACK HOLE BECOMES THE CAMERA TARGET
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit .intro-black-hole {
-
-    animation:
-        blackHoleExpand
-        2.8s
-        cubic-bezier(0.65, 0, 0.15, 1)
-        forwards !important;
-
-    transform-origin: center;
-}
-
-
-/* ---------------------------------------------------------
-   HIDE INTRO TEXT DURING CAMERA FLIGHT
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit .intro-content {
-
-    animation:
-        introContentDisappear
-        0.7s
-        ease
-        forwards !important;
-}
-
-
-/* ---------------------------------------------------------
-   CAMERA FLIES INTO BLACK HOLE
-   --------------------------------------------------------- */
-
-@keyframes cameraIntoBlackHole {
-
-    0% {
-        transform: scale(1.03);
-        filter: brightness(1);
-    }
-
-    20% {
-        transform: scale(1.08);
-        filter: brightness(1.02);
-    }
-
-    40% {
-        transform: scale(1.22);
-        filter: brightness(1.05);
-    }
-
-    58% {
-        transform: scale(1.55);
-        filter: brightness(1.08);
-    }
-
-    72% {
-        transform: scale(2.05);
-        filter: brightness(1.12);
-    }
-
-    84% {
-        transform: scale(2.9);
-        filter: brightness(1.18);
-    }
-
-    93% {
-        transform: scale(4.2);
-        filter: brightness(1.3);
-    }
-
-    100% {
-        transform: scale(7.5);
-        filter: brightness(1.5);
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   BLACK HOLE EXPANDS INTO THE SCREEN
-   --------------------------------------------------------- */
-
-@keyframes blackHoleExpand {
-
-    0% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-
-        opacity: 1;
-
-    }
-
-    40% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(2);
-
-        opacity: 1;
-
-    }
-
-    65% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(5);
-
-        opacity: 1;
-
-    }
-
-    82% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(12);
-
-        opacity: 1;
-
-    }
-
-    100% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(35);
-
-        opacity: 1;
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   TEXT DISAPPEARS
-   --------------------------------------------------------- */
-
-@keyframes introContentDisappear {
-
-    0% {
-
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%)
-            scale(0.75);
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   COMPLETE CINEMATIC EXIT
-   --------------------------------------------------------- */
-
-@keyframes cinematicBlackHoleExit {
-
-    0% {
-
-        opacity: 1;
-
-        visibility: visible;
-
-    }
-
-    75% {
-
-        opacity: 1;
-
-        visibility: visible;
-
-    }
-
-    87% {
-
-        opacity: 1;
-
-        visibility: visible;
-
-        background: #020305;
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        visibility: hidden;
-
-        background: #000;
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   HOMEPAGE STAYS HIDDEN DURING TRANSITION
-   --------------------------------------------------------- */
-
-body.intro-playing .navbar,
-body.intro-playing .hero,
-body.intro-playing .section,
-body.intro-playing .final-cta,
-body.intro-playing footer {
-
-    visibility: hidden !important;
-
-}
-
-
-/* ---------------------------------------------------------
-   BLACK SCREEN MOMENT
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 100;
-
-    background: #000;
-
+.reveal {
     opacity: 0;
 
-    pointer-events: none;
+    transform:
+        translateY(45px)
+        scale(0.98);
 
-    animation:
-        finalBlackScreen
-        3.2s
-        ease
-        forwards;
-
-}
-
-
-@keyframes finalBlackScreen {
-
-    0% {
-        opacity: 0;
-    }
-
-    72% {
-        opacity: 0;
-    }
-
-    80% {
-        opacity: 0.15;
-    }
-
-    86% {
-        opacity: 0.55;
-    }
-
-    92% {
-        opacity: 0.9;
-    }
-
-    100% {
-        opacity: 1;
-    }
-
-}
-
-
-/* =========================================================
-   GLOW — CINEMATIC BLACK HOLE TRANSITION v2
-   =========================================================
-
-   This block intentionally overrides only the previous intro
-   transition rules. The rest of the website remains unchanged.
-
-   Timeline:
-   0.00s  text begins disappearing
-   0.45s  camera begins its main rush
-   2.60s  black hole rapidly fills the frame
-   2.68s  frame is completely black
-   3.05s  homepage is revealed by JavaScript
-*/
-
-
-/* ---------- FIXED BLACK HOLE TARGET ---------- */
-.cinematic-intro .intro-black-hole {
-    position: absolute;
-    left: 50%;
-    top: 22%;
-
-    width: clamp(150px, 15vw, 190px);
-    height: clamp(150px, 15vw, 190px);
-
-    transform: translate(-50%, -50%);
-    transform-origin: 50% 50%;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #000 0%,
-            #000 34%,
-            rgba(0, 0, 0, 0.98) 43%,
-            rgba(10, 10, 12, 0.94) 48%,
-            rgba(255, 255, 255, 0.20) 52%,
-            rgba(150, 160, 175, 0.12) 58%,
-            transparent 70%
+    transition:
+        opacity 0.9s ease,
+        transform
+        0.9s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
         );
-
-    box-shadow:
-        0 0 18px rgba(255,255,255,0.10),
-        0 0 48px rgba(150,165,185,0.14),
-        0 0 105px rgba(80,95,120,0.12);
-
-    z-index: 4;
-    pointer-events: none;
-
-    animation: blackHoleAxisRotation 18s linear infinite;
-    will-change: transform;
 }
 
-
-/* A very subtle rotating accretion structure makes the rotation visible
-   without making the black hole itself wobble or travel. */
-.cinematic-intro .intro-black-hole::before {
-    content: "";
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-    width: 118%;
-    height: 48%;
-
-    transform: translate(-50%, -50%) rotate(-12deg);
-    transform-origin: center;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 0 43%,
-            rgba(255,255,255,0.22) 48%,
-            rgba(170,180,195,0.10) 57%,
-            transparent 72%
-        );
-
-    filter: blur(1px);
-    opacity: 0.78;
-
-    animation: blackHoleDiskRotation 11s linear infinite;
-}
-
-.cinematic-intro .intro-black-hole::after {
-    content: "";
-
-    position: absolute;
-    inset: 17%;
-
-    border-radius: 50%;
-
-    background: #000;
-
-    box-shadow:
-        inset 0 0 18px rgba(0,0,0,0.95),
-        0 0 22px rgba(0,0,0,0.9);
-}
-
-@keyframes blackHoleAxisRotation {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-@keyframes blackHoleDiskRotation {
-    from {
-        transform: translate(-50%, -50%) rotate(-12deg) scaleX(1);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(348deg) scaleX(1);
-    }
-}
-
-
-/* ---------- NORMAL INTRO SCENE ---------- */
-.cinematic-intro .intro-scene {
-    transform: scale(1.035);
-    animation: introSceneFloatCinematic 18s ease-in-out infinite alternate;
-    transform-origin: 50% 22%;
-    will-change: transform, filter;
-}
-
-@keyframes introSceneFloatCinematic {
-    from {
-        transform: scale(1.035);
-    }
-    to {
-        transform: scale(1.065);
-    }
-}
-
-
-/* ---------- ENTER TRANSITION ---------- */
-.cinematic-intro.intro-exit {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    animation: none !important;
-    transition: none !important;
-    background: #020305;
-}
-
-/* The skip button remains clickable during the entire transition. */
-.cinematic-intro.intro-exit .skip-intro {
-    pointer-events: auto !important;
-    z-index: 500 !important;
-}
-
-
-/* Text disappears before the camera really accelerates. */
-.cinematic-intro.intro-exit .intro-content {
-    animation: cinematicTextOut 0.48s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
-}
-
-@keyframes cinematicTextOut {
-    0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-        filter: blur(0);
-    }
-
-    65% {
-        opacity: 0.35;
-        transform: translate(-50%, -50%) scale(0.985);
-        filter: blur(1px);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.97);
-        filter: blur(4px);
-    }
-}
-
-
-/* Camera stays locked to the black hole's exact location. */
-.cinematic-intro.intro-exit .intro-scene {
-    animation: cameraRushToBlackHole 2.68s cubic-bezier(0.18, 0.72, 0.16, 1) forwards !important;
-    transform-origin: 50% 22% !important;
-}
-
-@keyframes cameraRushToBlackHole {
-    0% {
-        transform: scale(1.035);
-        filter: brightness(1) contrast(1);
-    }
-
-    /* Almost imperceptible beginning — the camera gathers momentum. */
-    18% {
-        transform: scale(1.075);
-        filter: brightness(1.01) contrast(1.01);
-    }
-
-    38% {
-        transform: scale(1.20);
-        filter: brightness(1.025) contrast(1.02);
-    }
-
-    56% {
-        transform: scale(1.55);
-        filter: brightness(1.04) contrast(1.04);
-    }
-
-    72% {
-        transform: scale(2.25);
-        filter: brightness(1.06) contrast(1.06);
-    }
-
-    84% {
-        transform: scale(3.55);
-        filter: brightness(1.08) contrast(1.08);
-    }
-
-    93% {
-        transform: scale(5.8);
-        filter: brightness(1.10) contrast(1.10);
-    }
-
-    100% {
-        transform: scale(8.8);
-        filter: brightness(1.02) contrast(1.08);
-    }
-}
-
-
-/* Black hole expansion starts gently, then takes over the frame near
-   the moment the camera reaches it. */
-.cinematic-intro.intro-exit .intro-black-hole {
-    animation:
-        blackHoleAxisRotation 18s linear infinite,
-        blackHoleTakeover 2.68s cubic-bezier(0.16, 0.72, 0.12, 1) forwards !important;
-}
-
-@keyframes blackHoleTakeover {
-    0% {
-        width: clamp(150px, 15vw, 190px);
-        height: clamp(150px, 15vw, 190px);
-        opacity: 1;
-        filter: brightness(1);
-    }
-
-    55% {
-        width: clamp(170px, 17vw, 215px);
-        height: clamp(170px, 17vw, 215px);
-        opacity: 1;
-        filter: brightness(1.02);
-    }
-
-    76% {
-        width: 28vw;
-        height: 28vw;
-        filter: brightness(1.04);
-    }
-
-    88% {
-        width: 75vw;
-        height: 75vw;
-        filter: brightness(1.06);
-    }
-
-    96% {
-        width: 155vw;
-        height: 155vw;
-        filter: brightness(1.04);
-    }
-
-    100% {
-        width: 260vw;
-        height: 260vw;
-        opacity: 1;
-        filter: brightness(1);
-    }
-}
-
-
-/* During exit the old pulse must not change the black hole's position. */
-.cinematic-intro.intro-exit .intro-black-hole::before,
-.cinematic-intro.intro-exit .intro-black-hole::after {
-    pointer-events: none;
-}
-
-
-/* ---------- CINEMATIC BLACKOUT ---------- */
-.cinematic-intro.intro-exit::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 400;
-
-    background: #000;
-    opacity: 0;
-    pointer-events: none;
-
-    animation: cinematicBlackout 3.05s linear forwards !important;
-}
-
-@keyframes cinematicBlackout {
-    0%, 86% {
-        opacity: 0;
-    }
-
-    88% {
-        opacity: 0.35;
-    }
-
-    90% {
-        opacity: 0.82;
-    }
-
-    91.5%, 100% {
-        opacity: 1;
-    }
-}
-
-
-/* Homepage is hidden until JS releases the intro. */
-body.intro-playing .navbar,
-body.intro-playing .hero,
-body.intro-playing .section,
-body.intro-playing .final-cta,
-body.intro-playing footer {
-    visibility: hidden !important;
-}
-
-
-/* ---------- SKIP: TRUE IMMEDIATE EXIT ---------- */
-.cinematic-intro.skip-intro-now {
-    animation: none !important;
-    transition: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-
-/* Mobile keeps the same fixed target. */
-@media (max-width: 650px) {
-
-    .cinematic-intro .intro-black-hole {
-        width: 105px;
-        height: 105px;
-        left: 50%;
-        top: 22%;
-    }
-
-    .cinematic-intro.intro-exit .intro-black-hole {
-        animation:
-            blackHoleAxisRotation 18s linear infinite,
-            blackHoleTakeover 2.68s cubic-bezier(0.16, 0.72, 0.12, 1) forwards !important;
-    }
-
-}
-
-/* =========================================================
-   GLOW — FINAL CINEMATIC BLACK HOLE TRANSITION
-   ========================================================= */
-
-
-/* =========================================================
-   INTRO BASE
-   ========================================================= */
-
-.cinematic-intro {
-    position: fixed;
-    inset: 0;
-
-    z-index: 9999;
-
-    overflow: hidden;
-
-    background: #020305;
-}
-
-
-/* =========================================================
-   CINEMATIC SCENE
-   ========================================================= */
-
-.cinematic-intro .intro-scene {
+.revealed {
+    opacity: 1;
 
     transform:
-        translate3d(0, 0, 0)
-        scale(1.03);
-
-    transform-origin:
-        50% 22%;
-
-    will-change:
-        transform,
-        filter;
-
-}
-
-
-/* =========================================================
-   BLACK HOLE
-   ========================================================= */
-
-.cinematic-intro .intro-black-hole {
-
-    position: absolute;
-
-    left: 50%;
-    top: 22%;
-
-    width: min(16vw, 175px);
-    height: min(16vw, 175px);
-
-    transform:
-        translate3d(-50%, -50%, 0)
+        translateY(0)
         scale(1);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-
-            #000000 0%,
-            #000000 31%,
-
-            rgba(0, 0, 0, 0.98) 40%,
-
-            rgba(3, 4, 7, 0.98) 46%,
-
-            rgba(255, 255, 255, 0.15) 52%,
-
-            rgba(170, 190, 220, 0.11) 57%,
-
-            rgba(90, 120, 165, 0.07) 65%,
-
-            transparent 76%
-        );
-
-    box-shadow:
-
-        0 0 18px
-        rgba(255, 255, 255, 0.08),
-
-        0 0 50px
-        rgba(145, 170, 205, 0.12),
-
-        0 0 110px
-        rgba(90, 120, 165, 0.10),
-
-        0 0 180px
-        rgba(60, 90, 130, 0.06);
-
-    pointer-events: none;
-
-    z-index: 7;
-
-    will-change:
-        transform,
-        filter,
-        opacity;
-
-}
-
-
-/* =========================================================
-   INNER ACCRETION RING
-   ========================================================= */
-
-.cinematic-intro .intro-black-hole::before {
-
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 82%;
-    height: 82%;
-
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        conic-gradient(
-            from 0deg,
-
-            transparent 0deg,
-
-            rgba(255, 255, 255, 0.025) 30deg,
-
-            rgba(200, 215, 235, 0.14) 70deg,
-
-            rgba(255, 255, 255, 0.025) 110deg,
-
-            transparent 145deg,
-
-            transparent 190deg,
-
-            rgba(190, 210, 235, 0.10) 230deg,
-
-            rgba(255, 255, 255, 0.02) 270deg,
-
-            transparent 315deg,
-
-            transparent 360deg
-        );
-
-    filter:
-        blur(4px);
-
-    opacity: 0.75;
-
-}
-
-
-/* =========================================================
-   OUTER RING
-   ========================================================= */
-
-.cinematic-intro .intro-black-hole::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 106%;
-    height: 106%;
-
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    border:
-        1px solid
-        rgba(210, 225, 245, 0.075);
-
-    box-shadow:
-        0 0 25px
-        rgba(150, 175, 210, 0.08);
-
-    opacity: 0.6;
-
-}
-
-
-/* =========================================================
-   INTRO CONTENT
-   ========================================================= */
-
-.cinematic-intro .intro-content {
-
-    will-change:
-        opacity,
-        transform,
-        filter;
-
-}
-
-
-/* =========================================================
-   FINAL BLACK SCREEN
-   ========================================================= */
-
-.cinematic-intro .cinematic-black-screen {
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 99999;
-
-    background: #000000;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    will-change: opacity;
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 650px) {
-
-    .cinematic-intro .intro-black-hole {
-
-        width: 100px;
-        height: 100px;
-
-        left: 50%;
-        top: 22%;
-
-    }
-
 }
