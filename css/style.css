@@ -2256,12 +2256,17 @@ body.intro-active {
     top: 50%;
     left: 50%;
 
-    width: 90%;
+    width: 100%;
     max-width: 900px;
+
+    padding: 0 20px;
+
+    z-index: 2;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     text-align: center;
 
@@ -2283,7 +2288,7 @@ body.intro-active {
     }
 
 }
-
+   
 /* =========================================================
    CINEMATIC INTRO — STAGGERED TEXT
    ========================================================= */
@@ -2408,4 +2413,45 @@ body.intro-active {
     align-items: center;
 
     text-align: center;
+}
+
+/* =========================================================
+   FIX — CINEMATIC INTRO CONTENT CENTER
+   ========================================================= */
+
+.cinematic-intro {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+.cinematic-intro .intro-content {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    max-width: 900px;
+
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    z-index: 2;
 }
