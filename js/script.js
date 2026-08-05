@@ -451,7 +451,7 @@ function startCinematicIntro() {
         3200;
 
     const BLACK_HOLD =
-        20;
+        5;
 
 
     const TOTAL_DURATION =
@@ -659,7 +659,7 @@ function startCinematicIntro() {
         */
 
         const blackStart =
-            0.965;
+            0.995;
 
 
         const blackRaw =
