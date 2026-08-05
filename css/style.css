@@ -2455,3 +2455,93 @@ body.intro-active {
 
     z-index: 2;
 }
+
+/* =========================================================
+   CINEMATIC INTRO — FINAL CENTER FIX
+   ========================================================= */
+
+.cinematic-intro {
+    position: fixed !important;
+
+    inset: 0 !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+
+    display: grid !important;
+    place-items: center !important;
+
+    overflow: hidden !important;
+
+    z-index: 9999 !important;
+}
+
+
+/* Center the complete text group */
+
+.cinematic-intro > .intro-content {
+    position: absolute !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    right: auto !important;
+    bottom: auto !important;
+
+    width: min(900px, 100%) !important;
+
+    margin: 0 !important;
+    padding: 0 20px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    text-align: center !important;
+
+    z-index: 2 !important;
+
+    transform: translate(-50%, -50%) !important;
+}
+
+
+/* Keep every piece of text centered */
+
+.cinematic-intro .intro-label,
+.cinematic-intro h1,
+.cinematic-intro .intro-subtitle,
+.cinematic-intro .intro-button {
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    text-align: center !important;
+}
+
+
+/* =========================================================
+   INTRO ANIMATION
+   ========================================================= */
+
+.cinematic-intro > .intro-content {
+    animation: introContentCentered 1.4s ease forwards !important;
+}
+
+@keyframes introContentCentered {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate(-50%, calc(-50% + 25px)) !important;
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%) !important;
+    }
+
+}
