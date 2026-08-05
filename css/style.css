@@ -13,33 +13,43 @@
     --max-width: 1200px;
 }
 
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
     font-family: Arial, Helvetica, sans-serif;
+
     background: var(--bg);
+
     color: var(--text);
+
     line-height: 1.6;
+
     overflow-x: hidden;
 }
+
 
 a {
     color: inherit;
     text-decoration: none;
 }
 
+
 button,
 input {
     font: inherit;
 }
+
 
 
 /* =========================================================
@@ -48,47 +58,65 @@ input {
 
 .navbar {
     position: fixed;
+
     top: 0;
     left: 0;
+
     width: 100%;
     height: 72px;
 
     display: flex;
+
     align-items: center;
     justify-content: space-between;
 
     padding: 0 5%;
 
-    background: rgba(5, 6, 8, 0.72);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background:
+        rgba(5, 6, 8, 0.72);
 
-    border-bottom: 1px solid var(--line);
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid var(--line);
 
     z-index: 1000;
 }
 
+
 .logo {
     font-size: 1.25rem;
+
     font-weight: 800;
+
     letter-spacing: 0.22em;
 
-    transition: opacity 0.3s ease;
+    transition:
+        opacity 0.3s ease;
 }
+
 
 .logo:hover {
     opacity: 0.65;
 }
 
+
 .nav-links {
     display: flex;
+
     gap: 36px;
 }
+
 
 .nav-links a {
     position: relative;
 
     color: var(--muted);
+
     font-size: 0.9rem;
 
     transition:
@@ -96,15 +124,20 @@ input {
         transform 0.3s ease;
 }
 
+
 .nav-links a:hover {
     color: var(--text);
-    transform: translateY(-1px);
+
+    transform:
+        translateY(-1px);
 }
+
 
 .nav-links a::after {
     content: "";
 
     position: absolute;
+
     left: 0;
     bottom: -7px;
 
@@ -113,24 +146,31 @@ input {
 
     background: var(--text);
 
-    transition: width 0.3s ease;
+    transition:
+        width 0.3s ease;
 }
+
 
 .nav-links a:hover::after {
     width: 100%;
 }
+
 
 .search-button {
     width: 42px;
     height: 42px;
 
     display: grid;
+
     place-items: center;
 
-    border: 1px solid var(--line);
+    border:
+        1px solid var(--line);
+
     border-radius: 50%;
 
     background: transparent;
+
     color: var(--text);
 
     cursor: pointer;
@@ -140,14 +180,20 @@ input {
         transform 0.3s ease;
 }
 
+
 .search-button:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: scale(1.05);
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    transform:
+        scale(1.05);
 }
+
 
 .search-button span {
     font-size: 1.3rem;
 }
+
 
 
 /* =========================================================
@@ -156,19 +202,27 @@ input {
 
 .search-overlay {
     position: fixed;
+
     inset: 0;
 
     display: flex;
+
     align-items: flex-start;
     justify-content: center;
 
     padding-top: 150px;
 
-    background: rgba(3, 4, 6, 0.94);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background:
+        rgba(3, 4, 6, 0.94);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
 
     opacity: 0;
+
     visibility: hidden;
 
     transition:
@@ -178,23 +232,32 @@ input {
     z-index: 2000;
 }
 
+
 .search-overlay.active {
     opacity: 1;
+
     visibility: visible;
 }
 
+
 .search-container {
-    width: min(700px, 90%);
+    width:
+        min(700px, 90%);
 }
+
 
 .search-container input {
     width: 100%;
 
-    padding: 18px 20px;
+    padding:
+        18px 20px;
 
     background: transparent;
+
     border: none;
-    border-bottom: 1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
 
     color: var(--text);
 
@@ -203,16 +266,20 @@ input {
     outline: none;
 }
 
+
 .search-container input::placeholder {
     color: #656b74;
 }
 
+
 .close-search {
     position: absolute;
+
     top: 25px;
     right: 5%;
 
     background: transparent;
+
     border: none;
 
     color: var(--text);
@@ -221,12 +288,16 @@ input {
 
     cursor: pointer;
 
-    transition: transform 0.3s ease;
+    transition:
+        transform 0.3s ease;
 }
 
+
 .close-search:hover {
-    transform: rotate(90deg);
+    transform:
+        rotate(90deg);
 }
+
 
 
 /* =========================================================
@@ -239,15 +310,19 @@ input {
     min-height: 100vh;
 
     display: flex;
+
     align-items: center;
 
-    padding: 120px 8% 80px;
+    padding:
+        120px 8% 80px;
 
     overflow: hidden;
 }
 
+
 .hero-background {
     position: absolute;
+
     inset: 0;
 
     background-image:
@@ -257,86 +332,102 @@ input {
             rgba(5, 6, 8, 0.55) 45%,
             rgba(5, 6, 8, 0.15) 100%
         ),
-        url("/glow-website/red-sprites-hero.png");
+        url("../red-sprites-hero.png");
 
     background-size: cover;
+
     background-position: center;
 
-    transform: scale(1.03);
+    transform:
+        scale(1.03);
 
-    animation: heroZoom 12s ease-in-out infinite alternate;
+    animation:
+        heroZoom 12s ease-in-out infinite alternate;
 
     opacity: 1;
 
-    transition: opacity 1s ease-in-out;
+    transition:
+        opacity 1s ease-in-out;
 }
+
 
 #heroTitle,
 #heroDescription {
-    transition: opacity 0.7s ease-in-out;
+    transition:
+        opacity 0.7s ease-in-out;
 }
+
 
 @keyframes heroZoom {
+
     from {
-        transform: scale(1.03);
+        transform:
+            scale(1.03);
     }
 
     to {
-        transform: scale(1.08);
-    }
-}
-
-@keyframes backgroundPulse {
-    from {
-        transform: scale(1);
-        opacity: 0.8;
+        transform:
+            scale(1.08);
     }
 
-    to {
-        transform: scale(1.08);
-        opacity: 1;
-    }
 }
+
 
 .hero-content {
     position: relative;
+
     z-index: 2;
 
     max-width: 700px;
 
-    animation: heroEnter 1.2s ease forwards;
+    animation:
+        heroEnter 1.2s ease forwards;
 }
 
+
 @keyframes heroEnter {
+
     from {
         opacity: 0;
-        transform: translateY(30px);
+
+        transform:
+            translateY(30px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
+
 }
+
 
 .hero-label,
 .section-label {
     color: var(--muted);
 
     font-size: 0.72rem;
+
     font-weight: 700;
 
     letter-spacing: 0.22em;
 }
 
-.hero h1 {
-    margin: 15px 0;
 
-    font-size: clamp(3.5rem, 9vw, 8rem);
+.hero h1 {
+    margin:
+        15px 0;
+
+    font-size:
+        clamp(3.5rem, 9vw, 8rem);
+
     line-height: 0.95;
 
     letter-spacing: -0.05em;
 }
+
 
 .hero p:not(.hero-label) {
     max-width: 500px;
@@ -346,33 +437,48 @@ input {
     font-size: 1.1rem;
 }
 
+
 .hero-button {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
     margin-top: 30px;
-    padding: 13px 25px;
 
-    background: var(--text);
-    color: #050608;
+    padding:
+        13px 25px;
 
-    border-radius: 999px;
+    background:
+        var(--text);
 
-    font-size: 0.85rem;
-    font-weight: 700;
+    color:
+        #050608;
+
+    border-radius:
+        999px;
+
+    font-size:
+        0.85rem;
+
+    font-weight:
+        700;
 
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
 }
 
+
 .hero-button:hover {
-    transform: translateY(-3px);
+    transform:
+        translateY(-3px);
 
     box-shadow:
-        0 10px 40px rgba(255, 255, 255, 0.15);
+        0 10px 40px
+        rgba(255, 255, 255, 0.15);
 }
+
 
 
 /* =========================================================
@@ -386,19 +492,24 @@ input {
     left: 50%;
 
     display: flex;
+
     gap: 8px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 }
+
 
 .slider-dots button {
     width: 7px;
     height: 7px;
 
     border: none;
+
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.3);
+    background:
+        rgba(255, 255, 255, 0.3);
 
     cursor: pointer;
 
@@ -407,12 +518,16 @@ input {
         background 0.3s ease;
 }
 
+
 .slider-dots button.active {
     width: 24px;
+
     border-radius: 10px;
 
-    background: var(--text);
+    background:
+        var(--text);
 }
+
 
 
 /* =========================================================
@@ -420,30 +535,43 @@ input {
    ========================================================= */
 
 .section {
-    width: min(var(--max-width), 90%);
+    width:
+        min(var(--max-width), 90%);
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
-    padding: 120px 0;
+    padding:
+        120px 0;
 }
+
 
 .section-heading {
-    margin-bottom: 55px;
+    margin-bottom:
+        55px;
 }
+
 
 .section-heading h2 {
-    margin-top: 8px;
+    margin-top:
+        8px;
 
-    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-size:
+        clamp(2.2rem, 5vw, 4rem);
 
-    letter-spacing: -0.04em;
+    letter-spacing:
+        -0.04em;
 }
+
 
 .section-heading > p:last-child {
-    margin-top: 10px;
+    margin-top:
+        10px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
+
 
 
 /* =========================================================
@@ -453,19 +581,29 @@ input {
 .category-grid {
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    gap: 14px;
+    gap:
+        14px;
 }
 
+
 .category-card {
-    min-height: 190px;
+    min-height:
+        190px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    display:
+        flex;
 
-    padding: 28px;
+    flex-direction:
+        column;
+
+    justify-content:
+        flex-end;
+
+    padding:
+        28px;
 
     background:
         linear-gradient(
@@ -474,10 +612,14 @@ input {
             rgba(255, 255, 255, 0.015)
         );
 
-    border: 1px solid var(--line);
-    border-radius: 18px;
+    border:
+        1px solid var(--line);
 
-    overflow: hidden;
+    border-radius:
+        18px;
+
+    overflow:
+        hidden;
 
     transition:
         transform 0.4s ease,
@@ -485,10 +627,13 @@ input {
         background 0.4s ease;
 }
 
-.category-card:hover {
-    transform: translateY(-8px);
 
-    border-color: rgba(255, 255, 255, 0.22);
+.category-card:hover {
+    transform:
+        translateY(-8px);
+
+    border-color:
+        rgba(255, 255, 255, 0.22);
 
     background:
         linear-gradient(
@@ -498,44 +643,63 @@ input {
         );
 
     box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.3);
+        0 18px 45px
+        rgba(0, 0, 0, 0.3);
 }
 
+
 .category-icon {
-    margin-bottom: auto;
+    margin-bottom:
+        auto;
 
-    font-size: 1.5rem;
+    font-size:
+        1.5rem;
 
-    color: #d8dbe0;
+    color:
+        #d8dbe0;
 
     transition:
         transform 0.4s ease,
         opacity 0.4s ease;
 }
 
+
 .category-card:hover .category-icon {
-    transform: translateY(-5px) scale(1.08);
+    transform:
+        translateY(-5px)
+        scale(1.08);
 
     opacity: 1;
 
     text-shadow:
-        0 0 8px rgba(255, 255, 255, 0.35),
-        0 0 18px rgba(255, 255, 255, 0.18);
+        0 0 8px
+        rgba(255, 255, 255, 0.35),
+
+        0 0 18px
+        rgba(255, 255, 255, 0.18);
 }
+
 
 .category-card h3 {
-    margin-top: 30px;
+    margin-top:
+        30px;
 
-    font-size: 1.25rem;
+    font-size:
+        1.25rem;
 }
+
 
 .category-card p {
-    margin-top: 6px;
+    margin-top:
+        6px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 0.88rem;
+    font-size:
+        0.88rem;
 }
+
 
 
 /* =========================================================
@@ -545,18 +709,26 @@ input {
 .shader-grid {
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    gap: 20px;
+    gap:
+        20px;
 }
 
+
 .shader-card {
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    background: var(--card);
+    background:
+        var(--card);
 
-    border: 1px solid var(--line);
-    border-radius: 18px;
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        18px;
 
     transition:
         transform 0.4s ease,
@@ -564,32 +736,53 @@ input {
         box-shadow 0.4s ease;
 }
 
-.shader-card:hover {
-    transform: translateY(-8px);
 
-    border-color: rgba(255, 255, 255, 0.18);
+.shader-card:hover {
+    transform:
+        translateY(-8px);
+
+    border-color:
+        rgba(255, 255, 255, 0.18);
 
     box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.35);
+        0 18px 45px
+        rgba(0, 0, 0, 0.35);
 }
+
 
 .shader-image {
-    position: relative;
+    position:
+        relative;
 
-    height: 280px;
+    height:
+        280px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display:
+        flex;
 
-    overflow: hidden;
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
+
+    transition:
+        transform 0.7s ease;
 }
 
-.shader-image::after {
-    content: "";
 
-    position: absolute;
-    inset: 0;
+.shader-image::after {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
 
     background:
         linear-gradient(
@@ -599,23 +792,30 @@ input {
         );
 }
 
-.shader-image {
-    transition: transform 0.7s ease;
-}
 
 .shader-card:hover .shader-image {
-    transform: scale(1.06);
+    transform:
+        scale(1.06);
 }
+
 
 .shader-image span {
-    position: relative;
-    z-index: 2;
+    position:
+        relative;
 
-    font-size: 0.8rem;
-    font-weight: 700;
+    z-index:
+        2;
 
-    letter-spacing: 0.18em;
+    font-size:
+        0.8rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.18em;
 }
+
 
 .shader-red-sprites {
     background:
@@ -624,17 +824,20 @@ input {
             rgba(255, 70, 70, 0.75),
             transparent 18%
         ),
+
         radial-gradient(
             ellipse at 45% 60%,
             rgba(100, 50, 120, 0.45),
             transparent 35%
         ),
+
         linear-gradient(
             180deg,
             #11111b,
             #050608
         );
 }
+
 
 .shader-placeholder {
     background:
@@ -643,6 +846,7 @@ input {
             rgba(255, 255, 255, 0.12),
             transparent 25%
         ),
+
         linear-gradient(
             135deg,
             #0d1015,
@@ -650,90 +854,138 @@ input {
         );
 }
 
+
 .shader-info {
-    padding: 25px;
+    padding:
+        25px;
 }
+
 
 .shader-category {
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 0.68rem;
-    font-weight: 700;
+    font-size:
+        0.68rem;
 
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.16em;
+
+    text-transform:
+        uppercase;
 }
 
-.shader-info h3 {
-    margin-top: 8px;
 
-    font-size: 1.45rem;
-    letter-spacing: -0.02em;
+.shader-info h3 {
+    margin-top:
+        8px;
+
+    font-size:
+        1.45rem;
+
+    letter-spacing:
+        -0.02em;
 
     transition:
         color 0.3s ease,
         transform 0.3s ease;
 }
 
+
 .shader-card:hover .shader-info h3 {
-    transform: translateX(2px);
+    transform:
+        translateX(2px);
 }
+
 
 .shader-info > p:not(.shader-category) {
-    margin-top: 10px;
+    margin-top:
+        10px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 0.9rem;
+    font-size:
+        0.9rem;
 }
 
+
 .shader-link {
-    display: inline-block;
+    display:
+        inline-block;
 
-    margin-top: 20px;
+    margin-top:
+        20px;
 
-    font-size: 0.85rem;
-    font-weight: 700;
+    font-size:
+        0.85rem;
+
+    font-weight:
+        700;
 
     transition:
         transform 0.3s ease,
         opacity 0.3s ease;
 }
 
+
 .shader-card:hover .shader-link {
-    transform: translateX(4px);
+    transform:
+        translateX(4px);
 }
+
 
 .shader-link:hover {
-    transform: translateX(7px);
-    opacity: 0.8;
+    transform:
+        translateX(7px);
+
+    opacity:
+        0.8;
 }
+
 
 .center-button {
-    display: flex;
-    justify-content: center;
+    display:
+        flex;
 
-    margin-top: 50px;
+    justify-content:
+        center;
+
+    margin-top:
+        50px;
 }
 
+
 .outline-button {
-    padding: 12px 24px;
+    padding:
+        12px 24px;
 
-    border: 1px solid var(--line);
-    border-radius: 999px;
+    border:
+        1px solid var(--line);
 
-    font-size: 0.85rem;
+    border-radius:
+        999px;
+
+    font-size:
+        0.85rem;
 
     transition:
         background 0.3s ease,
         border-color 0.3s ease;
 }
 
-.outline-button:hover {
-    background: rgba(255, 255, 255, 0.06);
 
-    border-color: rgba(255, 255, 255, 0.2);
+.outline-button:hover {
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border-color:
+        rgba(255, 255, 255, 0.2);
 }
+
 
 
 /* =========================================================
@@ -741,74 +993,110 @@ input {
    ========================================================= */
 
 .why-glow {
-    width: 100%;
-    max-width: none;
+    width:
+        100%;
 
-    padding-left: 5%;
-    padding-right: 5%;
+    max-width:
+        none;
 
-    background: var(--bg-soft);
+    padding-left:
+        5%;
+
+    padding-right:
+        5%;
+
+    background:
+        var(--bg-soft);
 }
+
 
 .features-grid {
-    width: min(var(--max-width), 90%);
+    width:
+        min(var(--max-width), 90%);
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
-    display: grid;
+    display:
+        grid;
 
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:
+        repeat(4, 1fr);
 
-    gap: 25px;
+    gap:
+        25px;
 }
 
+
 .feature {
-    padding: 25px 0;
+    padding:
+        25px 0;
 
     transition:
         transform 0.4s ease,
         opacity 0.4s ease;
 }
 
-.feature > span {
-    display: inline-block;
 
-    font-size: 1.5rem;
+.feature > span {
+    display:
+        inline-block;
+
+    font-size:
+        1.5rem;
 
     transition:
         transform 0.4s ease,
         text-shadow 0.4s ease;
 }
 
+
 .feature:hover {
-    transform: translateY(-6px);
+    transform:
+        translateY(-6px);
 }
+
 
 .feature:hover > span {
-    transform: translateY(-4px) scale(1.1);
+    transform:
+        translateY(-4px)
+        scale(1.1);
 
     text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.3),
-        0 0 20px rgba(255, 255, 255, 0.15);
+        0 0 10px
+        rgba(255, 255, 255, 0.3),
+
+        0 0 20px
+        rgba(255, 255, 255, 0.15);
 }
+
 
 .feature h3 {
-    margin-top: 20px;
+    margin-top:
+        20px;
 
-    transition: transform 0.4s ease;
+    transition:
+        transform 0.4s ease;
 }
+
 
 .feature:hover h3 {
-    transform: translateX(2px);
+    transform:
+        translateX(2px);
 }
+
 
 .feature p {
-    margin-top: 8px;
+    margin-top:
+        8px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 0.9rem;
+    font-size:
+        0.9rem;
 }
+
 
 
 /* =========================================================
@@ -816,16 +1104,26 @@ input {
    ========================================================= */
 
 .release {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display:
+        flex;
 
-    padding: 30px;
+    align-items:
+        center;
 
-    background: var(--card);
+    justify-content:
+        space-between;
 
-    border: 1px solid var(--line);
-    border-radius: 18px;
+    padding:
+        30px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        18px;
 
     transition:
         transform 0.4s ease,
@@ -833,24 +1131,35 @@ input {
         box-shadow 0.4s ease;
 }
 
-.release:hover {
-    transform: translateY(-6px);
 
-    border-color: rgba(255, 255, 255, 0.18);
+.release:hover {
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(255, 255, 255, 0.18);
 
     box-shadow:
-        0 16px 40px rgba(0, 0, 0, 0.3);
+        0 16px 40px
+        rgba(0, 0, 0, 0.3);
 }
 
+
 .release-version {
-    padding: 7px 13px;
+    padding:
+        7px 13px;
 
-    border: 1px solid var(--line);
-    border-radius: 999px;
+    border:
+        1px solid var(--line);
 
-    color: var(--muted);
+    border-radius:
+        999px;
 
-    font-size: 0.75rem;
+    color:
+        var(--muted);
+
+    font-size:
+        0.75rem;
 
     transition:
         border-color 0.3s ease,
@@ -858,13 +1167,18 @@ input {
         transform 0.3s ease;
 }
 
+
 .release:hover .release-version {
-    transform: translateX(-3px);
+    transform:
+        translateX(-3px);
 
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color:
+        rgba(255, 255, 255, 0.2);
 
-    color: var(--text);
+    color:
+        var(--text);
 }
+
 
 
 /* =========================================================
@@ -872,31 +1186,50 @@ input {
    ========================================================= */
 
 .final-cta {
-    position: relative;
+    position:
+        relative;
 
-    min-height: 520px;
+    min-height:
+        520px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display:
+        flex;
 
-    text-align: center;
+    flex-direction:
+        column;
 
-    padding: 80px 20px;
+    align-items:
+        center;
 
-    overflow: hidden;
+    justify-content:
+        center;
 
-    border-top: 1px solid var(--line);
+    text-align:
+        center;
+
+    padding:
+        80px 20px;
+
+    overflow:
+        hidden;
+
+    border-top:
+        1px solid var(--line);
 }
 
+
 .cta-glow {
-    position: absolute;
+    position:
+        absolute;
 
-    width: 500px;
-    height: 500px;
+    width:
+        500px;
 
-    border-radius: 50%;
+    height:
+        500px;
+
+    border-radius:
+        50%;
 
     background:
         radial-gradient(
@@ -905,57 +1238,71 @@ input {
             transparent 65%
         );
 
-    filter: blur(30px);
+    filter:
+        blur(30px);
 
-    animation: ctaPulse 6s ease-in-out infinite alternate;
+    animation:
+        ctaPulse 6s ease-in-out infinite alternate;
 }
 
+
 @keyframes ctaPulse {
+
     from {
-        transform: scale(0.85);
-        opacity: 0.4;
+        transform:
+            scale(0.85);
+
+        opacity:
+            0.4;
     }
 
     to {
-        transform: scale(1.15);
-        opacity: 0.8;
+        transform:
+            scale(1.15);
+
+        opacity:
+            0.8;
     }
+
 }
+
 
 .final-cta > *:not(.cta-glow) {
-    position: relative;
-    z-index: 2;
+    position:
+        relative;
+
+    z-index:
+        2;
 }
 
-.final-cta h2 {
-    margin-top: 15px;
-
-    font-size: clamp(3rem, 8vw, 7rem);
-
-    line-height: 0.95;
-
-    letter-spacing: -0.06em;
-}
 
 .final-cta h2 {
-    margin-top: 15px;
+    margin-top:
+        15px;
 
-    font-size: clamp(3rem, 8vw, 7rem);
+    font-size:
+        clamp(3rem, 8vw, 7rem);
 
-    line-height: 0.95;
+    line-height:
+        0.95;
 
-    letter-spacing: -0.06em;
+    letter-spacing:
+        -0.06em;
 
     transition:
         transform 0.5s ease,
         letter-spacing 0.5s ease;
 }
 
-.final-cta:hover h2 {
-    transform: scale(1.015);
 
-    letter-spacing: -0.065em;
+.final-cta:hover h2 {
+    transform:
+        scale(1.015);
+
+    letter-spacing:
+        -0.065em;
 }
+
 
 
 /* =========================================================
@@ -963,60 +1310,1630 @@ input {
    ========================================================= */
 
 footer {
-    padding: 70px 5% 30px;
+    padding:
+        70px 5% 30px;
 
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 
-    background: #030405;
+    background:
+        #030405;
 }
+
 
 .footer-brand h2 {
-    font-size: 1.2rem;
+    font-size:
+        1.2rem;
 
-    letter-spacing: 0.2em;
+    letter-spacing:
+        0.2em;
 }
+
 
 .footer-brand p {
-    margin-top: 8px;
+    margin-top:
+        8px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
+
 
 .footer-links {
-    display: flex;
+    display:
+        flex;
 
-    gap: 25px;
+    gap:
+        25px;
 
-    margin-top: 35px;
+    margin-top:
+        35px;
 }
 
-.footer-links a {
-    color: var(--muted);
 
-    font-size: 0.85rem;
+.footer-links a {
+    color:
+        var(--muted);
+
+    font-size:
+        0.85rem;
 
     transition:
         color 0.3s ease,
         transform 0.3s ease;
 }
 
-.footer-links a:hover {
-    color: var(--text);
 
-    transform: translateY(-2px);
+.footer-links a:hover {
+    color:
+        var(--text);
+
+    transform:
+        translateY(-2px);
 }
+
 
 .footer-bottom {
-    margin-top: 60px;
+    margin-top:
+        60px;
 
-    padding-top: 20px;
+    padding-top:
+        20px;
 
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 
-    color: #666c75;
+    color:
+        #666c75;
 
-    font-size: 0.75rem;
+    font-size:
+        0.75rem;
 }
+
+
+
+/* =========================================================
+   =========================================================
+   CINEMATIC INTRO
+   =========================================================
+   ========================================================= */
+
+
+/*
+   IMPORTANT:
+
+   The intro contains ONE black hole.
+
+   The black hole does NOT travel around the screen.
+
+   The camera moves toward it.
+
+   This keeps the target locked and prevents
+   the "second black hole" effect.
+*/
+
+
+.cinematic-intro {
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        9999;
+
+    overflow:
+        hidden;
+
+    background:
+        #010203;
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+    pointer-events:
+        auto;
+}
+
+
+/* =========================================================
+   INTRO SCENE
+   ========================================================= */
+
+.intro-scene {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    overflow:
+        hidden;
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1);
+
+    transform-origin:
+        50% 22%;
+
+    will-change:
+        transform,
+        filter;
+
+    background-image:
+        url("../black-hole-intro.png");
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+}
+
+
+/*
+   During the camera movement the WHOLE SCENE moves.
+
+   Because the black hole is inside this scene,
+   the camera always travels toward the exact
+   black hole that the user saw.
+*/
+
+
+.cinematic-intro.intro-exit .intro-scene {
+    animation:
+        cameraDive
+        2.55s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        )
+        forwards;
+}
+
+
+
+/* =========================================================
+   STARS
+   ========================================================= */
+
+.intro-stars {
+    position:
+        absolute;
+
+    inset:
+        -30%;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.8)
+            0 1px,
+            transparent 1.6px
+        );
+
+    background-size:
+        170px 170px;
+
+    opacity:
+        0.16;
+
+    mix-blend-mode:
+        screen;
+
+    pointer-events:
+        none;
+
+    animation:
+        starsFloat
+        20s
+        linear
+        infinite;
+}
+
+
+@keyframes starsFloat {
+
+    from {
+        transform:
+            translate3d(0, 0, 0);
+    }
+
+    to {
+        transform:
+            translate3d(-45px, 25px, 0);
+    }
+
+}
+
+
+
+/* =========================================================
+   SPACE DUST
+   ========================================================= */
+
+.intro-space-dust {
+    position:
+        absolute;
+
+    inset:
+        -20%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 22%,
+            rgba(255,255,255,0.055),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 25% 55%,
+            rgba(130,150,180,0.035),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 75% 45%,
+            rgba(180,180,180,0.025),
+            transparent 40%
+        );
+
+    pointer-events:
+        none;
+
+    mix-blend-mode:
+        screen;
+}
+
+
+
+/* =========================================================
+   BLACK HOLE
+   ========================================================= */
+
+.intro-black-hole {
+    position:
+        absolute;
+
+    /*
+       FIXED POSITION.
+
+       This is the camera target.
+    */
+
+    left:
+        50%;
+
+    top:
+        22%;
+
+    width:
+        min(22vw, 260px);
+
+    height:
+        min(22vw, 260px);
+
+    transform:
+        translate3d(-50%, -50%, 0);
+
+    transform-style:
+        preserve-3d;
+
+    border-radius:
+        50%;
+
+    pointer-events:
+        none;
+
+    z-index:
+        5;
+
+    will-change:
+        transform;
+}
+
+
+
+/* =========================================================
+   BLACK HOLE CORE
+   ========================================================= */
+
+.black-hole-core {
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    width:
+        40%;
+
+    height:
+        40%;
+
+    transform:
+        translate3d(-50%, -50%, 0);
+
+    border-radius:
+        50%;
+
+    background:
+        #000;
+
+    box-shadow:
+        0 0 25px
+        rgba(0,0,0,0.95),
+
+        0 0 55px
+        rgba(0,0,0,0.8),
+
+        0 0 100px
+        rgba(0,0,0,0.65);
+
+    z-index:
+        8;
+}
+
+
+
+/* =========================================================
+   BLACK HOLE GLOW
+   ========================================================= */
+
+.black-hole-glow {
+    position:
+        absolute;
+
+    inset:
+        4%;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            transparent 25%,
+            rgba(255,255,255,0.10) 42%,
+            rgba(160,180,210,0.10) 52%,
+            transparent 72%
+        );
+
+    filter:
+        blur(5px);
+
+    opacity:
+        0.75;
+
+    z-index:
+        1;
+}
+
+
+
+/* =========================================================
+   ACCRETION RINGS
+   ========================================================= */
+
+.accretion-ring {
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    border-radius:
+        50%;
+
+    transform-style:
+        preserve-3d;
+
+    pointer-events:
+        none;
+
+    will-change:
+        transform;
+}
+
+
+/* OUTER RING */
+
+.ring-outer {
+    width:
+        112%;
+
+    height:
+        34%;
+
+    transform:
+        translate3d(-50%, -50%, 0)
+        rotateX(66deg)
+        rotateZ(-8deg);
+
+    border:
+        2px solid
+        rgba(210,225,245,0.22);
+
+    box-shadow:
+        0 0 15px
+        rgba(210,225,245,0.15),
+
+        0 0 40px
+        rgba(120,150,190,0.12),
+
+        inset 0 0 20px
+        rgba(255,255,255,0.08);
+
+    filter:
+        blur(0.2px);
+
+    animation:
+        ringOuterRotation
+        10s
+        linear
+        infinite;
+}
+
+
+/* MIDDLE RING */
+
+.ring-middle {
+    width:
+        88%;
+
+    height:
+        27%;
+
+    transform:
+        translate3d(-50%, -50%, 0)
+        rotateX(67deg)
+        rotateZ(14deg);
+
+    border:
+        3px solid
+        rgba(255,255,255,0.17);
+
+    box-shadow:
+        0 0 18px
+        rgba(255,255,255,0.12),
+
+        0 0 35px
+        rgba(160,180,210,0.15);
+
+    animation:
+        ringMiddleRotation
+        7s
+        linear
+        infinite reverse;
+}
+
+
+/* INNER RING */
+
+.ring-inner {
+    width:
+        64%;
+
+    height:
+        20%;
+
+    transform:
+        translate3d(-50%, -50%, 0)
+        rotateX(68deg)
+        rotateZ(-12deg);
+
+    border:
+        4px solid
+        rgba(255,255,255,0.22);
+
+    box-shadow:
+        0 0 12px
+        rgba(255,255,255,0.18),
+
+        0 0 28px
+        rgba(190,205,225,0.16);
+
+    animation:
+        ringInnerRotation
+        5s
+        linear
+        infinite;
+}
+
+
+
+/* =========================================================
+   RING ROTATION
+   ========================================================= */
+
+@keyframes ringOuterRotation {
+
+    from {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotateX(66deg)
+            rotateZ(0deg);
+    }
+
+    to {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotateX(66deg)
+            rotateZ(360deg);
+    }
+
+}
+
+
+@keyframes ringMiddleRotation {
+
+    from {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotateX(67deg)
+            rotateZ(0deg);
+    }
+
+    to {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotateX(67deg)
+            rotateZ(360deg);
+    }
+
+}
+
+
+@keyframes ringInnerRotation {
+
+    from {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotateX(68deg)
+            rotateZ(0deg);
+    }
+
+    to {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotateX(68deg)
+            rotateZ(360deg);
+    }
+
+}
+
+
+
+/* =========================================================
+   INTRO VIGNETTE
+   ========================================================= */
+
+.intro-vignette {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        20;
+
+    pointer-events:
+        none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 38%,
+            rgba(0,0,0,0.22) 65%,
+            rgba(0,0,0,0.78) 100%
+        );
+}
+
+
+
+/* =========================================================
+   INTRO CONTENT
+   ========================================================= */
+
+.intro-content {
+    position:
+        absolute;
+
+    top:
+        50%;
+
+    left:
+        50%;
+
+    width:
+        min(900px, 92%);
+
+    padding:
+        20px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    transform:
+        translate3d(-50%, -50%, 0);
+
+    z-index:
+        50;
+
+    animation:
+        introContentAppear
+        1.2s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        )
+        forwards;
+}
+
+
+@keyframes introContentAppear {
+
+    from {
+        opacity:
+            0;
+
+        transform:
+            translate3d(-50%, calc(-50% + 25px), 0);
+    }
+
+    to {
+        opacity:
+            1;
+
+        transform:
+            translate3d(-50%, -50%, 0);
+    }
+
+}
+
+
+
+/* =========================================================
+   INTRO LABEL
+   ========================================================= */
+
+.intro-label {
+    margin-bottom:
+        8px;
+
+    color:
+        rgba(255,255,255,0.94);
+
+    font-size:
+        clamp(0.65rem, 2vw, 0.85rem);
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.32em;
+
+    text-shadow:
+        0 2px 10px
+        rgba(0,0,0,0.95),
+
+        0 0 18px
+        rgba(255,255,255,0.2);
+
+    opacity:
+        0;
+
+    animation:
+        introTextIn
+        0.8s
+        ease
+        0.35s
+        forwards;
+}
+
+
+
+/* =========================================================
+   INTRO TITLE
+   ========================================================= */
+
+.intro-content h1 {
+    margin:
+        0;
+
+    color:
+        #fff;
+
+    font-size:
+        clamp(4.5rem, 17vw, 9rem);
+
+    line-height:
+        0.85;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        -0.055em;
+
+    text-shadow:
+        0 0 5px
+        rgba(255,255,255,0.9),
+
+        0 0 15px
+        rgba(255,255,255,0.75),
+
+        0 0 35px
+        rgba(255,255,255,0.45),
+
+        0 0 70px
+        rgba(255,255,255,0.22);
+
+    filter:
+        drop-shadow(
+            0 5px 20px
+            rgba(0,0,0,0.55)
+        );
+
+    opacity:
+        0;
+
+    animation:
+        introTitleIn
+        1s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        )
+        0.55s
+        forwards;
+}
+
+
+@keyframes introTitleIn {
+
+    from {
+        opacity:
+            0;
+
+        transform:
+            translateY(25px)
+            scale(0.94);
+    }
+
+    to {
+        opacity:
+            1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+
+/* =========================================================
+   INTRO SUBTITLE
+   ========================================================= */
+
+.intro-subtitle {
+    margin-top:
+        28px;
+
+    color:
+        rgba(255,255,255,0.94);
+
+    font-size:
+        clamp(0.95rem, 3vw, 1.2rem);
+
+    text-shadow:
+        0 2px 12px
+        rgba(0,0,0,0.95),
+
+        0 4px 25px
+        rgba(0,0,0,0.75);
+
+    opacity:
+        0;
+
+    animation:
+        introTextIn
+        0.8s
+        ease
+        0.85s
+        forwards;
+}
+
+
+
+/* =========================================================
+   INTRO BUTTON
+   ========================================================= */
+
+.intro-button {
+    min-width:
+        190px;
+
+    min-height:
+        54px;
+
+    margin-top:
+        38px;
+
+    padding:
+        14px 30px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.65);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(5,6,8,0.42);
+
+    color:
+        #fff;
+
+    font-size:
+        0.85rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.18em;
+
+    cursor:
+        pointer;
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    box-shadow:
+        0 0 0 1px
+        rgba(255,255,255,0.08),
+
+        0 8px 35px
+        rgba(0,0,0,0.45),
+
+        0 0 30px
+        rgba(255,255,255,0.08);
+
+    text-shadow:
+        0 2px 8px
+        rgba(0,0,0,0.8);
+
+    opacity:
+        0;
+
+    animation:
+        introButtonIn
+        0.8s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        )
+        1.15s
+        forwards;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.intro-button:hover {
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    background:
+        rgba(255,255,255,0.16);
+
+    border-color:
+        rgba(255,255,255,0.95);
+
+    box-shadow:
+        0 10px 45px
+        rgba(0,0,0,0.5),
+
+        0 0 35px
+        rgba(255,255,255,0.22);
+}
+
+
+.intro-button:active {
+    transform:
+        scale(0.97);
+}
+
+
+
+/* =========================================================
+   INTRO TEXT ANIMATIONS
+   ========================================================= */
+
+@keyframes introTextIn {
+
+    from {
+        opacity:
+            0;
+
+        transform:
+            translateY(12px);
+    }
+
+    to {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes introButtonIn {
+
+    from {
+        opacity:
+            0;
+
+        transform:
+            translateY(15px)
+            scale(0.96);
+    }
+
+    to {
+        opacity:
+            1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+
+/* =========================================================
+   SKIP INTRO
+   ========================================================= */
+
+.skip-intro {
+    position:
+        absolute;
+
+    right:
+        28px;
+
+    bottom:
+        25px;
+
+    z-index:
+        100;
+
+    padding:
+        10px 8px;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    color:
+        rgba(255,255,255,0.82);
+
+    font-size:
+        0.85rem;
+
+    letter-spacing:
+        0.03em;
+
+    cursor:
+        pointer;
+
+    text-shadow:
+        0 2px 10px
+        rgba(0,0,0,0.9);
+
+    opacity:
+        0;
+
+    animation:
+        skipFadeIn
+        0.7s
+        ease
+        1.3s
+        forwards;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+
+@keyframes skipFadeIn {
+
+    from {
+        opacity:
+            0;
+    }
+
+    to {
+        opacity:
+            1;
+    }
+
+}
+
+
+.skip-intro:hover {
+    color:
+        #fff;
+
+    transform:
+        translateY(-2px);
+}
+
+
+
+/* =========================================================
+   ENTER CINEMATIC EXIT
+   ========================================================= */
+
+
+/*
+   Sequence:
+
+   0.00
+   User clicks ENTER.
+
+   0.00–0.55
+   Text fades away.
+
+   0.40–2.55
+   Camera smoothly approaches the SAME black hole.
+
+   1.00–2.55
+   Black hole grows.
+
+   2.30–2.70
+   Black fills the frame.
+
+   2.70–2.95
+   Short black pause.
+
+   3.00
+   Homepage appears.
+*/
+
+
+.cinematic-intro.intro-exit {
+    pointer-events:
+        none;
+}
+
+
+/* =========================================================
+   TEXT DISAPPEARS FIRST
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-content {
+    animation:
+        introContentExit
+        0.55s
+        cubic-bezier(
+            0.4,
+            0,
+            1,
+            1
+        )
+        forwards;
+}
+
+
+@keyframes introContentExit {
+
+    from {
+        opacity:
+            1;
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1);
+    }
+
+    to {
+        opacity:
+            0;
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(0.96);
+    }
+
+}
+
+
+
+/* =========================================================
+   CAMERA DIVE
+   ========================================================= */
+
+@keyframes cameraDive {
+
+    0% {
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+
+        filter:
+            brightness(1)
+            contrast(1);
+    }
+
+
+    15% {
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.025);
+
+        filter:
+            brightness(0.98)
+            contrast(1.01);
+    }
+
+
+    32% {
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.08);
+
+        filter:
+            brightness(0.98)
+            contrast(1.02);
+    }
+
+
+    50% {
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.24);
+
+        filter:
+            brightness(1.02)
+            contrast(1.04);
+    }
+
+
+    68% {
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.58);
+
+        filter:
+            brightness(1.05)
+            contrast(1.07);
+    }
+
+
+    82% {
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(2.15);
+
+        filter:
+            brightness(1.08)
+            contrast(1.1);
+    }
+
+
+    92% {
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(3.4);
+
+        filter:
+            brightness(1.12)
+            contrast(1.12);
+    }
+
+
+    100% {
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(6.8);
+
+        filter:
+            brightness(1.15)
+            contrast(1.15);
+    }
+
+}
+
+
+
+/* =========================================================
+   BLACK HOLE GROWTH
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-black-hole {
+
+    animation:
+        blackHoleApproach
+        2.55s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        )
+        forwards;
+}
+
+
+@keyframes blackHoleApproach {
+
+    0% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1);
+    }
+
+
+    20% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.04);
+    }
+
+
+    42% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.14);
+    }
+
+
+    62% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.32);
+    }
+
+
+    78% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.65);
+    }
+
+
+    90% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(2.15);
+    }
+
+
+    100% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(3.2);
+    }
+
+}
+
+
+
+/* =========================================================
+   BLACK HOLE CORE EXPANSION
+   ========================================================= */
+
+.cinematic-intro.intro-exit .black-hole-core {
+
+    animation:
+        coreExpand
+        2.55s
+        cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        )
+        forwards;
+}
+
+
+@keyframes coreExpand {
+
+    0% {
+        width:
+            40%;
+
+        height:
+            40%;
+    }
+
+
+    55% {
+        width:
+            44%;
+
+        height:
+            44%;
+    }
+
+
+    80% {
+        width:
+            54%;
+
+        height:
+            54%;
+    }
+
+
+    100% {
+        width:
+            70%;
+
+        height:
+            70%;
+    }
+
+}
+
+
+
+/* =========================================================
+   BLACK SCREEN
+   ========================================================= */
+
+.intro-black-screen {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        500;
+
+    background:
+        #000;
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+}
+
+
+.cinematic-intro.intro-exit .intro-black-screen {
+
+    animation:
+        finalBlack
+        3s
+        linear
+        forwards;
+}
+
+
+@keyframes finalBlack {
+
+    0% {
+        opacity:
+            0;
+    }
+
+
+    72% {
+        opacity:
+            0;
+    }
+
+
+    79% {
+        opacity:
+            0.08;
+    }
+
+
+    84% {
+        opacity:
+            0.35;
+    }
+
+
+    89% {
+        opacity:
+            0.72;
+    }
+
+
+    93% {
+        opacity:
+            1;
+    }
+
+
+    100% {
+        opacity:
+            1;
+    }
+
+}
+
+
+
+/* =========================================================
+   INTRO EXIT / HOMEPAGE REVEAL
+   ========================================================= */
+
+.cinematic-intro.intro-exit {
+
+    animation:
+        introDisappear
+        3s
+        linear
+        forwards;
+}
+
+
+@keyframes introDisappear {
+
+    0% {
+
+        opacity:
+            1;
+
+        visibility:
+            visible;
+    }
+
+
+    93% {
+
+        opacity:
+            1;
+
+        visibility:
+            visible;
+    }
+
+
+    100% {
+
+        opacity:
+            0;
+
+        visibility:
+            hidden;
+    }
+
+}
+
+
+
+/* =========================================================
+   HOMEPAGE LOCK
+   ========================================================= */
+
+body.intro-active .navbar,
+body.intro-active .hero,
+body.intro-active .section,
+body.intro-active .final-cta,
+body.intro-active footer {
+
+    visibility:
+        hidden;
+}
+
+
+html.intro-active,
+body.intro-active {
+
+    overflow:
+        hidden !important;
+}
+
+
+
+/* =========================================================
+   SKIP INTRO IMMEDIATELY
+   ========================================================= */
+
+.cinematic-intro.skip-intro-now {
+
+    animation:
+        none !important;
+
+    transition:
+        none !important;
+
+    opacity:
+        0 !important;
+
+    visibility:
+        hidden !important;
+
+    pointer-events:
+        none !important;
+}
+
+
+.cinematic-intro.skip-intro-now * {
+
+    animation:
+        none !important;
+}
+
 
 
 /* =========================================================
@@ -1026,631 +2943,209 @@ footer {
 @media (max-width: 900px) {
 
     .nav-links {
-        gap: 18px;
+        gap:
+            18px;
     }
+
 
     .category-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
+
 
     .shader-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
+
     .features-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
 }
+
 
 
 @media (max-width: 650px) {
 
     .navbar {
-        padding: 0 20px;
+        padding:
+            0 20px;
     }
+
 
     .nav-links {
-        display: none;
+        display:
+            none;
     }
+
 
     .hero {
-        min-height: 85vh;
+        min-height:
+            85vh;
 
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left:
+            25px;
+
+        padding-right:
+            25px;
     }
 
-    .slider-arrow {
-        display: none;
-    }
 
     .section {
-        padding: 80px 0;
+        padding:
+            80px 0;
     }
+
 
     .category-grid,
     .shader-grid,
     .features-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
     }
+
 
     .category-card {
-        min-height: 160px;
+        min-height:
+            160px;
     }
+
 
     .shader-image {
-        height: 240px;
+        height:
+            240px;
     }
+
 
     .release {
-        align-items: flex-start;
-        flex-direction: column;
 
-        gap: 20px;
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            20px;
     }
+
 
     .final-cta {
-        min-height: 450px;
+        min-height:
+            450px;
     }
+
 
     .footer-links {
-        flex-wrap: wrap;
+        flex-wrap:
+            wrap;
     }
 
-}
 
 
-/* =========================================================
-   CINEMATIC INTRO
-   ========================================================= */
-
-.cinematic-intro {
-    position: fixed;
-    inset: 0;
-
-    z-index: 9999;
-
-    overflow: hidden;
-
-    background: #020305;
-
-    opacity: 1;
-    visibility: visible;
-
-    pointer-events: auto;
-
-    isolation: isolate;
-}
-
-.intro-scene {
-    position: absolute;
-    inset: 0;
-
-    z-index: 0;
-
-    background-image:
-        url("../black-hole-intro.png");
-
-    background-size: cover;
-    background-position: center;
-
-    transform: scale(1.025);
-
-    will-change: transform, filter;
-}
-
-.intro-stars {
-    position: absolute;
-    inset: -20%;
-
-    background-image:
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.72) 0 1px,
-            transparent 1.5px
-        );
-
-    background-size: 180px 180px;
-
-    opacity: 0.14;
-
-    mix-blend-mode: screen;
-
-    pointer-events: none;
-}
-
-.intro-vignette {
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 38%,
-            rgba(0, 0, 0, 0.16) 65%,
-            rgba(0, 0, 0, 0.72) 100%
-        );
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   SINGLE BLACK HOLE
-   ========================================================= */
-
-.intro-black-hole {
-    position: absolute;
-
-    left: 50%;
-    top: 22%;
-
-    width: min(18vw, 190px);
-    height: min(18vw, 190px);
-
-    transform:
-        translate(-50%, -50%)
-        scale(1);
-
-    border-radius: 50%;
-
-    z-index: 5;
-
-    pointer-events: none;
-
-    will-change: transform, filter, opacity;
-
-    filter: brightness(1);
-
-    background:
-        radial-gradient(
-            circle,
-            #000 0 31%,
-            #020202 32% 39%,
-            rgba(5, 5, 5, 0.96) 40% 45%,
-            transparent 46% 100%
-        );
-
-    box-shadow:
-        0 0 12px rgba(255, 255, 255, 0.08),
-        0 0 35px rgba(170, 190, 220, 0.12),
-        0 0 80px rgba(110, 140, 180, 0.10);
-
-    transform-origin: center center;
-}
-
-
-/* =========================================================
-   BLACK HOLE RINGS
-   ========================================================= */
-
-.black-hole-ring {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 145%;
-    height: 48%;
-
-    border-radius: 50%;
-
-    transform:
-        translate(-50%, -50%)
-        rotate(-14deg);
-
-    border:
-        2px solid rgba(255, 220, 175, 0.52);
-
-    box-shadow:
-        0 0 8px rgba(255, 205, 155, 0.42),
-        0 0 20px rgba(255, 165, 100, 0.22);
-
-    pointer-events: none;
-
-    will-change: transform;
-}
-
-.black-hole-ring:nth-child(2) {
-    width: 175%;
-    height: 58%;
-
-    border-width: 1px;
-
-    opacity: 0.42;
-
-    transform:
-        translate(-50%, -50%)
-        rotate(8deg);
-}
-
-.black-hole-ring:nth-child(3) {
-    width: 210%;
-    height: 68%;
-
-    border-width: 1px;
-
-    opacity: 0.24;
-
-    transform:
-        translate(-50%, -50%)
-        rotate(-25deg);
-}
-
-.black-hole-ring::after {
-    content: "";
-
-    position: absolute;
-    inset: -3px;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 180, 120, 0.28),
-            transparent 72%
-        );
-
-    filter: blur(4px);
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   INTRO CONTENT
-   ========================================================= */
-
-.cinematic-intro .intro-content {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    z-index: 20;
-
-    width: min(900px, 100%);
-
-    margin: 0;
-    padding: 20px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    transform: translate(-50%, -50%);
-
-    will-change: transform, opacity;
-}
-
-.intro-label {
-    position: relative;
-    z-index: 2;
-
-    margin-bottom: 8px;
-
-    color: rgba(255, 255, 255, 0.95);
-
-    font-size: clamp(0.65rem, 2vw, 0.85rem);
-    font-weight: 600;
-
-    letter-spacing: 0.32em;
-
-    text-align: center;
-
-    text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9),
-        0 0 18px rgba(255, 255, 255, 0.25);
-}
-
-.intro-content h1 {
-    position: relative;
-    z-index: 2;
-
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: clamp(4.5rem, 17vw, 9rem);
-
-    line-height: 0.85;
-
-    font-weight: 800;
-
-    letter-spacing: -0.055em;
-
-    text-align: center;
-
-    text-shadow:
-        0 0 5px rgba(255, 255, 255, 0.9),
-        0 0 15px rgba(255, 255, 255, 0.75),
-        0 0 35px rgba(255, 255, 255, 0.45),
-        0 0 70px rgba(255, 255, 255, 0.22);
-
-    filter:
-        drop-shadow(0 5px 20px rgba(0, 0, 0, 0.55));
-
-    will-change: opacity, transform;
-}
-
-.intro-subtitle {
-    position: relative;
-    z-index: 2;
-
-    margin-top: 28px;
-
-    color: rgba(255, 255, 255, 0.95);
-
-    font-size: clamp(0.95rem, 3vw, 1.2rem);
-
-    letter-spacing: 0.02em;
-
-    text-align: center;
-
-    text-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.95),
-        0 4px 25px rgba(0, 0, 0, 0.75);
-}
-
-
-/* =========================================================
-   ENTER BUTTON
-   ========================================================= */
-
-.intro-button {
-    position: relative;
-    z-index: 25;
-
-    margin-top: 38px;
-
-    min-width: 190px;
-    min-height: 54px;
-
-    padding: 14px 30px;
-
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    border-radius: 999px;
-
-    background:
-        rgba(5, 6, 8, 0.42);
-
-    color: #ffffff;
-
-    font-size: 0.85rem;
-    font-weight: 700;
-
-    letter-spacing: 0.18em;
-
-    text-align: center;
-
-    cursor: pointer;
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.08),
-        0 8px 35px rgba(0, 0, 0, 0.45),
-        0 0 30px rgba(255, 255, 255, 0.08);
-
-    text-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.8);
-
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        box-shadow 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.intro-button:hover {
-    transform: translateY(-3px) scale(1.03);
-
-    background:
-        rgba(255, 255, 255, 0.16);
-
-    border-color: rgba(255, 255, 255, 0.95);
-
-    box-shadow:
-        0 10px 45px rgba(0, 0, 0, 0.5),
-        0 0 35px rgba(255, 255, 255, 0.22);
-}
-
-.intro-button:active {
-    transform: scale(0.97);
-}
-
-
-/* =========================================================
-   SKIP INTRO
-   ========================================================= */
-
-.skip-intro {
-    position: absolute;
-
-    right: 28px;
-    bottom: 25px;
-
-    z-index: 100;
-
-    display: block;
-
-    padding: 10px 8px;
-
-    border: none;
-
-    background: transparent;
-
-    color: rgba(255, 255, 255, 0.78);
-
-    font-size: 0.85rem;
-
-    letter-spacing: 0.03em;
-
-    cursor: pointer;
-
-    pointer-events: auto;
-
-    text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9);
-
-    transition:
-        color 0.3s ease,
-        transform 0.3s ease,
-        opacity 0.3s ease;
-}
-
-.skip-intro:hover {
-    color: #ffffff;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   CINEMATIC BLACK SCREEN
-   ========================================================= */
-
-.cinematic-black-screen {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 90;
-
-    background: #000000;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    will-change: opacity;
-}
-
-
-/* =========================================================
-   INTRO ACTIVE STATE
-   ========================================================= */
-
-html.intro-active,
-body.intro-active {
-    overflow: hidden !important;
-}
-
-body.intro-playing .navbar,
-body.intro-playing .hero,
-body.intro-playing .section,
-body.intro-playing .final-cta,
-body.intro-playing footer {
-    visibility: hidden !important;
-}
-
-
-/* =========================================================
-   INTRO FINISHED
-   ========================================================= */
-
-.cinematic-intro.intro-finished {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-
-/* =========================================================
-   MOBILE INTRO
-   ========================================================= */
-
-@media (max-width: 650px) {
+    /* =====================================================
+       MOBILE INTRO
+       ===================================================== */
 
     .intro-scene {
-        background-position: center;
+        background-position:
+            center;
     }
+
 
     .intro-black-hole {
-        width: 105px;
-        height: 105px;
 
-        top: 22%;
+        width:
+            150px;
+
+        height:
+            150px;
+
+        left:
+            50%;
+
+        top:
+            22%;
     }
 
-    .cinematic-intro .intro-content {
-        top: 50%;
-        left: 50%;
 
-        width: 92%;
-        max-width: 900px;
+    .intro-content {
 
-        margin: 0;
+        width:
+            92%;
 
-        padding: 0 20px;
-
-        transform: translate(-50%, -50%);
+        padding:
+            0 20px;
     }
+
 
     .intro-label {
-        margin-bottom: 7px;
 
-        letter-spacing: 0.28em;
+        letter-spacing:
+            0.28em;
     }
+
 
     .intro-content h1 {
-        font-size: clamp(4.2rem, 20vw, 6.5rem);
 
-        letter-spacing: -0.06em;
+        font-size:
+            clamp(4.2rem, 20vw, 6.5rem);
+
+        letter-spacing:
+            -0.06em;
     }
+
 
     .intro-subtitle {
-        margin-top: 24px;
 
-        font-size: 0.95rem;
+        margin-top:
+            24px;
 
-        white-space: nowrap;
+        font-size:
+            0.95rem;
+
+        white-space:
+            nowrap;
     }
+
 
     .intro-button {
-        margin-top: 34px;
 
-        min-width: 205px;
-        min-height: 56px;
+        margin-top:
+            34px;
 
-        padding: 15px 30px;
+        min-width:
+            205px;
 
-        font-size: 0.82rem;
+        min-height:
+            56px;
+
+        padding:
+            15px 30px;
+
+        font-size:
+            0.82rem;
     }
+
 
     .skip-intro {
-        right: 20px;
-        bottom: 20px;
 
-        padding: 12px 6px;
+        right:
+            20px;
 
-        font-size: 0.9rem;
-    }
+        bottom:
+            20px;
 
-}
+        padding:
+            12px 6px;
 
-
-/* =========================================================
-   ACCESSIBILITY
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
+        font-size:
+            0.9rem;
     }
 
 }
