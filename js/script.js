@@ -409,18 +409,6 @@ function startCinematicIntro() {
     introBlackHole.style.filter =
         "brightness(1)";
 
-
-    /*
-       Reset ring.
-    */
-
-    if (introRing) {
-
-        introRing.style.transform =
-            "translate3d(-50%, -50%, 0) rotate(-12deg)";
-    }
-
-
     /*
        Black screen starts invisible.
     */
@@ -463,7 +451,7 @@ function startCinematicIntro() {
         3200;
 
     const BLACK_HOLD =
-        45;
+        20;
 
 
     const TOTAL_DURATION =
@@ -660,27 +648,6 @@ function startCinematicIntro() {
             `
             brightness(${1 + cameraProgress * 0.05})
             `;
-
-
-        /* =================================================
-           RING ROTATION
-           ================================================= */
-
-        if (introRing) {
-
-            const rotation =
-                -12 +
-                cameraElapsed *
-                0.045;
-
-
-            introRing.style.transform =
-                `
-                translate3d(-50%, -50%, 0)
-                rotate(${rotation}deg)
-                `;
-        }
-
 
         /* =================================================
            FINAL BLACK
