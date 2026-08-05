@@ -12,10 +12,13 @@
 
 <body>
 
-<!-- ==================== CINEMATIC INTRO ==================== -->
+<!-- =========================================================
+     CINEMATIC INTRO
+     ========================================================= -->
 
 <div class="cinematic-intro" id="cinematicIntro">
 
+    <!-- Background scene -->
     <div class="intro-scene">
 
         <div class="intro-stars"></div>
@@ -25,36 +28,66 @@
     </div>
 
 
-    <!-- SEPARATE MOVING BLACK HOLE -->
+    <!-- =====================================================
+         BLACK HOLE
+         ===================================================== -->
 
-    <div class="intro-black-hole"></div>
+    <div class="intro-black-hole" id="introBlackHole">
 
+        <div class="black-hole-ring"></div>
+
+        <div class="black-hole-core"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         INTRO CONTENT
+         ===================================================== -->
 
     <div class="intro-content">
 
-        <p class="intro-label">WELCOME TO</p>
+        <p class="intro-label">
+            WELCOME TO
+        </p>
 
-        <h1>GLOW</h1>
+        <h1>
+            GLOW
+        </h1>
 
         <p class="intro-subtitle">
             Shaders beyond the ordinary.
         </p>
 
-        <button class="intro-button" id="enterGlow">
+        <button
+            class="intro-button"
+            id="enterGlow"
+            type="button"
+        >
             ENTER GLOW
         </button>
 
     </div>
 
 
-    <button class="skip-intro" id="skipIntro">
+    <!-- =====================================================
+         SKIP INTRO
+         ===================================================== -->
+
+    <button
+        class="skip-intro"
+        id="skipIntro"
+        type="button"
+    >
         Skip intro
     </button>
 
 </div>
 
 
-<!-- ==================== NAVIGATION ==================== -->
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
 
 <header class="navbar">
 
@@ -78,31 +111,34 @@
 
     </nav>
 
-
     <button
         class="search-button"
         id="searchButton"
         aria-label="Search"
+        type="button"
     >
-
         <span>⌕</span>
-
     </button>
 
 </header>
 
 
-<!-- ==================== SEARCH OVERLAY ==================== -->
+<!-- =========================================================
+     SEARCH OVERLAY
+     ========================================================= -->
 
-<div class="search-overlay" id="searchOverlay">
+<div
+    class="search-overlay"
+    id="searchOverlay"
+>
 
     <button
         class="close-search"
         id="closeSearch"
+        type="button"
     >
         ×
     </button>
-
 
     <div class="search-container">
 
@@ -113,7 +149,6 @@
             autocomplete="off"
         >
 
-
         <div id="searchResults"></div>
 
     </div>
@@ -121,9 +156,16 @@
 </div>
 
 
-<!-- ==================== HERO SLIDESHOW ==================== -->
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
 
 <main>
+
+
+    <!-- =====================================================
+         HERO SLIDESHOW
+         ===================================================== -->
 
     <section
         class="hero"
@@ -139,16 +181,13 @@
                 FEATURED SHADER
             </p>
 
-
             <h1 id="heroTitle">
                 Red Sprites
             </h1>
 
-
             <p id="heroDescription">
                 Experience Minecraft skies like never before.
             </p>
-
 
             <a
                 href="#shaders"
@@ -160,25 +199,34 @@
         </div>
 
 
-        <!-- SLIDESHOW CONTROLS -->
+        <!-- Slideshow controls -->
 
         <div
             class="slider-dots"
             id="sliderDots"
         >
 
-            <button class="active"></button>
+            <button
+                class="active"
+                type="button"
+            ></button>
 
-            <button></button>
+            <button
+                type="button"
+            ></button>
 
-            <button></button>
+            <button
+                type="button"
+            ></button>
 
         </div>
 
     </section>
 
 
-    <!-- ==================== CATEGORIES ==================== -->
+    <!-- =====================================================
+         CATEGORIES
+         ===================================================== -->
 
     <section
         class="categories section"
@@ -203,6 +251,7 @@
 
 
         <div class="category-grid">
+
 
             <a
                 href="#"
@@ -328,7 +377,9 @@
     </section>
 
 
-    <!-- ==================== FEATURED SHADERS ==================== -->
+    <!-- =====================================================
+         FEATURED SHADERS
+         ===================================================== -->
 
     <section
         class="shaders section"
@@ -355,7 +406,7 @@
         <div class="shader-grid">
 
 
-            <!-- RED SPRITES -->
+            <!-- Red Sprites -->
 
             <article class="shader-card">
 
@@ -366,7 +417,6 @@
                     </span>
 
                 </div>
-
 
                 <div class="shader-info">
 
@@ -395,7 +445,7 @@
             </article>
 
 
-            <!-- FUTURE SHADER -->
+            <!-- Future Shader -->
 
             <article class="shader-card">
 
@@ -406,7 +456,6 @@
                     </span>
 
                 </div>
-
 
                 <div class="shader-info">
 
@@ -434,7 +483,7 @@
             </article>
 
 
-            <!-- FUTURE SHADER -->
+            <!-- Future Shader -->
 
             <article class="shader-card">
 
@@ -445,7 +494,6 @@
                     </span>
 
                 </div>
-
 
                 <div class="shader-info">
 
@@ -489,7 +537,9 @@
     </section>
 
 
-    <!-- ==================== WHY GLOW ==================== -->
+    <!-- =====================================================
+         WHY GLOW
+         ===================================================== -->
 
     <section
         class="why-glow section"
@@ -510,6 +560,7 @@
 
 
         <div class="features-grid">
+
 
             <div class="feature">
 
@@ -587,7 +638,9 @@
     </section>
 
 
-    <!-- ==================== LATEST RELEASES ==================== -->
+    <!-- =====================================================
+         LATEST RELEASES
+         ===================================================== -->
 
     <section class="latest section">
 
@@ -622,7 +675,6 @@
 
             </div>
 
-
             <span class="release-version">
                 Version 1.0
             </span>
@@ -632,7 +684,9 @@
     </section>
 
 
-    <!-- ==================== FINAL CTA ==================== -->
+    <!-- =====================================================
+         FINAL CTA
+         ===================================================== -->
 
     <section class="final-cta">
 
@@ -642,12 +696,10 @@
             WELCOME TO GLOW
         </p>
 
-
         <h2>
             See Minecraft<br>
             differently.
         </h2>
-
 
         <a
             href="#shaders"
@@ -661,7 +713,9 @@
 </main>
 
 
-<!-- ==================== FOOTER ==================== -->
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
 
 <footer class="footer">
 
@@ -710,7 +764,11 @@
 </footer>
 
 
-<script src="js/script.js?v=2"></script>
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script src="js/script.js?v=3"></script>
 
 </body>
 </html>
