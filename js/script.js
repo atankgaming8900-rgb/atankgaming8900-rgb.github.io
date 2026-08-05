@@ -1,10 +1,10 @@
 /* =========================================================
-   GLOW — CINEMATIC INTRO + WEBSITE SCRIPT
+   GLOW — SCRIPT.JS
    ========================================================= */
 
 
 /* =========================================================
-   LOCK PAGE DURING INTRO
+   LOCK PAGE DURING CINEMATIC INTRO
    ========================================================= */
 
 document.documentElement.classList.add("intro-active");
@@ -30,34 +30,17 @@ const skipIntro =
    ========================================================= */
 
 let introFinished = false;
-let introTransitionRunning = false;
-
-let introTimers = [];
+let introRunning = false;
 
 
 /* =========================================================
-   PAGE UNLOCK
+   UNLOCK PAGE
    ========================================================= */
 
 function unlockPage() {
 
     document.documentElement.classList.remove("intro-active");
     document.body.classList.remove("intro-active");
-
-}
-
-
-/* =========================================================
-   CLEAR INTRO TIMERS
-   ========================================================= */
-
-function clearIntroTimers() {
-
-    introTimers.forEach(timer => {
-        clearTimeout(timer);
-    });
-
-    introTimers = [];
 
 }
 
@@ -73,23 +56,85 @@ function finishIntro() {
     }
 
     introFinished = true;
-
-    clearIntroTimers();
+    introRunning = false;
 
     cinematicIntro.classList.remove("intro-exit");
 
     cinematicIntro.classList.add("skip-intro-now");
 
-    cinematicIntro.style.animation = "none";
-    cinematicIntro.style.transition = "none";
-
-    cinematicIntro.style.opacity = "0";
-    cinematicIntro.style.visibility = "hidden";
-    cinematicIntro.style.pointerEvents = "none";
-
     document.body.classList.remove("intro-playing");
 
     unlockPage();
+
+    setTimeout(() => {
+
+        cinematicIntro.style.display = "none";
+
+    }, 50);
+
+}
+
+
+/* =========================================================
+   ENTER GLOW
+   ========================================================= */
+
+function startCinematicIntro() {
+
+    if (introRunning || introFinished) {
+        return;
+    }
+
+    introRunning = true;
+
+    document.body.classList.add("intro-playing");
+
+    /*
+       Force browser to acknowledge the current state
+       before starting the cinematic animation.
+    */
+
+    cinematicIntro.offsetHeight;
+
+    cinematicIntro.classList.add("intro-exit");
+
+
+    /*
+       The complete cinematic lasts 3 seconds.
+
+       0.00–0.65
+       Text disappears.
+
+       0.45–2.55
+       Camera begins moving toward the black hole.
+
+       1.25–2.65
+       Black hole expands as the camera approaches.
+
+       2.55–2.90
+       Screen becomes black.
+
+       2.90–3.00
+       Homepage is revealed.
+    */
+
+    setTimeout(() => {
+
+        if (!introFinished) {
+            finishIntro();
+        }
+
+    }, 3000);
+
+}
+
+
+if (enterGlow) {
+
+    enterGlow.addEventListener(
+        "click",
+        startCinematicIntro
+    );
 
 }
 
@@ -104,117 +149,82 @@ function skipCinematicIntro() {
         return;
     }
 
+    introRunning = false;
     introFinished = true;
 
-    clearIntroTimers();
-
-    introTransitionRunning = false;
 
     /*
-       Immediately stop every intro animation.
+       Cancel every cinematic animation immediately.
     */
 
     cinematicIntro.classList.remove("intro-exit");
-    cinematicIntro.classList.remove("intro-zoom");
+
+    cinematicIntro.classList.add("skip-intro-now");
+
+
+    /*
+       Make absolutely sure the overlay disappears.
+    */
 
     cinematicIntro.style.animation = "none";
     cinematicIntro.style.transition = "none";
-
-    /*
-       Hide the intro immediately.
-    */
 
     cinematicIntro.style.opacity = "0";
     cinematicIntro.style.visibility = "hidden";
     cinematicIntro.style.pointerEvents = "none";
 
-    /*
-       Show homepage immediately.
-    */
 
     document.body.classList.remove("intro-playing");
 
+
     unlockPage();
+
+
+    /*
+       Remove the intro completely after the browser
+       has rendered the hidden state.
+    */
+
+    requestAnimationFrame(() => {
+
+        cinematicIntro.style.display = "none";
+
+    });
 
 }
 
-
-/* =========================================================
-   SKIP BUTTON
-   ========================================================= */
 
 if (skipIntro) {
 
-    skipIntro.addEventListener("click", event => {
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        skipCinematicIntro();
-
-    });
+    skipIntro.addEventListener(
+        "click",
+        skipCinematicIntro
+    );
 
 }
 
 
 /* =========================================================
-   ENTER GLOW
+   KEYBOARD SKIP
    ========================================================= */
 
-if (enterGlow) {
+document.addEventListener("keydown", (event) => {
 
-    enterGlow.addEventListener("click", event => {
+    if (event.key === "Escape") {
 
-        event.preventDefault();
-        event.stopPropagation();
+        if (
+            !introFinished &&
+            cinematicIntro &&
+            cinematicIntro.style.display !== "none"
+        ) {
 
-        if (introFinished || introTransitionRunning) {
-            return;
+            skipCinematicIntro();
+
         }
 
-        introTransitionRunning = true;
+    }
 
-        document.body.classList.add("intro-playing");
-
-        /*
-           Start the cinematic sequence.
-
-           CSS controls the actual camera movement.
-           JavaScript only controls timing/state.
-        */
-
-        cinematicIntro.classList.add("intro-exit");
-
-
-        /*
-           Keep skip available during the entire
-           cinematic transition.
-        */
-
-        const finishTimer = setTimeout(() => {
-
-            if (!introFinished) {
-
-                cinematicIntro.style.display = "none";
-
-                document.body.classList.remove(
-                    "intro-playing"
-                );
-
-                unlockPage();
-
-                introFinished = true;
-                introTransitionRunning = false;
-
-            }
-
-        }, 3200);
-
-        introTimers.push(finishTimer);
-
-    });
-
-}
+});
 
 
 /* =========================================================
@@ -308,71 +318,57 @@ slides.forEach(slide => {
 
 
 /* =========================================================
-   SHOW HERO SLIDE
+   SHOW SLIDE
    ========================================================= */
 
 function showSlide(index) {
 
+    if (
+        !heroTitle ||
+        !heroDescription ||
+        !heroBackground
+    ) {
+        return;
+    }
+
+
     currentSlide =
         (index + slides.length) % slides.length;
+
 
     const slide =
         slides[currentSlide];
 
 
     /*
-       Fade current content out.
+       Fade content and image out together.
     */
 
-    if (heroTitle) {
-        heroTitle.style.opacity = "0";
-    }
+    heroTitle.style.opacity = "0";
+    heroDescription.style.opacity = "0";
+    heroBackground.style.opacity = "0";
 
-    if (heroDescription) {
-        heroDescription.style.opacity = "0";
-    }
-
-    if (heroBackground) {
-        heroBackground.style.opacity = "0";
-    }
-
-
-    /*
-       Change content after fade.
-    */
 
     setTimeout(() => {
 
-        if (heroTitle) {
-            heroTitle.textContent =
-                slide.title;
-        }
+        heroTitle.textContent =
+            slide.title;
 
-        if (heroDescription) {
-            heroDescription.textContent =
-                slide.description;
-        }
+        heroDescription.textContent =
+            slide.description;
 
         setHeroImage(slide.image);
 
 
-        if (heroTitle) {
-            heroTitle.style.opacity = "1";
-        }
-
-        if (heroDescription) {
-            heroDescription.style.opacity = "1";
-        }
-
-        if (heroBackground) {
-            heroBackground.style.opacity = "1";
-        }
+        heroTitle.style.opacity = "1";
+        heroDescription.style.opacity = "1";
+        heroBackground.style.opacity = "1";
 
     }, 350);
 
 
     /*
-       Update slider dots.
+       Update dots.
     */
 
     sliderDots.forEach((dot, i) => {
@@ -386,7 +382,7 @@ function showSlide(index) {
 
 
     /*
-       Restart automatic slideshow.
+       Restart slideshow timer.
     */
 
     clearTimeout(slideTimer);
@@ -419,7 +415,13 @@ sliderDots.forEach((dot, index) => {
    START HERO SLIDESHOW
    ========================================================= */
 
-setHeroImage(slides[0].image);
+if (heroBackground) {
+
+    setHeroImage(
+        slides[0].image
+    );
+
+}
 
 
 sliderDots.forEach((dot, i) => {
@@ -471,9 +473,7 @@ if (searchButton) {
 
         setTimeout(() => {
 
-            if (searchInput) {
-                searchInput.focus();
-            }
+            searchInput.focus();
 
         }, 300);
 
@@ -516,12 +516,16 @@ if (closeSearch) {
 
 
 /* =========================================================
-   ESCAPE KEY
+   ESCAPE SEARCH
    ========================================================= */
 
-document.addEventListener("keydown", event => {
+document.addEventListener("keydown", (event) => {
 
-    if (event.key === "Escape") {
+    if (
+        event.key === "Escape" &&
+        searchOverlay &&
+        searchOverlay.classList.contains("active")
+    ) {
 
         closeSearchOverlay();
 
@@ -568,9 +572,9 @@ if (searchInput) {
                     .toLowerCase()
                     .trim();
 
-            if (searchResults) {
-                searchResults.innerHTML = "";
-            }
+
+            searchResults.innerHTML = "";
+
 
             if (!query) {
                 return;
@@ -603,10 +607,6 @@ if (searchInput) {
                 });
 
 
-            /*
-               No results.
-            */
-
             if (results.length === 0) {
 
                 searchResults.innerHTML = `
@@ -626,10 +626,6 @@ if (searchInput) {
 
             }
 
-
-            /*
-               Display results.
-            */
 
             results.forEach(shader => {
 
@@ -691,6 +687,10 @@ const revealElements =
     );
 
 
+/* =========================================================
+   INTERSECTION OBSERVER
+   ========================================================= */
+
 const revealObserver =
     new IntersectionObserver(
 
@@ -720,6 +720,10 @@ const revealObserver =
 
     );
 
+
+/* =========================================================
+   ADD REVEAL CLASS
+   ========================================================= */
 
 revealElements.forEach(element => {
 
@@ -751,7 +755,12 @@ revealStyle.textContent = `
         transition:
             opacity 0.9s ease,
             transform 0.9s
-            cubic-bezier(0.22, 1, 0.36, 1);
+            cubic-bezier(
+                0.22,
+                1,
+                0.36,
+                1
+            );
 
     }
 
@@ -792,8 +801,3 @@ document
         );
 
     });
-
-
-/* =========================================================
-   END
-   ========================================================= */
