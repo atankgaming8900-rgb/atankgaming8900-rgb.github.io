@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Glow — Minecraft Shaders
-    </title>
+    <title>Glow — Minecraft Shaders</title>
 
     <meta
         name="description"
@@ -30,13 +28,19 @@
 <body>
 
 
-<!-- ==================== CINEMATIC INTRO ==================== -->
+<!-- =========================================================
+     CINEMATIC INTRO
+     ========================================================= -->
 
 <div
     class="cinematic-intro"
     id="cinematicIntro"
 >
 
+
+    <!-- =====================================================
+         SPACE / BACKGROUND
+         ===================================================== -->
 
     <div class="intro-scene">
 
@@ -47,20 +51,39 @@
     </div>
 
 
-    <!-- SEPARATE MOVING BLACK HOLE -->
-
-    <div class="intro-black-hole"></div>
-
-
-    <!-- FINAL BLACK SCREEN -->
+    <!-- =====================================================
+         BLACK HOLE
+         ===================================================== -->
 
     <div
-        class="cinematic-black-screen"
+        class="intro-black-hole"
         aria-hidden="true"
-    ></div>
+    >
+
+        <!-- Outer gravitational glow -->
+
+        <div class="black-hole-glow"></div>
 
 
-    <!-- INTRO CONTENT -->
+        <!-- Accretion disk / rings -->
+
+        <div class="black-hole-ring ring-outer"></div>
+
+        <div class="black-hole-ring ring-middle"></div>
+
+        <div class="black-hole-ring ring-inner"></div>
+
+
+        <!-- Dark event horizon -->
+
+        <div class="black-hole-core"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         INTRO CONTENT
+         ===================================================== -->
 
     <div class="intro-content">
 
@@ -83,6 +106,7 @@
         <button
             class="intro-button"
             id="enterGlow"
+            type="button"
         >
             ENTER GLOW
         </button>
@@ -91,23 +115,38 @@
     </div>
 
 
-    <!-- SKIP INTRO -->
+    <!-- =====================================================
+         SKIP INTRO
+         ===================================================== -->
 
     <button
         class="skip-intro"
         id="skipIntro"
+        type="button"
     >
         Skip intro
     </button>
 
 
+    <!-- =====================================================
+         SPACE STREAKS
+         ===================================================== -->
+
+    <div
+        class="space-streaks"
+        aria-hidden="true"
+    ></div>
+
+
 </div>
 
 
-<!-- ==================== NAVIGATION ==================== -->
+
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
 
 <header class="navbar">
-
 
     <a
         href="index.html"
@@ -119,21 +158,17 @@
 
     <nav class="nav-links">
 
-
         <a href="#shaders">
             Shaders
         </a>
-
 
         <a href="#categories">
             Categories
         </a>
 
-
         <a href="#about">
             About
         </a>
-
 
     </nav>
 
@@ -142,6 +177,7 @@
         class="search-button"
         id="searchButton"
         aria-label="Search"
+        type="button"
     >
 
         <span>
@@ -150,11 +186,13 @@
 
     </button>
 
-
 </header>
 
 
-<!-- ==================== SEARCH OVERLAY ==================== -->
+
+<!-- =========================================================
+     SEARCH OVERLAY
+     ========================================================= -->
 
 <div
     class="search-overlay"
@@ -165,6 +203,8 @@
     <button
         class="close-search"
         id="closeSearch"
+        type="button"
+        aria-label="Close search"
     >
         ×
     </button>
@@ -190,7 +230,10 @@
 </div>
 
 
-<!-- ==================== HERO SLIDESHOW ==================== -->
+
+<!-- =========================================================
+     HERO SLIDESHOW
+     ========================================================= -->
 
 <main>
 
@@ -233,18 +276,28 @@
         </div>
 
 
-        <!-- SLIDESHOW CONTROLS -->
+        <!-- Slideshow controls -->
 
         <div
             class="slider-dots"
             id="sliderDots"
         >
 
-            <button class="active"></button>
+            <button
+                class="active"
+                type="button"
+                aria-label="Slide 1"
+            ></button>
 
-            <button></button>
+            <button
+                type="button"
+                aria-label="Slide 2"
+            ></button>
 
-            <button></button>
+            <button
+                type="button"
+                aria-label="Slide 3"
+            ></button>
 
         </div>
 
@@ -252,7 +305,10 @@
     </section>
 
 
-    <!-- ==================== CATEGORIES ==================== -->
+
+    <!-- =====================================================
+         CATEGORIES
+         ===================================================== -->
 
     <section
         class="categories section"
@@ -262,21 +318,17 @@
 
         <div class="section-heading">
 
-
             <p class="section-label">
                 EXPLORE
             </p>
-
 
             <h2>
                 Categories
             </h2>
 
-
             <p>
                 Find the visual style that fits your world.
             </p>
-
 
         </div>
 
@@ -293,11 +345,9 @@
                     ◈
                 </span>
 
-
                 <h3>
                     Realistic
                 </h3>
-
 
                 <p>
                     Natural lighting and realistic environments.
@@ -315,11 +365,9 @@
                     ✦
                 </span>
 
-
                 <h3>
                     Cinematic
                 </h3>
-
 
                 <p>
                     Designed for dramatic and cinematic worlds.
@@ -337,11 +385,9 @@
                     ☁
                 </span>
 
-
                 <h3>
                     Atmospheric
                 </h3>
-
 
                 <p>
                     Skies, clouds, weather and atmosphere.
@@ -359,11 +405,9 @@
                     ⚡
                 </span>
 
-
                 <h3>
                     Performance
                 </h3>
-
 
                 <p>
                     Beautiful visuals without sacrificing performance.
@@ -381,11 +425,9 @@
                     ◆
                 </span>
 
-
                 <h3>
                     Stylized
                 </h3>
-
 
                 <p>
                     Unique visual styles for different worlds.
@@ -403,11 +445,9 @@
                     ◌
                 </span>
 
-
                 <h3>
                     Lightweight
                 </h3>
-
 
                 <p>
                     Made for systems with limited resources.
@@ -422,7 +462,10 @@
     </section>
 
 
-    <!-- ==================== FEATURED SHADERS ==================== -->
+
+    <!-- =====================================================
+         FEATURED SHADERS
+         ===================================================== -->
 
     <section
         class="shaders section"
@@ -432,21 +475,17 @@
 
         <div class="section-heading">
 
-
             <p class="section-label">
                 OUR WORK
             </p>
-
 
             <h2>
                 Featured Shaders
             </h2>
 
-
             <p>
                 Explore the latest visual experiences from Glow.
             </p>
-
 
         </div>
 
@@ -454,7 +493,7 @@
         <div class="shader-grid">
 
 
-            <!-- RED SPRITES -->
+            <!-- Red Sprites -->
 
             <article class="shader-card">
 
@@ -503,7 +542,8 @@
             </article>
 
 
-            <!-- FUTURE SHADER -->
+
+            <!-- Future Shader -->
 
             <article class="shader-card">
 
@@ -551,7 +591,8 @@
             </article>
 
 
-            <!-- FUTURE SHADER -->
+
+            <!-- Future Shader -->
 
             <article class="shader-card">
 
@@ -604,7 +645,6 @@
 
         <div class="center-button">
 
-
             <a
                 href="#"
                 class="outline-button"
@@ -612,14 +652,16 @@
                 View All Shaders
             </a>
 
-
         </div>
 
 
     </section>
 
 
-    <!-- ==================== WHY GLOW ==================== -->
+
+    <!-- =====================================================
+         WHY GLOW
+         ===================================================== -->
 
     <section
         class="why-glow section"
@@ -629,16 +671,13 @@
 
         <div class="section-heading">
 
-
             <p class="section-label">
                 THE IDEA
             </p>
 
-
             <h2>
                 Why Glow?
             </h2>
-
 
         </div>
 
@@ -648,88 +687,72 @@
 
             <div class="feature">
 
-
                 <span>
                     ✦
                 </span>
 
-
                 <h3>
                     Beautiful Lighting
                 </h3>
-
 
                 <p>
                     Lighting designed to transform ordinary
                     Minecraft environments.
                 </p>
 
-
             </div>
 
 
             <div class="feature">
 
-
                 <span>
                     ☁
                 </span>
 
-
                 <h3>
                     Immersive Atmospheres
                 </h3>
-
 
                 <p>
                     Skies, weather and atmospheric effects
                     that make worlds feel alive.
                 </p>
 
-
             </div>
 
 
             <div class="feature">
 
-
                 <span>
                     ⚡
                 </span>
 
-
                 <h3>
                     Performance Options
                 </h3>
-
 
                 <p>
                     Different experiences for different
                     hardware.
                 </p>
 
-
             </div>
 
 
             <div class="feature">
 
-
                 <span>
                     ∞
                 </span>
-
 
                 <h3>
                     Always Evolving
                 </h3>
 
-
                 <p>
                     New ideas, new effects and new shaders
                     are always being explored.
                 </p>
-
 
             </div>
 
@@ -740,23 +763,23 @@
     </section>
 
 
-    <!-- ==================== LATEST RELEASES ==================== -->
+
+    <!-- =====================================================
+         LATEST RELEASES
+         ===================================================== -->
 
     <section class="latest section">
 
 
         <div class="section-heading">
 
-
             <p class="section-label">
                 WHAT'S NEW
             </p>
 
-
             <h2>
                 Latest Releases
             </h2>
-
 
         </div>
 
@@ -766,21 +789,17 @@
 
             <div>
 
-
                 <p class="release-label">
                     LATEST SHADER
                 </p>
-
 
                 <h3>
                     Red Sprites
                 </h3>
 
-
                 <p>
                     The first Glow shader experience.
                 </p>
-
 
             </div>
 
@@ -796,7 +815,10 @@
     </section>
 
 
-    <!-- ==================== FINAL CTA ==================== -->
+
+    <!-- =====================================================
+         FINAL CTA
+         ===================================================== -->
 
     <section class="final-cta">
 
@@ -829,60 +851,53 @@
 </main>
 
 
-<!-- ==================== FOOTER ==================== -->
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
 
 <footer class="footer">
 
 
     <div class="footer-brand">
 
-
         <h2>
             GLOW
         </h2>
 
-
         <p>
             Shaders for everyone.
         </p>
-
 
     </div>
 
 
     <div class="footer-links">
 
-
         <a href="#shaders">
             Shaders
         </a>
-
 
         <a href="#categories">
             Categories
         </a>
 
-
         <a href="#about">
             About
         </a>
 
-
         <a href="#">
             Contact
         </a>
-
 
     </div>
 
 
     <div class="footer-bottom">
 
-
         <p>
             © 2026 Glow. All rights reserved.
         </p>
-
 
     </div>
 
@@ -890,7 +905,12 @@
 </footer>
 
 
-<script src="js/script.js?v=2"></script>
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script src="js/script.js?v=3"></script>
 
 
 </body>
