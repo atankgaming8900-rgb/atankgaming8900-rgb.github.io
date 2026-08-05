@@ -1,47 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Glow — Minecraft Shaders</title>
+    <meta name="description" content="Glow creates immersive Minecraft shaders with cinematic lighting, atmospheric skies, and stunning visual effects.">
 
-    <meta
-        name="description"
-        content="Glow creates immersive Minecraft shaders with cinematic lighting, atmospheric skies, and stunning visual effects."
-    >
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-
 <body>
-
 
 <!-- =========================================================
      CINEMATIC INTRO
      ========================================================= -->
 
-<div
-    class="cinematic-intro"
-    id="cinematicIntro"
->
+<div class="cinematic-intro" id="cinematicIntro">
 
-
-    <!-- =====================================================
-         SPACE / BACKGROUND
-         ===================================================== -->
-
+    <!-- Background scene -->
     <div class="intro-scene">
 
         <div class="intro-stars"></div>
@@ -55,26 +32,13 @@
          BLACK HOLE
          ===================================================== -->
 
-    <div
-        class="intro-black-hole"
-        aria-hidden="true"
-    >
-
-        <!-- Outer gravitational glow -->
-
-        <div class="black-hole-glow"></div>
-
-
-        <!-- Accretion disk / rings -->
+    <div class="intro-black-hole" id="introBlackHole">
 
         <div class="black-hole-ring ring-outer"></div>
 
         <div class="black-hole-ring ring-middle"></div>
 
         <div class="black-hole-ring ring-inner"></div>
-
-
-        <!-- Dark event horizon -->
 
         <div class="black-hole-core"></div>
 
@@ -87,21 +51,17 @@
 
     <div class="intro-content">
 
-
         <p class="intro-label">
             WELCOME TO
         </p>
-
 
         <h1>
             GLOW
         </h1>
 
-
         <p class="intro-subtitle">
             Shaders beyond the ordinary.
         </p>
-
 
         <button
             class="intro-button"
@@ -110,7 +70,6 @@
         >
             ENTER GLOW
         </button>
-
 
     </div>
 
@@ -127,19 +86,7 @@
         Skip intro
     </button>
 
-
-    <!-- =====================================================
-         SPACE STREAKS
-         ===================================================== -->
-
-    <div
-        class="space-streaks"
-        aria-hidden="true"
-    ></div>
-
-
 </div>
-
 
 
 <!-- =========================================================
@@ -176,8 +123,8 @@
     <button
         class="search-button"
         id="searchButton"
-        aria-label="Search"
         type="button"
+        aria-label="Search"
     >
 
         <span>
@@ -189,7 +136,6 @@
 </header>
 
 
-
 <!-- =========================================================
      SEARCH OVERLAY
      ========================================================= -->
@@ -199,19 +145,16 @@
     id="searchOverlay"
 >
 
-
     <button
         class="close-search"
         id="closeSearch"
         type="button"
-        aria-label="Close search"
     >
         ×
     </button>
 
 
     <div class="search-container">
-
 
         <input
             type="text"
@@ -223,32 +166,31 @@
 
         <div id="searchResults"></div>
 
-
     </div>
-
 
 </div>
 
 
-
 <!-- =========================================================
-     HERO SLIDESHOW
+     MAIN CONTENT
      ========================================================= -->
 
 <main>
 
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
 
     <section
         class="hero"
         id="hero"
     >
 
-
         <div class="hero-background"></div>
 
 
         <div class="hero-content">
-
 
             <p class="hero-label">
                 FEATURED SHADER
@@ -271,7 +213,6 @@
             >
                 Explore Shader
             </a>
-
 
         </div>
 
@@ -301,9 +242,7 @@
 
         </div>
 
-
     </section>
-
 
 
     <!-- =====================================================
@@ -314,7 +253,6 @@
         class="categories section"
         id="categories"
     >
-
 
         <div class="section-heading">
 
@@ -455,12 +393,9 @@
 
             </a>
 
-
         </div>
 
-
     </section>
-
 
 
     <!-- =====================================================
@@ -471,7 +406,6 @@
         class="shaders section"
         id="shaders"
     >
-
 
         <div class="section-heading">
 
@@ -497,10 +431,7 @@
 
             <article class="shader-card">
 
-
-                <div
-                    class="shader-image shader-red-sprites"
-                >
+                <div class="shader-image shader-red-sprites">
 
                     <span>
                         RED SPRITES
@@ -511,22 +442,18 @@
 
                 <div class="shader-info">
 
-
                     <p class="shader-category">
                         Atmospheric
                     </p>
-
 
                     <h3>
                         Red Sprites
                     </h3>
 
-
                     <p>
                         Discover rare atmospheric lightning
                         high above the clouds.
                     </p>
-
 
                     <a
                         href="#"
@@ -535,22 +462,16 @@
                         View Shader →
                     </a>
 
-
                 </div>
 
-
             </article>
-
 
 
             <!-- Future Shader -->
 
             <article class="shader-card">
 
-
-                <div
-                    class="shader-image shader-placeholder"
-                >
+                <div class="shader-image shader-placeholder">
 
                     <span>
                         COMING SOON
@@ -561,22 +482,18 @@
 
                 <div class="shader-info">
 
-
                     <p class="shader-category">
                         Future Release
                     </p>
 
-
                     <h3>
                         Coming Soon
                     </h3>
-
 
                     <p>
                         Something new is being created.
                     </p>
 
-
                     <a
                         href="#"
                         class="shader-link"
@@ -584,22 +501,16 @@
                         Coming Soon →
                     </a>
 
-
                 </div>
 
-
             </article>
-
 
 
             <!-- Future Shader -->
 
             <article class="shader-card">
 
-
-                <div
-                    class="shader-image shader-placeholder"
-                >
+                <div class="shader-image shader-placeholder">
 
                     <span>
                         COMING SOON
@@ -610,21 +521,17 @@
 
                 <div class="shader-info">
 
-
                     <p class="shader-category">
                         Future Release
                     </p>
-
 
                     <h3>
                         Coming Soon
                     </h3>
 
-
                     <p>
                         More visual experiences are on the way.
                     </p>
-
 
                     <a
                         href="#"
@@ -633,12 +540,9 @@
                         Coming Soon →
                     </a>
 
-
                 </div>
 
-
             </article>
-
 
         </div>
 
@@ -654,9 +558,7 @@
 
         </div>
 
-
     </section>
-
 
 
     <!-- =====================================================
@@ -667,7 +569,6 @@
         class="why-glow section"
         id="about"
     >
-
 
         <div class="section-heading">
 
@@ -756,12 +657,9 @@
 
             </div>
 
-
         </div>
 
-
     </section>
-
 
 
     <!-- =====================================================
@@ -769,7 +667,6 @@
          ===================================================== -->
 
     <section class="latest section">
-
 
         <div class="section-heading">
 
@@ -785,7 +682,6 @@
 
 
         <div class="release">
-
 
             <div>
 
@@ -808,12 +704,9 @@
                 Version 1.0
             </span>
 
-
         </div>
 
-
     </section>
-
 
 
     <!-- =====================================================
@@ -821,7 +714,6 @@
          ===================================================== -->
 
     <section class="final-cta">
-
 
         <div class="cta-glow"></div>
 
@@ -844,12 +736,9 @@
             Explore Shaders
         </a>
 
-
     </section>
 
-
 </main>
-
 
 
 <!-- =========================================================
@@ -857,7 +746,6 @@
      ========================================================= -->
 
 <footer class="footer">
-
 
     <div class="footer-brand">
 
@@ -901,9 +789,7 @@
 
     </div>
 
-
 </footer>
-
 
 
 <!-- =========================================================
@@ -912,7 +798,5 @@
 
 <script src="js/script.js?v=3"></script>
 
-
 </body>
-
 </html>
