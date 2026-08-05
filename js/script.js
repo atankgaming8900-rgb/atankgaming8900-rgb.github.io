@@ -103,59 +103,79 @@ function smoothCamera(value) {
 
 
 /* =========================================================
-   CAMERA SCALE
-
-   Exponential growth creates a natural
-   cinematic forward movement.
+   CAMERA — SINGLE CONTINUOUS FORWARD MOVEMENT
    ========================================================= */
 
-function getCameraScale(progress) {
+const progress = cinematicEase(raw);
 
-    const startScale = 1.03;
 
-    const endScale = 9.5;
+/*
+   The scene itself is the camera.
 
-    return (
-        startScale *
-        Math.pow(
-            endScale / startScale,
-            progress
-        )
+   The black hole does NOT independently
+   grow anymore.
+
+   This makes the black hole feel like a
+   real fixed object in space that we are
+   physically approaching.
+*/
+
+const cameraScale =
+    1.03 *
+    Math.pow(
+        9.8 / 1.03,
+        progress
     );
-}
+
+
+scene.style.transform =
+    `translate3d(0,0,0) scale(${cameraScale})`;
+
+
+/*
+   Very subtle cinematic exposure change.
+*/
+
+scene.style.filter =
+    `
+    brightness(${1 + progress * 0.055})
+    contrast(${1 + progress * 0.025})
+    `;
 
 
 /* =========================================================
-   BLACK HOLE SCALE
-
-   The black hole begins growing early enough
-   to visually connect with the camera.
-
-   There is NO sudden size jump.
+   BLACK HOLE
    ========================================================= */
 
-function getBlackHoleScale(progress) {
 
-    /*
-       Start growing from the beginning,
-       but very slowly.
+/*
+   IMPORTANT:
 
-       This makes the camera and black hole
-       feel like one physical movement.
-    */
+   The black hole stays physically fixed
+   inside the scene.
 
-    const growth =
-        Math.pow(
-            progress,
-            2.35
-        );
+   We do NOT apply another giant scale to it.
 
-    return (
-        1 +
-        growth * 31
-    );
-}
+   The camera zoom naturally makes it
+   become larger on screen.
+*/
 
+introBlackHole.style.transform =
+    `
+    translate3d(-50%,-50%,0)
+    rotate(${elapsed * 0.012}deg)
+    scale(1)
+    `;
+
+
+/*
+   Very subtle intensity increase.
+*/
+
+introBlackHole.style.filter =
+    `
+    brightness(${1 + progress * 0.04})
+    `;
 
 /* =========================================================
    TEXT FADE
