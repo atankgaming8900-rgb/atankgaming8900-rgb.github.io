@@ -4,15 +4,7 @@
 
 
 /* =========================================================
-   LOCK PAGE DURING CINEMATIC INTRO
-   ========================================================= */
-
-document.documentElement.classList.add("intro-active");
-document.body.classList.add("intro-active");
-
-
-/* =========================================================
-   CINEMATIC INTRO ELEMENTS
+   CINEMATIC INTRO
    ========================================================= */
 
 const cinematicIntro =
@@ -25,12 +17,21 @@ const skipIntro =
     document.getElementById("skipIntro");
 
 
-/* =========================================================
-   INTRO STATE
-   ========================================================= */
-
 let introFinished = false;
 let introRunning = false;
+
+
+/* =========================================================
+   LOCK PAGE
+   ========================================================= */
+
+document.documentElement.classList.add(
+    "intro-active"
+);
+
+document.body.classList.add(
+    "intro-active"
+);
 
 
 /* =========================================================
@@ -39,8 +40,83 @@ let introRunning = false;
 
 function unlockPage() {
 
-    document.documentElement.classList.remove("intro-active");
-    document.body.classList.remove("intro-active");
+    document.documentElement.classList.remove(
+        "intro-active"
+    );
+
+    document.body.classList.remove(
+        "intro-active"
+    );
+
+}
+
+
+/* =========================================================
+   ENTER GLOW
+   ========================================================= */
+
+function startIntro() {
+
+    if (
+        introRunning ||
+        introFinished
+    ) {
+        return;
+    }
+
+
+    introRunning = true;
+
+
+    /*
+       Make sure the page is locked.
+    */
+
+    document.documentElement.classList.add(
+        "intro-active"
+    );
+
+    document.body.classList.add(
+        "intro-active"
+    );
+
+
+    document.body.classList.add(
+        "intro-playing"
+    );
+
+
+    /*
+       Force the browser to finish rendering
+       the initial cinematic state before
+       starting the exit animation.
+
+       This prevents animation jumps.
+    */
+
+    cinematicIntro.offsetHeight;
+
+
+    cinematicIntro.classList.add(
+        "intro-exit"
+    );
+
+
+    /*
+       CSS cinematic duration:
+
+       3 seconds total.
+
+       At the end:
+       - intro disappears
+       - homepage unlocks
+    */
+
+    setTimeout(() => {
+
+        finishIntro();
+
+    }, 3000);
 
 }
 
@@ -55,85 +131,48 @@ function finishIntro() {
         return;
     }
 
+
     introFinished = true;
+
     introRunning = false;
 
-    cinematicIntro.classList.remove("intro-exit");
 
-    cinematicIntro.classList.add("skip-intro-now");
+    document.body.classList.remove(
+        "intro-playing"
+    );
 
-    document.body.classList.remove("intro-playing");
 
     unlockPage();
 
+
+    /*
+       Remove the intro after the animation
+       has completed.
+    */
+
     setTimeout(() => {
 
-        cinematicIntro.style.display = "none";
+        if (cinematicIntro) {
 
-    }, 50);
+            cinematicIntro.style.display =
+                "none";
+
+        }
+
+    }, 30);
 
 }
 
 
 /* =========================================================
-   ENTER GLOW
+   ENTER BUTTON
    ========================================================= */
-
-function startCinematicIntro() {
-
-    if (introRunning || introFinished) {
-        return;
-    }
-
-    introRunning = true;
-
-    document.body.classList.add("intro-playing");
-
-    /*
-       Force browser to acknowledge the current state
-       before starting the cinematic animation.
-    */
-
-    cinematicIntro.offsetHeight;
-
-    cinematicIntro.classList.add("intro-exit");
-
-
-    /*
-       The complete cinematic lasts 3 seconds.
-
-       0.00–0.65
-       Text disappears.
-
-       0.45–2.55
-       Camera begins moving toward the black hole.
-
-       1.25–2.65
-       Black hole expands as the camera approaches.
-
-       2.55–2.90
-       Screen becomes black.
-
-       2.90–3.00
-       Homepage is revealed.
-    */
-
-    setTimeout(() => {
-
-        if (!introFinished) {
-            finishIntro();
-        }
-
-    }, 3000);
-
-}
-
 
 if (enterGlow) {
 
     enterGlow.addEventListener(
         "click",
-        startCinematicIntro
+        startIntro
     );
 
 }
@@ -143,51 +182,72 @@ if (enterGlow) {
    SKIP INTRO
    ========================================================= */
 
-function skipCinematicIntro() {
+function skipIntroNow() {
 
     if (introFinished) {
         return;
     }
 
+
     introRunning = false;
+
     introFinished = true;
 
 
     /*
-       Cancel every cinematic animation immediately.
+       Cancel cinematic animation.
     */
 
-    cinematicIntro.classList.remove("intro-exit");
+    cinematicIntro.classList.remove(
+        "intro-exit"
+    );
 
-    cinematicIntro.classList.add("skip-intro-now");
+
+    cinematicIntro.classList.add(
+        "skip-intro-now"
+    );
 
 
     /*
-       Make absolutely sure the overlay disappears.
+       Force immediate hiding.
     */
 
-    cinematicIntro.style.animation = "none";
-    cinematicIntro.style.transition = "none";
+    cinematicIntro.style.animation =
+        "none";
 
-    cinematicIntro.style.opacity = "0";
-    cinematicIntro.style.visibility = "hidden";
-    cinematicIntro.style.pointerEvents = "none";
+    cinematicIntro.style.transition =
+        "none";
+
+    cinematicIntro.style.opacity =
+        "0";
+
+    cinematicIntro.style.visibility =
+        "hidden";
+
+    cinematicIntro.style.pointerEvents =
+        "none";
 
 
-    document.body.classList.remove("intro-playing");
+    /*
+       Show homepage immediately.
+    */
+
+    document.body.classList.remove(
+        "intro-playing"
+    );
 
 
     unlockPage();
 
 
     /*
-       Remove the intro completely after the browser
-       has rendered the hidden state.
+       Completely remove the intro.
     */
 
     requestAnimationFrame(() => {
 
-        cinematicIntro.style.display = "none";
+        cinematicIntro.style.display =
+            "none";
 
     });
 
@@ -198,33 +258,32 @@ if (skipIntro) {
 
     skipIntro.addEventListener(
         "click",
-        skipCinematicIntro
+        skipIntroNow
     );
 
 }
 
 
 /* =========================================================
-   KEYBOARD SKIP
+   ESCAPE KEY
    ========================================================= */
 
-document.addEventListener("keydown", (event) => {
-
-    if (event.key === "Escape") {
+document.addEventListener(
+    "keydown",
+    (event) => {
 
         if (
-            !introFinished &&
-            cinematicIntro &&
-            cinematicIntro.style.display !== "none"
+            event.key === "Escape" &&
+            !introFinished
         ) {
 
-            skipCinematicIntro();
+            skipIntroNow();
 
         }
 
     }
+);
 
-});
 
 
 /* =========================================================
@@ -234,30 +293,45 @@ document.addEventListener("keydown", (event) => {
 const slides = [
 
     {
-        title: "Red Sprites",
+        title:
+            "Red Sprites",
+
         description:
             "Experience Minecraft skies like never before.",
-        image: "red-sprites-hero.png"
+
+        image:
+            "red-sprites-hero.png"
     },
 
+
     {
-        title: "Aurora",
+        title:
+            "Aurora",
+
         description:
             "Bring atmospheric skies and immersive light to your world.",
-        image: "aurora-hero.png"
+
+        image:
+            "aurora-hero.png"
     },
 
+
     {
-        title: "Cinematic",
+        title:
+            "Cinematic",
+
         description:
             "Experience beautiful lighting and breathtaking Minecraft worlds.",
-        image: "sunset-hero.png"
+
+        image:
+            "sunset-hero.png"
     }
 
 ];
 
 
 let currentSlide = 0;
+
 let slideTimer;
 
 
@@ -266,16 +340,24 @@ let slideTimer;
    ========================================================= */
 
 const heroBackground =
-    document.querySelector(".hero-background");
+    document.querySelector(
+        ".hero-background"
+    );
 
 const heroTitle =
-    document.getElementById("heroTitle");
+    document.getElementById(
+        "heroTitle"
+    );
 
 const heroDescription =
-    document.getElementById("heroDescription");
+    document.getElementById(
+        "heroDescription"
+    );
 
 const sliderDots =
-    document.querySelectorAll("#sliderDots button");
+    document.querySelectorAll(
+        "#sliderDots button"
+    );
 
 
 /* =========================================================
@@ -287,6 +369,7 @@ function setHeroImage(image) {
     if (!heroBackground) {
         return;
     }
+
 
     heroBackground.style.backgroundImage = `
 
@@ -308,13 +391,17 @@ function setHeroImage(image) {
    PRELOAD HERO IMAGES
    ========================================================= */
 
-slides.forEach(slide => {
+slides.forEach(
+    (slide) => {
 
-    const image = new Image();
+        const image =
+            new Image();
 
-    image.src = slide.image;
+        image.src =
+            slide.image;
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -328,12 +415,15 @@ function showSlide(index) {
         !heroDescription ||
         !heroBackground
     ) {
+
         return;
+
     }
 
 
     currentSlide =
-        (index + slides.length) % slides.length;
+        (index + slides.length)
+        % slides.length;
 
 
     const slide =
@@ -341,12 +431,17 @@ function showSlide(index) {
 
 
     /*
-       Fade content and image out together.
+       Fade current slide out.
     */
 
-    heroTitle.style.opacity = "0";
-    heroDescription.style.opacity = "0";
-    heroBackground.style.opacity = "0";
+    heroTitle.style.opacity =
+        "0";
+
+    heroDescription.style.opacity =
+        "0";
+
+    heroBackground.style.opacity =
+        "0";
 
 
     setTimeout(() => {
@@ -357,12 +452,19 @@ function showSlide(index) {
         heroDescription.textContent =
             slide.description;
 
-        setHeroImage(slide.image);
+        setHeroImage(
+            slide.image
+        );
 
 
-        heroTitle.style.opacity = "1";
-        heroDescription.style.opacity = "1";
-        heroBackground.style.opacity = "1";
+        heroTitle.style.opacity =
+            "1";
+
+        heroDescription.style.opacity =
+            "1";
+
+        heroBackground.style.opacity =
+            "1";
 
     }, 350);
 
@@ -371,27 +473,38 @@ function showSlide(index) {
        Update dots.
     */
 
-    sliderDots.forEach((dot, i) => {
+    sliderDots.forEach(
+        (dot, i) => {
 
-        dot.classList.toggle(
-            "active",
-            i === currentSlide
-        );
+            dot.classList.toggle(
+                "active",
+                i === currentSlide
+            );
 
-    });
+        }
+    );
 
 
     /*
-       Restart slideshow timer.
+       Restart timer.
     */
 
-    clearTimeout(slideTimer);
+    clearTimeout(
+        slideTimer
+    );
 
-    slideTimer = setTimeout(() => {
 
-        showSlide(currentSlide + 1);
+    slideTimer =
+        setTimeout(
+            () => {
 
-    }, 4000);
+                showSlide(
+                    currentSlide + 1
+                );
+
+            },
+            4000
+        );
 
 }
 
@@ -400,19 +513,26 @@ function showSlide(index) {
    DOT NAVIGATION
    ========================================================= */
 
-sliderDots.forEach((dot, index) => {
+sliderDots.forEach(
+    (dot, index) => {
 
-    dot.addEventListener("click", () => {
+        dot.addEventListener(
+            "click",
+            () => {
 
-        showSlide(index);
+                showSlide(
+                    index
+                );
 
-    });
+            }
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
-   START HERO SLIDESHOW
+   START SLIDESHOW
    ========================================================= */
 
 if (heroBackground) {
@@ -424,21 +544,28 @@ if (heroBackground) {
 }
 
 
-sliderDots.forEach((dot, i) => {
+sliderDots.forEach(
+    (dot, i) => {
 
-    dot.classList.toggle(
-        "active",
-        i === 0
+        dot.classList.toggle(
+            "active",
+            i === 0
+        );
+
+    }
+);
+
+
+slideTimer =
+    setTimeout(
+        () => {
+
+            showSlide(1);
+
+        },
+        4000
     );
 
-});
-
-
-slideTimer = setTimeout(() => {
-
-    showSlide(1);
-
-}, 4000);
 
 
 /* =========================================================
@@ -446,19 +573,29 @@ slideTimer = setTimeout(() => {
    ========================================================= */
 
 const searchButton =
-    document.getElementById("searchButton");
+    document.getElementById(
+        "searchButton"
+    );
 
 const searchOverlay =
-    document.getElementById("searchOverlay");
+    document.getElementById(
+        "searchOverlay"
+    );
 
 const closeSearch =
-    document.getElementById("closeSearch");
+    document.getElementById(
+        "closeSearch"
+    );
 
 const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
 
 const searchResults =
-    document.getElementById("searchResults");
+    document.getElementById(
+        "searchResults"
+    );
 
 
 /* =========================================================
@@ -467,17 +604,26 @@ const searchResults =
 
 if (searchButton) {
 
-    searchButton.addEventListener("click", () => {
+    searchButton.addEventListener(
+        "click",
+        () => {
 
-        searchOverlay.classList.add("active");
+            searchOverlay.classList.add(
+                "active"
+            );
 
-        setTimeout(() => {
 
-            searchInput.focus();
+            setTimeout(
+                () => {
 
-        }, 300);
+                    searchInput.focus();
 
-    });
+                },
+                300
+            );
+
+        }
+    );
 
 }
 
@@ -492,14 +638,25 @@ function closeSearchOverlay() {
         return;
     }
 
-    searchOverlay.classList.remove("active");
+
+    searchOverlay.classList.remove(
+        "active"
+    );
+
 
     if (searchInput) {
-        searchInput.value = "";
+
+        searchInput.value =
+            "";
+
     }
 
+
     if (searchResults) {
-        searchResults.innerHTML = "";
+
+        searchResults.innerHTML =
+            "";
+
     }
 
 }
@@ -516,22 +673,28 @@ if (closeSearch) {
 
 
 /* =========================================================
-   ESCAPE SEARCH
+   SEARCH ESCAPE
    ========================================================= */
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener(
+    "keydown",
+    (event) => {
 
-    if (
-        event.key === "Escape" &&
-        searchOverlay &&
-        searchOverlay.classList.contains("active")
-    ) {
+        if (
+            event.key === "Escape" &&
+            searchOverlay &&
+            searchOverlay.classList.contains(
+                "active"
+            )
+        ) {
 
-        closeSearchOverlay();
+            closeSearchOverlay();
+
+        }
 
     }
+);
 
-});
 
 
 /* =========================================================
@@ -541,20 +704,30 @@ document.addEventListener("keydown", (event) => {
 const shaders = [
 
     {
-        name: "Red Sprites",
-        category: "Atmospheric",
+        name:
+            "Red Sprites",
+
+        category:
+            "Atmospheric",
+
         description:
             "Atmospheric lightning high above the clouds."
     },
 
+
     {
-        name: "Aurora",
-        category: "Atmospheric",
+        name:
+            "Aurora",
+
+        category:
+            "Atmospheric",
+
         description:
             "Immersive aurora effects and atmospheric skies."
     }
 
 ];
+
 
 
 /* =========================================================
@@ -573,7 +746,8 @@ if (searchInput) {
                     .trim();
 
 
-            searchResults.innerHTML = "";
+            searchResults.innerHTML =
+                "";
 
 
             if (!query) {
@@ -582,32 +756,42 @@ if (searchInput) {
 
 
             const results =
-                shaders.filter(shader => {
+                shaders.filter(
+                    (shader) => {
 
-                    return (
+                        return (
 
-                        shader.name
-                            .toLowerCase()
-                            .includes(query)
+                            shader.name
+                                .toLowerCase()
+                                .includes(
+                                    query
+                                )
 
-                        ||
+                            ||
 
-                        shader.category
-                            .toLowerCase()
-                            .includes(query)
+                            shader.category
+                                .toLowerCase()
+                                .includes(
+                                    query
+                                )
 
-                        ||
+                            ||
 
-                        shader.description
-                            .toLowerCase()
-                            .includes(query)
+                            shader.description
+                                .toLowerCase()
+                                .includes(
+                                    query
+                                )
 
-                    );
+                        );
 
-                });
+                    }
+                );
 
 
-            if (results.length === 0) {
+            if (
+                results.length === 0
+            ) {
 
                 searchResults.innerHTML = `
 
@@ -627,54 +811,59 @@ if (searchInput) {
             }
 
 
-            results.forEach(shader => {
+            results.forEach(
+                (shader) => {
 
-                const result =
-                    document.createElement("div");
-
-
-                result.style.marginTop =
-                    "25px";
-
-                result.style.padding =
-                    "20px";
-
-                result.style.border =
-                    "1px solid rgba(255,255,255,0.09)";
-
-                result.style.borderRadius =
-                    "14px";
+                    const result =
+                        document.createElement(
+                            "div"
+                        );
 
 
-                result.innerHTML = `
+                    result.style.marginTop =
+                        "25px";
 
-                    <strong>
-                        ${shader.name}
-                    </strong>
+                    result.style.padding =
+                        "20px";
 
-                    <p style="
-                        margin-top: 5px;
-                        color: #9da3ad;
-                        font-size: 0.85rem;
-                    ">
+                    result.style.border =
+                        "1px solid rgba(255,255,255,0.09)";
 
-                        ${shader.description}
-
-                    </p>
-
-                `;
+                    result.style.borderRadius =
+                        "14px";
 
 
-                searchResults.appendChild(
-                    result
-                );
+                    result.innerHTML = `
 
-            });
+                        <strong>
+                            ${shader.name}
+                        </strong>
+
+                        <p style="
+                            margin-top: 5px;
+                            color: #9da3ad;
+                            font-size: 0.85rem;
+                        ">
+
+                            ${shader.description}
+
+                        </p>
+
+                    `;
+
+
+                    searchResults.appendChild(
+                        result
+                    );
+
+                }
+            );
 
         }
     );
 
 }
+
 
 
 /* =========================================================
@@ -687,51 +876,60 @@ const revealElements =
     );
 
 
-/* =========================================================
-   INTERSECTION OBSERVER
-   ========================================================= */
-
 const revealObserver =
     new IntersectionObserver(
 
-        (entries, observer) => {
+        (
+            entries,
+            observer
+        ) => {
 
-            entries.forEach(entry => {
+            entries.forEach(
+                (entry) => {
 
-                if (entry.isIntersecting) {
+                    if (
+                        entry.isIntersecting
+                    ) {
 
-                    entry.target.classList.add(
-                        "revealed"
-                    );
+                        entry.target.classList.add(
+                            "revealed"
+                        );
 
-                    observer.unobserve(
-                        entry.target
-                    );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
 
                 }
-
-            });
+            );
 
         },
 
         {
-            threshold: 0.12
+            threshold:
+                0.12
         }
 
     );
 
 
-/* =========================================================
-   ADD REVEAL CLASS
-   ========================================================= */
+revealElements.forEach(
+    (element) => {
 
-revealElements.forEach(element => {
+        element.classList.add(
+            "reveal"
+        );
 
-    element.classList.add("reveal");
 
-    revealObserver.observe(element);
+        revealObserver.observe(
+            element
+        );
 
-});
+    }
+);
+
 
 
 /* =========================================================
@@ -739,7 +937,9 @@ revealElements.forEach(element => {
    ========================================================= */
 
 const revealStyle =
-    document.createElement("style");
+    document.createElement(
+        "style"
+    );
 
 
 revealStyle.textContent = `
@@ -783,21 +983,26 @@ document.head.appendChild(
 );
 
 
+
 /* =========================================================
    PREVENT EMPTY HASH LINKS
    ========================================================= */
 
 document
-    .querySelectorAll('a[href="#"]')
-    .forEach(link => {
+    .querySelectorAll(
+        'a[href="#"]'
+    )
+    .forEach(
+        (link) => {
 
-        link.addEventListener(
-            "click",
-            event => {
+            link.addEventListener(
+                "click",
+                (event) => {
 
-                event.preventDefault();
+                    event.preventDefault();
 
-            }
-        );
+                }
+            );
 
-    });
+        }
+    );
