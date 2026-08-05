@@ -1102,7 +1102,14 @@ footer {
 
 
 /* =========================================================
+   =========================================================
    CINEMATIC INTRO
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================================
+   INTRO CONTAINER
    ========================================================= */
 
 .cinematic-intro {
@@ -1118,6 +1125,19 @@ footer {
     overflow: hidden;
 
     background: #020305;
+
+    opacity: 1;
+    visibility: visible;
+
+    pointer-events: auto;
+
+    isolation: isolate;
+
+    will-change: opacity;
+
+    transition:
+        opacity 0.25s linear,
+        visibility 0s linear;
 }
 
 
@@ -1135,28 +1155,40 @@ footer {
     background-size: cover;
     background-position: center;
 
-    transform: scale(1.03);
+    transform:
+        translate3d(0, 0, 0)
+        scale(1.03);
 
-    animation: introSceneFloat 12s ease-in-out infinite alternate;
+    transform-origin: 50% 22%;
 
-    will-change: transform;
+    will-change:
+        transform,
+        filter;
 
     z-index: 0;
+
+    animation: introSceneFloat 14s ease-in-out infinite alternate;
 }
 
 @keyframes introSceneFloat {
+
     from {
-        transform: scale(1.03);
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.03);
     }
 
     to {
-        transform: scale(1.09);
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.055);
     }
+
 }
 
 
 /* =========================================================
-   CINEMATIC VIGNETTE
+   VIGNETTE
    ========================================================= */
 
 .intro-vignette {
@@ -1166,19 +1198,20 @@ footer {
     background:
         radial-gradient(
             ellipse at center,
-            transparent 45%,
-            rgba(0, 0, 0, 0.20) 70%,
-            rgba(0, 0, 0, 0.72) 100%
+            transparent 35%,
+            rgba(0, 0, 0, 0.18) 58%,
+            rgba(0, 0, 0, 0.58) 82%,
+            rgba(0, 0, 0, 0.88) 100%
         );
 
     pointer-events: none;
 
-    z-index: 1;
+    z-index: 2;
 }
 
 
 /* =========================================================
-   SUBTLE STARS
+   STARS
    ========================================================= */
 
 .intro-stars {
@@ -1188,7 +1221,7 @@ footer {
     background-image:
         radial-gradient(
             circle,
-            rgba(255,255,255,0.7) 0 1px,
+            rgba(255, 255, 255, 0.75) 0 1px,
             transparent 1.5px
         );
 
@@ -1197,19 +1230,25 @@ footer {
     opacity: 0.18;
 
     animation:
-        starsDrift 18s linear infinite;
+        starsDrift 24s linear infinite;
 
     mix-blend-mode: screen;
+
+    pointer-events: none;
 }
 
 @keyframes starsDrift {
 
     from {
-        transform: translate3d(0, 0, 0) scale(1);
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
     }
 
     to {
-        transform: translate3d(-80px, 40px, 0) scale(1.08);
+        transform:
+            translate3d(-55px, 25px, 0)
+            scale(1.035);
     }
 
 }
@@ -1222,61 +1261,203 @@ footer {
 .intro-black-hole {
     position: absolute;
 
-    width: min(16vw, 170px);
-    height: min(16vw, 170px);
-
     left: 50%;
     top: 22%;
 
-    transform: translate(-50%, -50%);
+    width: min(18vw, 210px);
+    height: min(18vw, 210px);
+
+    transform:
+        translate3d(-50%, -50%, 0)
+        scale(1);
+
+    transform-origin: center center;
+
+    border-radius: 50%;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    will-change:
+        transform,
+        opacity,
+        filter;
+
+    /*
+       The center is deliberately pure black.
+       The surrounding glow creates the silhouette
+       without making the black hole itself move.
+    */
+
+    background:
+        radial-gradient(
+            circle,
+            #000000 0 35%,
+            #000000 43%,
+            rgba(0, 0, 0, 0.96) 49%,
+            rgba(0, 0, 0, 0.55) 58%,
+            transparent 73%
+        );
+
+    box-shadow:
+        0 0 25px rgba(255, 255, 255, 0.08),
+        0 0 60px rgba(150, 170, 200, 0.12),
+        0 0 120px rgba(80, 100, 130, 0.10);
+}
+
+
+/* =========================================================
+   BLACK HOLE INNER SHADOW
+   ========================================================= */
+
+.intro-black-hole::before {
+    content: "";
+
+    position: absolute;
+    inset: 7%;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            #000 0 32%,
-            rgba(0,0,0,0.95) 42%,
-            rgba(255,255,255,0.12) 55%,
-            transparent 72%
+            #000 0 62%,
+            rgba(0, 0, 0, 0.98) 70%,
+            transparent 74%
         );
 
     box-shadow:
-        0 0 25px rgba(255,255,255,0.12),
-        0 0 70px rgba(120,150,190,0.16),
-        0 0 130px rgba(80,110,150,0.12);
+        inset 0 0 35px rgba(0, 0, 0, 1);
 
-    animation:
-        blackHolePulse 5s ease-in-out infinite alternate;
-
-    pointer-events: none;
+    z-index: 3;
 }
 
-@keyframes blackHolePulse {
+
+/* =========================================================
+   ACCRETION RING
+   ========================================================= */
+
+.intro-black-hole::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 185%;
+    height: 46%;
+
+    transform:
+        translate3d(-50%, -50%, 0)
+        rotate(-12deg);
+
+    border-radius: 50%;
+
+    border:
+        2px solid rgba(255, 255, 255, 0.22);
+
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.22),
+        0 0 22px rgba(190, 210, 235, 0.16),
+        0 0 45px rgba(110, 140, 180, 0.10);
+
+    opacity: 0.72;
+
+    z-index: 1;
+
+    will-change:
+        transform,
+        opacity;
+
+    animation:
+        accretionRingRotate
+        8s
+        linear
+        infinite;
+}
+
+@keyframes accretionRingRotate {
 
     from {
         transform:
-            translate(-50%, -50%)
-            scale(0.94)
-            rotate(0deg);
-
-        filter: brightness(0.9);
+            translate3d(-50%, -50%, 0)
+            rotate(-12deg);
     }
 
     to {
         transform:
-            translate(-50%, -50%)
-            scale(1.08)
-            rotate(8deg);
-
-        filter: brightness(1.15);
+            translate3d(-50%, -50%, 0)
+            rotate(348deg);
     }
 
 }
 
 
 /* =========================================================
-   INTRO CONTENT — CENTERED
+   SECOND RING
+   ========================================================= */
+
+.intro-black-hole-ring {
+    position: absolute;
+
+    left: 50%;
+    top: 22%;
+
+    width: min(23vw, 270px);
+    height: min(23vw, 270px);
+
+    transform:
+        translate3d(-50%, -50%, 0)
+        rotate(18deg)
+        scale(1);
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10);
+
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.08),
+        0 0 55px rgba(100, 130, 170, 0.08);
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    opacity: 0.55;
+
+    will-change: transform;
+
+    animation:
+        outerRingRotate
+        16s
+        linear
+        infinite;
+}
+
+@keyframes outerRingRotate {
+
+    from {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotate(18deg)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotate(-342deg)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   INTRO CONTENT
    ========================================================= */
 
 .cinematic-intro .intro-content {
@@ -1288,7 +1469,7 @@ footer {
     right: auto;
     bottom: auto;
 
-    z-index: 10;
+    z-index: 20;
 
     width: min(900px, 100%);
     max-width: 900px;
@@ -1304,9 +1485,18 @@ footer {
 
     text-align: center;
 
-    transform: translate(-50%, -50%);
+    transform:
+        translate3d(-50%, -50%, 0);
 
-    animation: introContentIn 1.4s ease forwards;
+    will-change:
+        transform,
+        opacity;
+
+    animation:
+        introContentIn
+        1.4s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
 }
 
 @keyframes introContentIn {
@@ -1315,21 +1505,21 @@ footer {
         opacity: 0;
 
         transform:
-            translate(-50%, calc(-50% + 20px));
+            translate3d(-50%, calc(-50% + 20px), 0);
     }
 
     to {
         opacity: 1;
 
         transform:
-            translate(-50%, -50%);
+            translate3d(-50%, -50%, 0);
     }
 
 }
 
 
 /* =========================================================
-   WELCOME TO
+   INTRO LABEL
    ========================================================= */
 
 .intro-label {
@@ -1350,6 +1540,15 @@ footer {
     text-shadow:
         0 2px 10px rgba(0, 0, 0, 0.9),
         0 0 18px rgba(255, 255, 255, 0.25);
+
+    opacity: 0;
+
+    animation:
+        introTextFade
+        0.8s
+        ease
+        0.5s
+        forwards;
 }
 
 
@@ -1384,28 +1583,14 @@ footer {
     filter:
         drop-shadow(0 5px 20px rgba(0, 0, 0, 0.55));
 
+    opacity: 0;
+
     animation:
-        glowTitlePulse 4s ease-in-out infinite alternate;
-}
-
-@keyframes glowTitlePulse {
-
-    from {
-        text-shadow:
-            0 0 5px rgba(255, 255, 255, 0.85),
-            0 0 15px rgba(255, 255, 255, 0.65),
-            0 0 35px rgba(255, 255, 255, 0.35),
-            0 0 60px rgba(255, 255, 255, 0.18);
-    }
-
-    to {
-        text-shadow:
-            0 0 8px rgba(255, 255, 255, 1),
-            0 0 22px rgba(255, 255, 255, 0.8),
-            0 0 45px rgba(255, 255, 255, 0.5),
-            0 0 90px rgba(255, 255, 255, 0.25);
-    }
-
+        introTitleFade
+        1s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        0.7s
+        forwards;
 }
 
 
@@ -1430,16 +1615,25 @@ footer {
     text-shadow:
         0 2px 12px rgba(0, 0, 0, 0.95),
         0 4px 25px rgba(0, 0, 0, 0.75);
+
+    opacity: 0;
+
+    animation:
+        introTextFade
+        0.8s
+        ease
+        1s
+        forwards;
 }
 
 
 /* =========================================================
-   ENTER GLOW BUTTON
+   ENTER BUTTON
    ========================================================= */
 
 .intro-button {
     position: relative;
-    z-index: 5;
+    z-index: 25;
 
     margin-top: 38px;
 
@@ -1476,6 +1670,15 @@ footer {
     text-shadow:
         0 2px 8px rgba(0, 0, 0, 0.8);
 
+    opacity: 0;
+
+    animation:
+        introButtonFade
+        0.8s
+        ease
+        1.3s
+        forwards;
+
     transition:
         transform 0.3s ease,
         background 0.3s ease,
@@ -1484,12 +1687,15 @@ footer {
 }
 
 .intro-button:hover {
-    transform: translateY(-3px) scale(1.03);
+    transform:
+        translateY(-3px)
+        scale(1.03);
 
     background:
         rgba(255, 255, 255, 0.16);
 
-    border-color: rgba(255, 255, 255, 0.95);
+    border-color:
+        rgba(255, 255, 255, 0.95);
 
     box-shadow:
         0 10px 45px rgba(0, 0, 0, 0.5),
@@ -1511,7 +1717,7 @@ footer {
     right: 28px;
     bottom: 25px;
 
-    z-index: 20;
+    z-index: 10000;
 
     padding: 10px 8px;
 
@@ -1519,7 +1725,7 @@ footer {
 
     background: transparent;
 
-    color: rgba(255, 255, 255, 0.78);
+    color: rgba(255, 255, 255, 0.82);
 
     font-size: 0.85rem;
 
@@ -1527,8 +1733,10 @@ footer {
 
     cursor: pointer;
 
+    pointer-events: auto;
+
     text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9);
+        0 2px 10px rgba(0, 0, 0, 0.95);
 
     transition:
         color 0.3s ease,
@@ -1544,113 +1752,490 @@ footer {
 
 
 /* =========================================================
-   CINEMATIC INTRO — CLEAN TRANSITION SYSTEM
+   SPACE STREAKS
    ========================================================= */
 
-.cinematic-intro .intro-scene {
-    transform-origin: 50% 22%;
-    will-change: transform, filter;
-}
-
-
-/* =========================================================
-   BLACK HOLE — FIXED TARGET
-   ========================================================= */
-
-.cinematic-intro .intro-black-hole {
-    left: 50%;
-    top: 22%;
-
-    width: min(16vw, 175px);
-    height: min(16vw, 175px);
-
-    transform:
-        translate3d(-50%, -50%, 0)
-        scale(1)
-        rotate(0deg);
-
-    transform-origin: 50% 50%;
-
-    z-index: 7;
-
-    animation:
-        blackHoleAxisRotation
-        22s
-        linear
-        infinite;
-
-    will-change: transform, filter;
-}
-
-
-/* The rotating structure gives the hole a sense of axial rotation,
-   while its center remains completely locked in place. */
-
-.cinematic-intro .intro-black-hole::before {
-    animation:
-        blackHoleDiskRotation
-        13s
-        linear
-        infinite;
-}
-
-
-@keyframes blackHoleAxisRotation {
-
-    from {
-        transform:
-            translate3d(-50%, -50%, 0)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translate3d(-50%, -50%, 0)
-            rotate(360deg);
-    }
-
-}
-
-
-@keyframes blackHoleDiskRotation {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translate(-50%, -50%)
-            rotate(360deg);
-    }
-
-}
-
-
-/* =========================================================
-   CINEMATIC BLACK SCREEN
-   ========================================================= */
-
-.cinematic-intro .cinematic-black-screen {
+.space-streaks {
     position: absolute;
+
+    inset: -50%;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 48%,
+            rgba(255, 255, 255, 0.035) 49%,
+            transparent 50%
+        ),
+        linear-gradient(
+            75deg,
+            transparent 0%,
+            transparent 53%,
+            rgba(180, 200, 220, 0.025) 54%,
+            transparent 55%
+        );
+
+    opacity: 0.45;
+
+    pointer-events: none;
+
+    z-index: 3;
+}
+
+
+/* =========================================================
+   INTRO EXIT STATE
+   ========================================================= */
+
+.cinematic-intro.intro-exit {
+    pointer-events: none;
+
+    animation:
+        cinematicBlackHoleExit
+        3.05s
+        linear
+        forwards !important;
+}
+
+
+/* =========================================================
+   CAMERA FLIGHT
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-scene {
+
+    animation:
+        cameraIntoBlackHole
+        2.55s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        forwards !important;
+
+    transform-origin: 50% 22%;
+
+    will-change:
+        transform,
+        filter;
+}
+
+
+/* =========================================================
+   BLACK HOLE EXPANSION
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-black-hole {
+
+    animation:
+        blackHoleExpand
+        2.65s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        forwards !important;
+
+    transform-origin: center center;
+
+    will-change:
+        transform,
+        filter;
+}
+
+
+/* =========================================================
+   OUTER RING EXPANSION
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-black-hole-ring {
+
+    animation:
+        outerRingExpand
+        2.65s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        forwards !important;
+
+    will-change:
+        transform,
+        opacity;
+}
+
+
+/* =========================================================
+   TEXT DISAPPEARS FIRST
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-content {
+
+    animation:
+        introContentDisappear
+        0.55s
+        cubic-bezier(0.4, 0, 1, 1)
+        forwards !important;
+}
+
+
+/* =========================================================
+   CAMERA KEYFRAMES
+   ========================================================= */
+
+@keyframes cameraIntoBlackHole {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.03);
+
+        filter:
+            brightness(1)
+            contrast(1);
+    }
+
+    25% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.08);
+
+        filter:
+            brightness(1.015)
+            contrast(1.01);
+    }
+
+    50% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.25);
+
+        filter:
+            brightness(1.03)
+            contrast(1.015);
+    }
+
+    68% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1.65);
+
+        filter:
+            brightness(1.06)
+            contrast(1.02);
+    }
+
+    82% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(2.35);
+
+        filter:
+            brightness(1.10)
+            contrast(1.025);
+    }
+
+    92% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(3.8);
+
+        filter:
+            brightness(1.14)
+            contrast(1.03);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(7.8);
+
+        filter:
+            brightness(1.18)
+            contrast(1.04);
+    }
+
+}
+
+
+/* =========================================================
+   BLACK HOLE EXPANSION
+   ========================================================= */
+
+@keyframes blackHoleExpand {
+
+    0% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1);
+
+        filter:
+            brightness(0.95);
+
+        opacity: 1;
+    }
+
+    28% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.45);
+
+        filter:
+            brightness(1);
+
+        opacity: 1;
+    }
+
+    50% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(2.7);
+
+        filter:
+            brightness(1.02);
+
+        opacity: 1;
+    }
+
+    68% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(6);
+
+        filter:
+            brightness(1.04);
+
+        opacity: 1;
+    }
+
+    82% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(13);
+
+        filter:
+            brightness(1.06);
+
+        opacity: 1;
+    }
+
+    93% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(27);
+
+        filter:
+            brightness(1.08);
+
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(50);
+
+        filter:
+            brightness(1.1);
+
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================================
+   OUTER RING EXPANSION
+   ========================================================= */
+
+@keyframes outerRingExpand {
+
+    0% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotate(18deg)
+            scale(1);
+
+        opacity: 0.55;
+    }
+
+    45% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotate(170deg)
+            scale(2.2);
+
+        opacity: 0.5;
+    }
+
+    75% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotate(270deg)
+            scale(8);
+
+        opacity: 0.35;
+    }
+
+    100% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            rotate(360deg)
+            scale(35);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   TEXT EXIT
+   ========================================================= */
+
+@keyframes introContentDisappear {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1);
+
+        filter: blur(0);
+    }
+
+    55% {
+
+        opacity: 0.35;
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(0.97);
+
+        filter: blur(2px);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(0.9);
+
+        filter: blur(8px);
+    }
+
+}
+
+
+/* =========================================================
+   CINEMATIC EXIT
+   ========================================================= */
+
+@keyframes cinematicBlackHoleExit {
+
+    0% {
+
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+    78% {
+
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+    88% {
+
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+    93% {
+
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+    100% {
+
+        opacity: 0;
+
+        visibility: hidden;
+    }
+
+}
+
+
+/* =========================================================
+   FINAL BLACK SCREEN
+   ========================================================= */
+
+.cinematic-intro.intro-exit::after {
+
+    content: "";
+
+    position: absolute;
+
     inset: 0;
 
-    z-index: 99999;
+    z-index: 200;
 
-    background: #000;
+    background: #000000;
 
     opacity: 0;
 
     pointer-events: none;
 
-    will-change: opacity;
+    animation:
+        finalBlackScreen
+        3.05s
+        linear
+        forwards;
+}
+
+@keyframes finalBlackScreen {
+
+    0% {
+        opacity: 0;
+    }
+
+    82% {
+        opacity: 0;
+    }
+
+    88% {
+        opacity: 0.35;
+    }
+
+    92% {
+        opacity: 0.78;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
 }
 
 
 /* =========================================================
-   HOMEPAGE LOCK
+   HOMEPAGE HIDDEN DURING INTRO
    ========================================================= */
 
 body.intro-playing .navbar,
@@ -1658,111 +2243,58 @@ body.intro-playing .hero,
 body.intro-playing .section,
 body.intro-playing .final-cta,
 body.intro-playing footer {
+
     visibility: hidden !important;
 }
 
 
+/* =========================================================
+   PAGE LOCK
+   ========================================================= */
+
 html.intro-active,
 body.intro-active {
+
     overflow: hidden !important;
 }
 
 
 /* =========================================================
-   TEXT / CAMERA PERFORMANCE
-   ========================================================= */
-
-.cinematic-intro .intro-content {
-    will-change: opacity, transform, filter;
-}
-
-.cinematic-intro .intro-scene {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-.cinematic-intro .intro-black-hole {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-
-/* =========================================================
-   SKIP INTRO
+   SKIP INTRO — IMMEDIATE
    ========================================================= */
 
 .cinematic-intro.skip-intro-now {
+
     animation: none !important;
+
     transition: none !important;
+
     opacity: 0 !important;
+
     visibility: hidden !important;
+
     pointer-events: none !important;
 }
 
 
 /* =========================================================
-   INTRO TEXT ANIMATION
+   INTRO TEXT ANIMATIONS
    ========================================================= */
-
-.intro-label {
-    opacity: 0;
-
-    animation:
-        introTextFade
-        0.8s
-        ease
-        forwards;
-
-    animation-delay: 0.5s;
-}
-
-.intro-content h1 {
-    opacity: 0;
-
-    animation:
-        introTitleFade
-        1s
-        ease
-        forwards;
-
-    animation-delay: 0.7s;
-}
-
-.intro-subtitle {
-    opacity: 0;
-
-    animation:
-        introTextFade
-        0.8s
-        ease
-        forwards;
-
-    animation-delay: 1s;
-}
-
-.intro-button {
-    opacity: 0;
-
-    animation:
-        introButtonFade
-        0.8s
-        ease
-        forwards;
-
-    animation-delay: 1.3s;
-}
-
 
 @keyframes introTextFade {
 
     from {
         opacity: 0;
-        transform: translateY(12px);
+
+        transform:
+            translate3d(0, 12px, 0);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translate3d(0, 0, 0);
     }
 
 }
@@ -1772,12 +2304,18 @@ body.intro-active {
 
     from {
         opacity: 0;
-        transform: translateY(25px) scale(0.94);
+
+        transform:
+            translate3d(0, 25px, 0)
+            scale(0.94);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
     }
 
 }
@@ -1787,35 +2325,53 @@ body.intro-active {
 
     from {
         opacity: 0;
-        transform: translateY(15px) scale(0.96);
+
+        transform:
+            translate3d(0, 15px, 0)
+            scale(0.96);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
     }
 
 }
 
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE — MOBILE INTRO
    ========================================================= */
 
 @media (max-width: 650px) {
 
-    .cinematic-intro .intro-scene {
+    .intro-scene {
         background-position: center;
     }
 
-    .cinematic-intro .intro-black-hole {
-        width: 105px;
-        height: 105px;
+    .intro-black-hole {
+
+        width: 110px;
+        height: 110px;
+
+        left: 50%;
+        top: 22%;
+    }
+
+    .intro-black-hole-ring {
+
+        width: 145px;
+        height: 145px;
+
         left: 50%;
         top: 22%;
     }
 
     .cinematic-intro .intro-content {
+
         position: absolute;
 
         top: 50%;
@@ -1825,41 +2381,64 @@ body.intro-active {
         max-width: 900px;
 
         margin: 0;
+
         padding: 0 20px;
 
         transform:
-            translate(-50%, -50%);
+            translate3d(-50%, -50%, 0);
     }
 
     .intro-label {
+
         margin-bottom: 7px;
+
         letter-spacing: 0.28em;
     }
 
     .intro-content h1 {
-        font-size: clamp(4.2rem, 20vw, 6.5rem);
+
+        font-size:
+            clamp(4.2rem, 20vw, 6.5rem);
+
         letter-spacing: -0.06em;
     }
 
     .intro-subtitle {
+
         margin-top: 24px;
+
         font-size: 0.95rem;
+
         white-space: nowrap;
     }
 
     .intro-button {
+
         margin-top: 34px;
+
         min-width: 205px;
         min-height: 56px;
+
         padding: 15px 30px;
+
         font-size: 0.82rem;
     }
 
     .skip-intro {
+
         right: 20px;
         bottom: 20px;
+
+        z-index: 10000;
+
         padding: 12px 6px;
+
         font-size: 0.9rem;
     }
 
 }
+
+
+/* =========================================================
+   END CINEMATIC INTRO
+   ========================================================= */
