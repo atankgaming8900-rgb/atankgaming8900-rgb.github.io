@@ -46,7 +46,7 @@ enterGlow.addEventListener("click", () => {
 
         unlockPage();
 
-    }, 2400);
+    }, 3200);
 
 });
 
