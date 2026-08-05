@@ -1,48 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Glow — Minecraft Shaders</title>
-    <meta name="description" content="Glow creates immersive Minecraft shaders with cinematic lighting, atmospheric skies, and stunning visual effects.">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="css/style.css">
+    <title>
+        Glow — Minecraft Shaders
+    </title>
+
+    <meta
+        name="description"
+        content="Glow creates immersive Minecraft shaders with cinematic lighting, atmospheric skies, and stunning visual effects."
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
+
 
 <body>
 
+
 <!-- ==================== CINEMATIC INTRO ==================== -->
 
-<div class="cinematic-intro" id="cinematicIntro">
+<div
+    class="cinematic-intro"
+    id="cinematicIntro"
+>
+
 
     <div class="intro-scene">
+
         <div class="intro-stars"></div>
+
         <div class="intro-vignette"></div>
+
     </div>
 
-    <!-- Separate black hole -->
-    <div class="intro-black-hole" id="introBlackHole"></div>
 
-    <div class="intro-content" id="introContent">
+    <!-- SEPARATE MOVING BLACK HOLE -->
 
-        <p class="intro-label">WELCOME TO</p>
+    <div class="intro-black-hole"></div>
 
-        <h1>GLOW</h1>
+
+    <!-- FINAL BLACK SCREEN -->
+
+    <div
+        class="cinematic-black-screen"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- INTRO CONTENT -->
+
+    <div class="intro-content">
+
+
+        <p class="intro-label">
+            WELCOME TO
+        </p>
+
+
+        <h1>
+            GLOW
+        </h1>
+
 
         <p class="intro-subtitle">
             Shaders beyond the ordinary.
         </p>
 
-        <button class="intro-button" id="enterGlow">
+
+        <button
+            class="intro-button"
+            id="enterGlow"
+        >
             ENTER GLOW
         </button>
 
+
     </div>
 
-    <button class="skip-intro" id="skipIntro">
+
+    <!-- SKIP INTRO -->
+
+    <button
+        class="skip-intro"
+        id="skipIntro"
+    >
         Skip intro
     </button>
+
 
 </div>
 
@@ -50,29 +107,71 @@
 <!-- ==================== NAVIGATION ==================== -->
 
 <header class="navbar">
-    <a href="index.html" class="logo">GLOW</a>
+
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+        GLOW
+    </a>
+
 
     <nav class="nav-links">
-        <a href="#shaders">Shaders</a>
-        <a href="#categories">Categories</a>
-        <a href="#about">About</a>
+
+
+        <a href="#shaders">
+            Shaders
+        </a>
+
+
+        <a href="#categories">
+            Categories
+        </a>
+
+
+        <a href="#about">
+            About
+        </a>
+
+
     </nav>
 
-    <button class="search-button" id="searchButton" aria-label="Search">
-        <span>⌕</span>
+
+    <button
+        class="search-button"
+        id="searchButton"
+        aria-label="Search"
+    >
+
+        <span>
+            ⌕
+        </span>
+
     </button>
+
+
 </header>
 
 
 <!-- ==================== SEARCH OVERLAY ==================== -->
 
-<div class="search-overlay" id="searchOverlay">
+<div
+    class="search-overlay"
+    id="searchOverlay"
+>
 
-    <button class="close-search" id="closeSearch">
+
+    <button
+        class="close-search"
+        id="closeSearch"
+    >
         ×
     </button>
 
+
     <div class="search-container">
+
 
         <input
             type="text"
@@ -81,9 +180,12 @@
             autocomplete="off"
         >
 
+
         <div id="searchResults"></div>
 
+
     </div>
+
 
 </div>
 
@@ -92,234 +194,548 @@
 
 <main>
 
-    <section class="hero" id="hero">
+
+    <section
+        class="hero"
+        id="hero"
+    >
+
 
         <div class="hero-background"></div>
 
+
         <div class="hero-content">
 
-            <p class="hero-label">FEATURED SHADER</p>
 
-            <h1 id="heroTitle">Red Sprites</h1>
+            <p class="hero-label">
+                FEATURED SHADER
+            </p>
+
+
+            <h1 id="heroTitle">
+                Red Sprites
+            </h1>
+
 
             <p id="heroDescription">
                 Experience Minecraft skies like never before.
             </p>
 
-            <a href="#shaders" class="hero-button">
+
+            <a
+                href="#shaders"
+                class="hero-button"
+            >
                 Explore Shader
             </a>
 
+
         </div>
 
-        <div class="slider-dots" id="sliderDots">
+
+        <!-- SLIDESHOW CONTROLS -->
+
+        <div
+            class="slider-dots"
+            id="sliderDots"
+        >
+
             <button class="active"></button>
+
             <button></button>
+
             <button></button>
+
         </div>
+
 
     </section>
 
 
     <!-- ==================== CATEGORIES ==================== -->
 
-    <section class="categories section" id="categories">
+    <section
+        class="categories section"
+        id="categories"
+    >
+
 
         <div class="section-heading">
-            <p class="section-label">EXPLORE</p>
-            <h2>Categories</h2>
+
+
+            <p class="section-label">
+                EXPLORE
+            </p>
+
+
+            <h2>
+                Categories
+            </h2>
+
+
             <p>
                 Find the visual style that fits your world.
             </p>
+
+
         </div>
+
 
         <div class="category-grid">
 
-            <a href="#" class="category-card">
-                <span class="category-icon">◈</span>
-                <h3>Realistic</h3>
-                <p>Natural lighting and realistic environments.</p>
+
+            <a
+                href="#"
+                class="category-card"
+            >
+
+                <span class="category-icon">
+                    ◈
+                </span>
+
+
+                <h3>
+                    Realistic
+                </h3>
+
+
+                <p>
+                    Natural lighting and realistic environments.
+                </p>
+
             </a>
 
-            <a href="#" class="category-card">
-                <span class="category-icon">✦</span>
-                <h3>Cinematic</h3>
-                <p>Designed for dramatic and cinematic worlds.</p>
+
+            <a
+                href="#"
+                class="category-card"
+            >
+
+                <span class="category-icon">
+                    ✦
+                </span>
+
+
+                <h3>
+                    Cinematic
+                </h3>
+
+
+                <p>
+                    Designed for dramatic and cinematic worlds.
+                </p>
+
             </a>
 
-            <a href="#" class="category-card">
-                <span class="category-icon">☁</span>
-                <h3>Atmospheric</h3>
-                <p>Skies, clouds, weather and atmosphere.</p>
+
+            <a
+                href="#"
+                class="category-card"
+            >
+
+                <span class="category-icon">
+                    ☁
+                </span>
+
+
+                <h3>
+                    Atmospheric
+                </h3>
+
+
+                <p>
+                    Skies, clouds, weather and atmosphere.
+                </p>
+
             </a>
 
-            <a href="#" class="category-card">
-                <span class="category-icon">⚡</span>
-                <h3>Performance</h3>
-                <p>Beautiful visuals without sacrificing performance.</p>
+
+            <a
+                href="#"
+                class="category-card"
+            >
+
+                <span class="category-icon">
+                    ⚡
+                </span>
+
+
+                <h3>
+                    Performance
+                </h3>
+
+
+                <p>
+                    Beautiful visuals without sacrificing performance.
+                </p>
+
             </a>
 
-            <a href="#" class="category-card">
-                <span class="category-icon">◆</span>
-                <h3>Stylized</h3>
-                <p>Unique visual styles for different worlds.</p>
+
+            <a
+                href="#"
+                class="category-card"
+            >
+
+                <span class="category-icon">
+                    ◆
+                </span>
+
+
+                <h3>
+                    Stylized
+                </h3>
+
+
+                <p>
+                    Unique visual styles for different worlds.
+                </p>
+
             </a>
 
-            <a href="#" class="category-card">
-                <span class="category-icon">◌</span>
-                <h3>Lightweight</h3>
-                <p>Made for systems with limited resources.</p>
+
+            <a
+                href="#"
+                class="category-card"
+            >
+
+                <span class="category-icon">
+                    ◌
+                </span>
+
+
+                <h3>
+                    Lightweight
+                </h3>
+
+
+                <p>
+                    Made for systems with limited resources.
+                </p>
+
             </a>
+
 
         </div>
+
 
     </section>
 
 
     <!-- ==================== FEATURED SHADERS ==================== -->
 
-    <section class="shaders section" id="shaders">
+    <section
+        class="shaders section"
+        id="shaders"
+    >
+
 
         <div class="section-heading">
-            <p class="section-label">OUR WORK</p>
-            <h2>Featured Shaders</h2>
+
+
+            <p class="section-label">
+                OUR WORK
+            </p>
+
+
+            <h2>
+                Featured Shaders
+            </h2>
+
+
             <p>
                 Explore the latest visual experiences from Glow.
             </p>
+
+
         </div>
+
 
         <div class="shader-grid">
 
+
+            <!-- RED SPRITES -->
+
             <article class="shader-card">
 
-                <div class="shader-image shader-red-sprites">
-                    <span>RED SPRITES</span>
+
+                <div
+                    class="shader-image shader-red-sprites"
+                >
+
+                    <span>
+                        RED SPRITES
+                    </span>
+
                 </div>
 
-                <div class="shader-info">
-                    <p class="shader-category">Atmospheric</p>
 
-                    <h3>Red Sprites</h3>
+                <div class="shader-info">
+
+
+                    <p class="shader-category">
+                        Atmospheric
+                    </p>
+
+
+                    <h3>
+                        Red Sprites
+                    </h3>
+
 
                     <p>
                         Discover rare atmospheric lightning
                         high above the clouds.
                     </p>
 
-                    <a href="#" class="shader-link">
+
+                    <a
+                        href="#"
+                        class="shader-link"
+                    >
                         View Shader →
                     </a>
+
+
                 </div>
+
 
             </article>
 
 
+            <!-- FUTURE SHADER -->
+
             <article class="shader-card">
 
-                <div class="shader-image shader-placeholder">
-                    <span>COMING SOON</span>
+
+                <div
+                    class="shader-image shader-placeholder"
+                >
+
+                    <span>
+                        COMING SOON
+                    </span>
+
                 </div>
 
-                <div class="shader-info">
-                    <p class="shader-category">Future Release</p>
 
-                    <h3>Coming Soon</h3>
+                <div class="shader-info">
+
+
+                    <p class="shader-category">
+                        Future Release
+                    </p>
+
+
+                    <h3>
+                        Coming Soon
+                    </h3>
+
 
                     <p>
                         Something new is being created.
                     </p>
 
-                    <a href="#" class="shader-link">
+
+                    <a
+                        href="#"
+                        class="shader-link"
+                    >
                         Coming Soon →
                     </a>
+
+
                 </div>
+
 
             </article>
 
 
+            <!-- FUTURE SHADER -->
+
             <article class="shader-card">
 
-                <div class="shader-image shader-placeholder">
-                    <span>COMING SOON</span>
+
+                <div
+                    class="shader-image shader-placeholder"
+                >
+
+                    <span>
+                        COMING SOON
+                    </span>
+
                 </div>
 
-                <div class="shader-info">
-                    <p class="shader-category">Future Release</p>
 
-                    <h3>Coming Soon</h3>
+                <div class="shader-info">
+
+
+                    <p class="shader-category">
+                        Future Release
+                    </p>
+
+
+                    <h3>
+                        Coming Soon
+                    </h3>
+
 
                     <p>
                         More visual experiences are on the way.
                     </p>
 
-                    <a href="#" class="shader-link">
+
+                    <a
+                        href="#"
+                        class="shader-link"
+                    >
                         Coming Soon →
                     </a>
+
+
                 </div>
+
 
             </article>
 
+
         </div>
+
 
         <div class="center-button">
 
-            <a href="#" class="outline-button">
+
+            <a
+                href="#"
+                class="outline-button"
+            >
                 View All Shaders
             </a>
 
+
         </div>
+
 
     </section>
 
 
     <!-- ==================== WHY GLOW ==================== -->
 
-    <section class="why-glow section" id="about">
+    <section
+        class="why-glow section"
+        id="about"
+    >
+
 
         <div class="section-heading">
-            <p class="section-label">THE IDEA</p>
-            <h2>Why Glow?</h2>
+
+
+            <p class="section-label">
+                THE IDEA
+            </p>
+
+
+            <h2>
+                Why Glow?
+            </h2>
+
+
         </div>
+
 
         <div class="features-grid">
 
+
             <div class="feature">
-                <span>✦</span>
-                <h3>Beautiful Lighting</h3>
+
+
+                <span>
+                    ✦
+                </span>
+
+
+                <h3>
+                    Beautiful Lighting
+                </h3>
+
+
                 <p>
                     Lighting designed to transform ordinary
                     Minecraft environments.
                 </p>
+
+
             </div>
 
+
             <div class="feature">
-                <span>☁</span>
-                <h3>Immersive Atmospheres</h3>
+
+
+                <span>
+                    ☁
+                </span>
+
+
+                <h3>
+                    Immersive Atmospheres
+                </h3>
+
+
                 <p>
                     Skies, weather and atmospheric effects
                     that make worlds feel alive.
                 </p>
+
+
             </div>
 
+
             <div class="feature">
-                <span>⚡</span>
-                <h3>Performance Options</h3>
+
+
+                <span>
+                    ⚡
+                </span>
+
+
+                <h3>
+                    Performance Options
+                </h3>
+
+
                 <p>
                     Different experiences for different
                     hardware.
                 </p>
+
+
             </div>
 
+
             <div class="feature">
-                <span>∞</span>
-                <h3>Always Evolving</h3>
+
+
+                <span>
+                    ∞
+                </span>
+
+
+                <h3>
+                    Always Evolving
+                </h3>
+
+
                 <p>
                     New ideas, new effects and new shaders
                     are always being explored.
                 </p>
+
+
             </div>
 
+
         </div>
+
 
     </section>
 
@@ -328,26 +744,54 @@
 
     <section class="latest section">
 
+
         <div class="section-heading">
-            <p class="section-label">WHAT'S NEW</p>
-            <h2>Latest Releases</h2>
+
+
+            <p class="section-label">
+                WHAT'S NEW
+            </p>
+
+
+            <h2>
+                Latest Releases
+            </h2>
+
+
         </div>
+
 
         <div class="release">
 
+
             <div>
-                <p class="release-label">LATEST SHADER</p>
-                <h3>Red Sprites</h3>
+
+
+                <p class="release-label">
+                    LATEST SHADER
+                </p>
+
+
+                <h3>
+                    Red Sprites
+                </h3>
+
+
                 <p>
                     The first Glow shader experience.
                 </p>
+
+
             </div>
+
 
             <span class="release-version">
                 Version 1.0
             </span>
 
+
         </div>
+
 
     </section>
 
@@ -356,20 +800,31 @@
 
     <section class="final-cta">
 
+
         <div class="cta-glow"></div>
 
-        <p class="section-label">WELCOME TO GLOW</p>
+
+        <p class="section-label">
+            WELCOME TO GLOW
+        </p>
+
 
         <h2>
             See Minecraft<br>
             differently.
         </h2>
 
-        <a href="#shaders" class="hero-button">
+
+        <a
+            href="#shaders"
+            class="hero-button"
+        >
             Explore Shaders
         </a>
 
+
     </section>
+
 
 </main>
 
@@ -378,30 +833,66 @@
 
 <footer class="footer">
 
+
     <div class="footer-brand">
-        <h2>GLOW</h2>
+
+
+        <h2>
+            GLOW
+        </h2>
+
+
         <p>
             Shaders for everyone.
         </p>
+
+
     </div>
+
 
     <div class="footer-links">
-        <a href="#shaders">Shaders</a>
-        <a href="#categories">Categories</a>
-        <a href="#about">About</a>
-        <a href="#">Contact</a>
+
+
+        <a href="#shaders">
+            Shaders
+        </a>
+
+
+        <a href="#categories">
+            Categories
+        </a>
+
+
+        <a href="#about">
+            About
+        </a>
+
+
+        <a href="#">
+            Contact
+        </a>
+
+
     </div>
 
+
     <div class="footer-bottom">
+
+
         <p>
             © 2026 Glow. All rights reserved.
         </p>
+
+
     </div>
+
 
 </footer>
 
 
-<script src="js/script.js?v=3"></script>
+<script src="js/script.js?v=2"></script>
+
 
 </body>
+
 </html>
