@@ -2275,12 +2275,20 @@ body.intro-playing footer {
         opacity: 0;
     }
 
-    76% {
+    72% {
         opacity: 0;
     }
 
-    88% {
-        opacity: 1;
+    80% {
+        opacity: 0.15;
+    }
+
+    86% {
+        opacity: 0.55;
+    }
+
+    92% {
+        opacity: 0.9;
     }
 
     100% {
