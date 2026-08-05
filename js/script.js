@@ -20,11 +20,42 @@ const skipIntro =
     document.getElementById("skipIntro");
 
 
+let introFinished = false;
+let introTransitionRunning = false;
+
+
+/* =========================================================
+   UNLOCK PAGE
+   ========================================================= */
+
 function unlockPage() {
 
     document.documentElement.classList.remove("intro-active");
     document.body.classList.remove("intro-active");
+}
 
+
+/* =========================================================
+   SHOW HOMEPAGE
+   ========================================================= */
+
+function showHomepage() {
+
+    if (introFinished) {
+        return;
+    }
+
+    introFinished = true;
+    introTransitionRunning = false;
+
+    cinematicIntro.classList.remove("intro-exit");
+    cinematicIntro.classList.add("skip-intro-now");
+
+    document.body.classList.remove("intro-playing");
+
+    cinematicIntro.style.display = "none";
+
+    unlockPage();
 }
 
 
@@ -34,19 +65,31 @@ function unlockPage() {
 
 enterGlow.addEventListener("click", () => {
 
+    if (introFinished || introTransitionRunning) {
+        return;
+    }
+
+    introTransitionRunning = true;
+
     document.body.classList.add("intro-playing");
 
     cinematicIntro.classList.add("intro-exit");
 
+    /*
+       The CSS transition is 4.1 seconds.
+
+       Text disappears first,
+       camera moves toward the black hole,
+       black hole expands,
+       screen becomes completely black,
+       then homepage appears.
+    */
+
     setTimeout(() => {
 
-        cinematicIntro.style.display = "none";
+        showHomepage();
 
-        document.body.classList.remove("intro-playing");
-
-        unlockPage();
-
-    }, 3200);
+    }, 5100);
 
 });
 
@@ -55,25 +98,48 @@ enterGlow.addEventListener("click", () => {
    SKIP INTRO
    ========================================================= */
 
-skipIntro.addEventListener("click", () => {
+skipIntro.addEventListener("click", (event) => {
 
-    /* Immediately remove intro */
+    event.preventDefault();
+    event.stopPropagation();
+
+    /*
+       Skip must work even while the cinematic
+       transition is already running.
+    */
+
+    if (introFinished) {
+        return;
+    }
+
+    introFinished = true;
+    introTransitionRunning = false;
+
+    /*
+       Completely cancel every running animation.
+    */
 
     cinematicIntro.style.animation = "none";
     cinematicIntro.style.transition = "none";
 
     cinematicIntro.classList.remove("intro-exit");
 
+    cinematicIntro.classList.add("skip-intro-now");
+
+    /*
+       Make absolutely sure the intro disappears.
+    */
+
     cinematicIntro.style.opacity = "0";
     cinematicIntro.style.visibility = "hidden";
     cinematicIntro.style.pointerEvents = "none";
 
-    /* IMPORTANT:
-       Unlock scrolling */
+    document.body.classList.remove("intro-playing");
 
     unlockPage();
 
 });
+
 
 /* =========================================================
    HERO SLIDESHOW
@@ -225,6 +291,7 @@ slideTimer = setTimeout(() => {
     showSlide(1);
 
 }, 4000);
+
 
 /* =========================================================
    SEARCH
