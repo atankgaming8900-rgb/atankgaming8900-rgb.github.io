@@ -1955,3 +1955,354 @@ body.intro-active {
     }
 
 }
+
+/* =========================================================
+   GLOW — FINAL BLACK HOLE CINEMATIC TRANSITION
+   ========================================================= */
+
+/*
+   Sequence:
+
+   0.00s — normal intro
+   0.00–2.40s — camera rushes toward black hole
+   2.40–2.80s — black hole fills the screen
+   2.80–3.20s — complete black screen
+   3.20s — homepage appears
+*/
+
+
+/* ---------------------------------------------------------
+   MAIN CINEMATIC TRANSITION
+   --------------------------------------------------------- */
+
+.cinematic-intro.intro-exit {
+
+    pointer-events: none;
+
+    animation:
+        cinematicBlackHoleExit
+        3.2s
+        cubic-bezier(0.65, 0, 0.15, 1)
+        forwards !important;
+}
+
+
+/* ---------------------------------------------------------
+   CAMERA MOVEMENT
+   --------------------------------------------------------- */
+
+.cinematic-intro.intro-exit .intro-scene {
+
+    animation:
+        cameraIntoBlackHole
+        2.8s
+        cubic-bezier(0.65, 0, 0.15, 1)
+        forwards !important;
+
+    transform-origin: 50% 22%;
+
+    will-change: transform, filter;
+}
+
+
+/* ---------------------------------------------------------
+   BLACK HOLE BECOMES THE CAMERA TARGET
+   --------------------------------------------------------- */
+
+.cinematic-intro.intro-exit .intro-black-hole {
+
+    animation:
+        blackHoleExpand
+        2.8s
+        cubic-bezier(0.65, 0, 0.15, 1)
+        forwards !important;
+
+    transform-origin: center;
+}
+
+
+/* ---------------------------------------------------------
+   HIDE INTRO TEXT DURING CAMERA FLIGHT
+   --------------------------------------------------------- */
+
+.cinematic-intro.intro-exit .intro-content {
+
+    animation:
+        introContentDisappear
+        0.7s
+        ease
+        forwards !important;
+}
+
+
+/* ---------------------------------------------------------
+   CAMERA FLIES INTO BLACK HOLE
+   --------------------------------------------------------- */
+
+@keyframes cameraIntoBlackHole {
+
+    0% {
+
+        transform:
+            scale(1.03);
+
+        filter:
+            brightness(1)
+            blur(0);
+
+    }
+
+    35% {
+
+        transform:
+            scale(1.12);
+
+        filter:
+            brightness(1.05)
+            blur(0);
+
+    }
+
+    60% {
+
+        transform:
+            scale(1.45);
+
+        filter:
+            brightness(1.15)
+            blur(0);
+
+    }
+
+    78% {
+
+        transform:
+            scale(2.4);
+
+        filter:
+            brightness(1.35)
+            blur(1px);
+
+    }
+
+    90% {
+
+        transform:
+            scale(4.5);
+
+        filter:
+            brightness(1.7)
+            blur(3px);
+
+    }
+
+    100% {
+
+        transform:
+            scale(8);
+
+        filter:
+            brightness(2)
+            blur(8px);
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   BLACK HOLE EXPANDS INTO THE SCREEN
+   --------------------------------------------------------- */
+
+@keyframes blackHoleExpand {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 1;
+
+    }
+
+    40% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(2);
+
+        opacity: 1;
+
+    }
+
+    65% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(5);
+
+        opacity: 1;
+
+    }
+
+    82% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(12);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(35);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   TEXT DISAPPEARS
+   --------------------------------------------------------- */
+
+@keyframes introContentDisappear {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.75);
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   COMPLETE CINEMATIC EXIT
+   --------------------------------------------------------- */
+
+@keyframes cinematicBlackHoleExit {
+
+    0% {
+
+        opacity: 1;
+
+        visibility: visible;
+
+    }
+
+    75% {
+
+        opacity: 1;
+
+        visibility: visible;
+
+    }
+
+    87% {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        background: #020305;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        background: #000;
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   HOMEPAGE STAYS HIDDEN DURING TRANSITION
+   --------------------------------------------------------- */
+
+body.intro-playing .navbar,
+body.intro-playing .hero,
+body.intro-playing .section,
+body.intro-playing .final-cta,
+body.intro-playing footer {
+
+    visibility: hidden !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   BLACK SCREEN MOMENT
+   --------------------------------------------------------- */
+
+.cinematic-intro.intro-exit::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    background: #000;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    animation:
+        finalBlackScreen
+        3.2s
+        ease
+        forwards;
+
+}
+
+
+@keyframes finalBlackScreen {
+
+    0% {
+        opacity: 0;
+    }
+
+    76% {
+        opacity: 0;
+    }
+
+    88% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
