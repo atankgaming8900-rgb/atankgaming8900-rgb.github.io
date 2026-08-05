@@ -4,15 +4,7 @@
 
 
 /* =========================================================
-   PAGE LOCK DURING INTRO
-   ========================================================= */
-
-document.documentElement.classList.add("intro-active");
-document.body.classList.add("intro-active");
-
-
-/* =========================================================
-   CINEMATIC INTRO ELEMENTS
+   CINEMATIC INTRO — ULTRA SMOOTH VERSION
    ========================================================= */
 
 const cinematicIntro =
@@ -25,34 +17,39 @@ const skipIntro =
     document.getElementById("skipIntro");
 
 
-/* =========================================================
-   CINEMATIC SETTINGS
-   ========================================================= */
-
-const INTRO_DURATION = 3000;
-
-let introFinished = false;
 let introStarted = false;
+let introFinished = false;
 
 
 /* =========================================================
-   UNLOCK PAGE
+   PAGE LOCK
    ========================================================= */
+
+document.documentElement.classList.add("intro-active");
+document.body.classList.add("intro-active");
+
 
 function unlockPage() {
 
-    document.documentElement.classList.remove("intro-active");
-    document.body.classList.remove("intro-active");
+    document.documentElement.classList.remove(
+        "intro-active"
+    );
+
+    document.body.classList.remove(
+        "intro-active"
+    );
 
 }
 
 
 /* =========================================================
-   CREATE CINEMATIC BLACK HOLE
+   CREATE BLACK HOLE
    ========================================================= */
 
 let introBlackHole =
-    document.querySelector(".intro-black-hole");
+    cinematicIntro.querySelector(
+        ".intro-black-hole"
+    );
 
 
 if (!introBlackHole) {
@@ -63,22 +60,25 @@ if (!introBlackHole) {
     introBlackHole.className =
         "intro-black-hole";
 
-    cinematicIntro.appendChild(introBlackHole);
+    cinematicIntro.appendChild(
+        introBlackHole
+    );
 
 }
 
 
 /* =========================================================
-   CINEMATIC BLACK HOLE STYLE
+   CINEMATIC BLACK HOLE CSS
    ========================================================= */
 
-const blackHoleStyle =
+const cinematicStyle =
     document.createElement("style");
 
-blackHoleStyle.textContent = `
+
+cinematicStyle.textContent = `
 
 /* =========================================================
-   CINEMATIC BLACK HOLE
+   BLACK HOLE
    ========================================================= */
 
 .intro-black-hole {
@@ -92,7 +92,7 @@ blackHoleStyle.textContent = `
     height: min(15vw, 175px);
 
     transform:
-        translate(-50%, -50%)
+        translate3d(-50%, -50%, 0)
         scale(1);
 
     border-radius: 50%;
@@ -104,29 +104,41 @@ blackHoleStyle.textContent = `
     background:
         radial-gradient(
             circle at center,
-            #000000 0%,
-            #000000 34%,
-            rgba(0,0,0,0.98) 43%,
-            rgba(7,8,11,0.95) 48%,
-            rgba(255,255,255,0.10) 54%,
-            rgba(170,190,215,0.10) 59%,
-            rgba(80,100,130,0.07) 64%,
-            transparent 73%
+
+            #000 0%,
+            #000 31%,
+
+            rgba(0,0,0,0.98) 40%,
+
+            rgba(5,6,9,0.98) 47%,
+
+            rgba(255,255,255,0.12) 53%,
+
+            rgba(150,170,200,0.10) 58%,
+
+            rgba(70,90,120,0.06) 65%,
+
+            transparent 74%
         );
 
     box-shadow:
-        0 0 18px rgba(255,255,255,0.08),
-        0 0 45px rgba(150,170,200,0.10),
-        0 0 90px rgba(100,130,170,0.08);
+
+        0 0 18px
+        rgba(255,255,255,0.07),
+
+        0 0 45px
+        rgba(150,170,200,0.09),
+
+        0 0 100px
+        rgba(100,130,170,0.07);
 
     will-change:
         transform,
-        filter,
-        opacity;
+        filter;
 
     animation:
-        blackHoleRotation
-        18s
+        blackHoleRotate
+        24s
         linear
         infinite;
 
@@ -134,15 +146,15 @@ blackHoleStyle.textContent = `
 
 
 /* =========================================================
-   ROTATION
+   VERY SLOW ROTATION
    ========================================================= */
 
-@keyframes blackHoleRotation {
+@keyframes blackHoleRotate {
 
     from {
 
         transform:
-            translate(-50%, -50%)
+            translate3d(-50%, -50%, 0)
             rotate(0deg)
             scale(1);
 
@@ -151,7 +163,7 @@ blackHoleStyle.textContent = `
     to {
 
         transform:
-            translate(-50%, -50%)
+            translate3d(-50%, -50%, 0)
             rotate(360deg)
             scale(1);
 
@@ -161,137 +173,21 @@ blackHoleStyle.textContent = `
 
 
 /* =========================================================
-   BLACK HOLE EXIT
-   ========================================================= */
-
-.cinematic-intro.black-hole-exit
-.intro-black-hole {
-
-    animation:
-        blackHoleCinematicExpansion
-        2.65s
-        cubic-bezier(0.22, 0.75, 0.18, 1)
-        forwards;
-
-}
-
-
-/* =========================================================
-   BLACK HOLE EXPANSION
-   ========================================================= */
-
-@keyframes blackHoleCinematicExpansion {
-
-    0% {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(0deg)
-            scale(1);
-
-        filter:
-            brightness(1);
-
-    }
-
-    18% {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(32deg)
-            scale(1.35);
-
-        filter:
-            brightness(1.02);
-
-    }
-
-    36% {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(70deg)
-            scale(2.2);
-
-        filter:
-            brightness(1.04);
-
-    }
-
-    54% {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(110deg)
-            scale(4.5);
-
-        filter:
-            brightness(1.06);
-
-    }
-
-    70% {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(155deg)
-            scale(9);
-
-        filter:
-            brightness(1.08);
-
-    }
-
-    84% {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(205deg)
-            scale(18);
-
-        filter:
-            brightness(1.1);
-
-    }
-
-    94% {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(260deg)
-            scale(30);
-
-        filter:
-            brightness(1.12);
-
-    }
-
-    100% {
-
-        transform:
-            translate(-50%, -50%)
-            rotate(300deg)
-            scale(45);
-
-        filter:
-            brightness(1.15);
-
-    }
-
-}
-
-
-/* =========================================================
-   CAMERA TARGETING
+   CAMERA FLIGHT
    ========================================================= */
 
 .cinematic-intro.camera-flight
 .intro-scene {
 
     animation:
-        cinematicCameraFlight
-        2.65s
-        cubic-bezier(0.22, 0.75, 0.18, 1)
+        smoothCameraFlight
+        3.15s
+        cubic-bezier(
+            0.12,
+            0.82,
+            0.18,
+            1
+        )
         forwards !important;
 
     transform-origin:
@@ -305,14 +201,15 @@ blackHoleStyle.textContent = `
 
 
 /* =========================================================
-   CAMERA FLIGHT
+   CONTINUOUS CAMERA MOVEMENT
    ========================================================= */
 
-@keyframes cinematicCameraFlight {
+@keyframes smoothCameraFlight {
 
     0% {
 
         transform:
+            translate3d(0,0,0)
             scale(1.03);
 
         filter:
@@ -321,10 +218,23 @@ blackHoleStyle.textContent = `
 
     }
 
-    12% {
+    10% {
 
         transform:
-            scale(1.05);
+            translate3d(0,0,0)
+            scale(1.045);
+
+        filter:
+            brightness(1.002)
+            contrast(1.002);
+
+    }
+
+    20% {
+
+        transform:
+            translate3d(0,0,0)
+            scale(1.075);
 
         filter:
             brightness(1.005)
@@ -332,32 +242,47 @@ blackHoleStyle.textContent = `
 
     }
 
-    25% {
+    30% {
 
         transform:
-            scale(1.10);
+            translate3d(0,0,0)
+            scale(1.13);
 
         filter:
-            brightness(1.01)
-            contrast(1.01);
+            brightness(1.008)
+            contrast(1.006);
 
     }
 
     40% {
 
         transform:
-            scale(1.22);
+            translate3d(0,0,0)
+            scale(1.23);
 
         filter:
-            brightness(1.015)
+            brightness(1.012)
+            contrast(1.01);
+
+    }
+
+    50% {
+
+        transform:
+            translate3d(0,0,0)
+            scale(1.39);
+
+        filter:
+            brightness(1.018)
             contrast(1.015);
 
     }
 
-    55% {
+    60% {
 
         transform:
-            scale(1.48);
+            translate3d(0,0,0)
+            scale(1.64);
 
         filter:
             brightness(1.025)
@@ -365,58 +290,63 @@ blackHoleStyle.textContent = `
 
     }
 
-    68% {
+    70% {
 
         transform:
-            scale(1.95);
+            translate3d(0,0,0)
+            scale(2.05);
 
         filter:
-            brightness(1.04)
-            contrast(1.03);
+            brightness(1.035)
+            contrast(1.025);
 
     }
 
-    79% {
+    78% {
 
         transform:
+            translate3d(0,0,0)
             scale(2.65);
 
         filter:
+            brightness(1.045)
+            contrast(1.035);
+
+    }
+
+    86% {
+
+        transform:
+            translate3d(0,0,0)
+            scale(3.55);
+
+        filter:
             brightness(1.06)
-            contrast(1.04);
+            contrast(1.045);
 
     }
 
-    88% {
+    93% {
 
         transform:
-            scale(3.8);
+            translate3d(0,0,0)
+            scale(5.15);
 
         filter:
-            brightness(1.09)
-            contrast(1.06);
-
-    }
-
-    95% {
-
-        transform:
-            scale(5.7);
-
-        filter:
-            brightness(1.12)
-            contrast(1.08);
+            brightness(1.08)
+            contrast(1.055);
 
     }
 
     100% {
 
         transform:
-            scale(8.5);
+            translate3d(0,0,0)
+            scale(7.8);
 
         filter:
-            brightness(1.15)
-            contrast(1.1);
+            brightness(1.10)
+            contrast(1.06);
 
     }
 
@@ -424,29 +354,174 @@ blackHoleStyle.textContent = `
 
 
 /* =========================================================
-   INTRO TEXT EXIT
+   BLACK HOLE EXPANSION
+   ========================================================= */
+
+.cinematic-intro.black-hole-exit
+.intro-black-hole {
+
+    animation:
+        blackHoleSmoothExpansion
+        3.0s
+        cubic-bezier(
+            0.18,
+            0.78,
+            0.16,
+            1
+        )
+        forwards !important;
+
+}
+
+
+/* =========================================================
+   CONTINUOUS BLACK HOLE GROWTH
+   ========================================================= */
+
+@keyframes blackHoleSmoothExpansion {
+
+    0% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1);
+
+        filter:
+            brightness(1);
+
+    }
+
+    15% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.05);
+
+        filter:
+            brightness(1.005);
+
+    }
+
+    30% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.25);
+
+        filter:
+            brightness(1.01);
+
+    }
+
+    45% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(1.8);
+
+        filter:
+            brightness(1.015);
+
+    }
+
+    58% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(2.9);
+
+        filter:
+            brightness(1.02);
+
+    }
+
+    68% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(4.8);
+
+        filter:
+            brightness(1.025);
+
+    }
+
+    77% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(7.5);
+
+        filter:
+            brightness(1.03);
+
+    }
+
+    86% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(12);
+
+        filter:
+            brightness(1.035);
+
+    }
+
+    94% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(22);
+
+        filter:
+            brightness(1.04);
+
+    }
+
+    100% {
+
+        transform:
+            translate3d(-50%, -50%, 0)
+            scale(42);
+
+        filter:
+            brightness(1.045);
+
+    }
+
+}
+
+
+/* =========================================================
+   TEXT DISAPPEAR
    ========================================================= */
 
 .cinematic-intro.camera-flight
 .intro-content {
 
     animation:
-        cinematicTextExit
-        0.75s
-        cubic-bezier(0.22, 0.61, 0.36, 1)
+        smoothTextExit
+        0.85s
+        cubic-bezier(
+            0.22,
+            0.61,
+            0.36,
+            1
+        )
         forwards !important;
 
 }
 
 
-@keyframes cinematicTextExit {
+@keyframes smoothTextExit {
 
     0% {
 
         opacity: 1;
 
         transform:
-            translate(-50%, -50%)
+            translate3d(-50%, -50%, 0)
             scale(1);
 
         filter:
@@ -454,12 +529,25 @@ blackHoleStyle.textContent = `
 
     }
 
-    55% {
+    40% {
 
-        opacity: 0.35;
+        opacity: 0.7;
 
         transform:
-            translate(-50%, -50%)
+            translate3d(-50%, -50%, 0)
+            scale(0.995);
+
+        filter:
+            blur(0.3px);
+
+    }
+
+    70% {
+
+        opacity: 0.25;
+
+        transform:
+            translate3d(-50%, -50%, 0)
             scale(0.985);
 
         filter:
@@ -472,11 +560,11 @@ blackHoleStyle.textContent = `
         opacity: 0;
 
         transform:
-            translate(-50%, -50%)
-            scale(0.96);
+            translate3d(-50%, -50%, 0)
+            scale(0.97);
 
         filter:
-            blur(3px);
+            blur(2px);
 
     }
 
@@ -484,13 +572,13 @@ blackHoleStyle.textContent = `
 
 
 /* =========================================================
-   BLACK SCREEN
+   FINAL BLACK
    ========================================================= */
 
 .cinematic-intro.final-black {
 
     background:
-        #000000 !important;
+        #000 !important;
 
 }
 
@@ -505,7 +593,7 @@ blackHoleStyle.textContent = `
 
     z-index: 99999;
 
-    background: #000000;
+    background: #000;
 
     opacity: 1;
 
@@ -515,14 +603,23 @@ blackHoleStyle.textContent = `
 
 
 /* =========================================================
-   HOMEPAGE REVEAL
+   HOMEPAGE
    ========================================================= */
 
-body.intro-revealed .navbar,
-body.intro-revealed .hero,
-body.intro-revealed .section,
-body.intro-revealed .final-cta,
-body.intro-revealed footer {
+body.intro-revealed
+.navbar,
+
+body.intro-revealed
+.hero,
+
+body.intro-revealed
+.section,
+
+body.intro-revealed
+.final-cta,
+
+body.intro-revealed
+footer {
 
     visibility: visible !important;
 
@@ -531,195 +628,166 @@ body.intro-revealed footer {
 `;
 
 
-/* Add styles */
-
-document.head.appendChild(blackHoleStyle);
-
-
-/* =========================================================
-   RESET BLACK HOLE POSITION
-   ========================================================= */
-
-function resetBlackHole() {
-
-    introBlackHole.classList.remove(
-        "black-hole-exit"
-    );
-
-    introBlackHole.style.opacity = "1";
-
-    introBlackHole.style.left = "50%";
-    introBlackHole.style.top = "22%";
-
-}
+document.head.appendChild(
+    cinematicStyle
+);
 
 
 /* =========================================================
    ENTER GLOW
    ========================================================= */
 
-enterGlow.addEventListener("click", () => {
+enterGlow.addEventListener(
+    "click",
+    () => {
 
-    if (introStarted || introFinished) {
-        return;
-    }
-
-    introStarted = true;
-
-    document.body.classList.add(
-        "intro-playing"
-    );
-
-
-    /* -----------------------------------------
-       Begin camera flight
-       ----------------------------------------- */
-
-    cinematicIntro.classList.add(
-        "camera-flight"
-    );
+        if (
+            introStarted ||
+            introFinished
+        ) {
+            return;
+        }
 
 
-    /* -----------------------------------------
-       Begin black hole expansion
-       ----------------------------------------- */
-
-    cinematicIntro.classList.add(
-        "black-hole-exit"
-    );
+        introStarted = true;
 
 
-    /* -----------------------------------------
-       Remove text immediately but smoothly
-       ----------------------------------------- */
-
-    const introContent =
-        cinematicIntro.querySelector(
-            ".intro-content"
-        );
-
-    if (introContent) {
-
-        introContent.style.pointerEvents =
-            "none";
-
-    }
-
-
-    /* -----------------------------------------
-       Final black moment
-       ----------------------------------------- */
-
-    setTimeout(() => {
-
-        cinematicIntro.classList.add(
-            "final-black"
-        );
-
-    }, 2680);
-
-
-    /* -----------------------------------------
-       Reveal homepage
-       ----------------------------------------- */
-
-    setTimeout(() => {
-
-        introFinished = true;
-
-        cinematicIntro.style.display =
-            "none";
-
-        document.body.classList.remove(
+        document.body.classList.add(
             "intro-playing"
         );
 
-        document.body.classList.add(
-            "intro-revealed"
+
+        /*
+         * Start both animations together.
+         *
+         * The easing curves are deliberately
+         * long and continuous.
+         */
+
+        cinematicIntro.classList.add(
+            "camera-flight"
         );
 
-        unlockPage();
 
-    }, INTRO_DURATION);
+        cinematicIntro.classList.add(
+            "black-hole-exit"
+        );
 
-});
+
+        /*
+         * Keep black hole visible until
+         * the camera reaches it.
+         */
+
+
+        /* -----------------------------------------
+           PURE BLACK
+           ----------------------------------------- */
+
+        setTimeout(
+            () => {
+
+                cinematicIntro.classList.add(
+                    "final-black"
+                );
+
+            },
+            2920
+        );
+
+
+        /* -----------------------------------------
+           HOMEPAGE
+           ----------------------------------------- */
+
+        setTimeout(
+            () => {
+
+                introFinished = true;
+
+
+                cinematicIntro.style.display =
+                    "none";
+
+
+                document.body.classList.remove(
+                    "intro-playing"
+                );
+
+
+                document.body.classList.add(
+                    "intro-revealed"
+                );
+
+
+                unlockPage();
+
+            },
+            3150
+        );
+
+    }
+);
 
 
 /* =========================================================
    SKIP INTRO
    ========================================================= */
 
-skipIntro.addEventListener("click", () => {
+skipIntro.addEventListener(
+    "click",
+    () => {
 
-    if (introFinished) {
-        return;
+        if (introFinished) {
+            return;
+        }
+
+
+        introFinished = true;
+        introStarted = true;
+
+
+        cinematicIntro.classList.remove(
+            "camera-flight",
+            "black-hole-exit",
+            "final-black"
+        );
+
+
+        cinematicIntro.style.animation =
+            "none";
+
+        cinematicIntro.style.transition =
+            "none";
+
+
+        cinematicIntro.style.opacity =
+            "0";
+
+        cinematicIntro.style.visibility =
+            "hidden";
+
+        cinematicIntro.style.pointerEvents =
+            "none";
+
+        cinematicIntro.style.display =
+            "none";
+
+
+        document.body.classList.remove(
+            "intro-playing"
+        );
+
+
+        document.body.classList.add(
+            "intro-revealed"
+        );
+
+
+        unlockPage();
+
     }
-
-
-    /* -----------------------------------------
-       Mark intro finished
-       ----------------------------------------- */
-
-    introFinished = true;
-    introStarted = true;
-
-
-    /* -----------------------------------------
-       Stop all cinematic animations
-       ----------------------------------------- */
-
-    cinematicIntro.classList.remove(
-        "camera-flight",
-        "black-hole-exit",
-        "final-black"
-    );
-
-
-    cinematicIntro.style.animation =
-        "none";
-
-    cinematicIntro.style.transition =
-        "none";
-
-
-    /* -----------------------------------------
-       Hide intro immediately
-       ----------------------------------------- */
-
-    cinematicIntro.style.opacity =
-        "0";
-
-    cinematicIntro.style.visibility =
-        "hidden";
-
-    cinematicIntro.style.pointerEvents =
-        "none";
-
-
-    cinematicIntro.style.display =
-        "none";
-
-
-    /* -----------------------------------------
-       Show homepage
-       ----------------------------------------- */
-
-    document.body.classList.remove(
-        "intro-playing"
-    );
-
-    document.body.classList.add(
-        "intro-revealed"
-    );
-
-
-    /* -----------------------------------------
-       Unlock page scrolling
-       ----------------------------------------- */
-
-    unlockPage();
-
-});
+);
 
 
 /* =========================================================
