@@ -265,8 +265,10 @@ input {
     transform: scale(1.03);
 
     animation: heroZoom 12s ease-in-out infinite alternate;
-   opacity: 1;
-   transition: opacity 1s ease-in-out;
+
+    opacity: 1;
+
+    transition: opacity 1s ease-in-out;
 }
 
 #heroTitle,
@@ -520,6 +522,7 @@ input {
         0 0 8px rgba(255, 255, 255, 0.35),
         0 0 18px rgba(255, 255, 255, 0.18);
 }
+
 .category-card h3 {
     margin-top: 30px;
 
@@ -675,6 +678,7 @@ input {
 .shader-card:hover .shader-info h3 {
     transform: translateX(2px);
 }
+
 .shader-info > p:not(.shader-category) {
     margin-top: 10px;
 
@@ -805,6 +809,7 @@ input {
 
     font-size: 0.9rem;
 }
+
 
 /* =========================================================
    LATEST RELEASES
@@ -952,6 +957,7 @@ input {
     letter-spacing: -0.065em;
 }
 
+
 /* =========================================================
    FOOTER
    ========================================================= */
@@ -1094,6 +1100,7 @@ footer {
 
 }
 
+
 /* =========================================================
    CINEMATIC INTRO
    ========================================================= */
@@ -1114,27 +1121,188 @@ footer {
 }
 
 
-/* Intro content */
+/* =========================================================
+   INTRO SCENE
+   ========================================================= */
 
-.intro-content {
+.intro-scene {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        url("../black-hole-intro.png");
+
+    background-size: cover;
+    background-position: center;
+
+    transform: scale(1.03);
+
+    animation: introSceneFloat 12s ease-in-out infinite alternate;
+
+    will-change: transform;
+
+    z-index: 0;
+}
+
+@keyframes introSceneFloat {
+    from {
+        transform: scale(1.03);
+    }
+
+    to {
+        transform: scale(1.09);
+    }
+}
+
+
+/* =========================================================
+   CINEMATIC VIGNETTE
+   ========================================================= */
+
+.intro-vignette {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 45%,
+            rgba(0, 0, 0, 0.20) 70%,
+            rgba(0, 0, 0, 0.72) 100%
+        );
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   SUBTLE STARS
+   ========================================================= */
+
+.intro-stars {
+    position: absolute;
+    inset: -20%;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.7) 0 1px,
+            transparent 1.5px
+        );
+
+    background-size: 180px 180px;
+
+    opacity: 0.18;
+
+    animation:
+        starsDrift 18s linear infinite;
+
+    mix-blend-mode: screen;
+}
+
+@keyframes starsDrift {
+
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(-80px, 40px, 0) scale(1.08);
+    }
+
+}
+
+
+/* =========================================================
+   BLACK HOLE
+   ========================================================= */
+
+.intro-black-hole {
+    position: absolute;
+
+    width: min(16vw, 170px);
+    height: min(16vw, 170px);
+
+    left: 50%;
+    top: 22%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #000 0 32%,
+            rgba(0,0,0,0.95) 42%,
+            rgba(255,255,255,0.12) 55%,
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,0.12),
+        0 0 70px rgba(120,150,190,0.16),
+        0 0 130px rgba(80,110,150,0.12);
+
+    animation:
+        blackHolePulse 5s ease-in-out infinite alternate;
+
+    pointer-events: none;
+}
+
+@keyframes blackHolePulse {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            scale(0.94)
+            rotate(0deg);
+
+        filter: brightness(0.9);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            scale(1.08)
+            rotate(8deg);
+
+        filter: brightness(1.15);
+    }
+
+}
+
+
+/* =========================================================
+   INTRO CONTENT — CENTERED
+   ========================================================= */
+
+.cinematic-intro .intro-content {
     position: absolute;
 
     top: 50%;
     left: 50%;
 
-    z-index: 2;
+    right: auto;
+    bottom: auto;
+
+    z-index: 10;
+
+    width: min(900px, 100%);
+    max-width: 900px;
+
+    margin: 0;
+    padding: 20px;
 
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
 
-    width: max-content;
-    max-width: 90vw;
-
     text-align: center;
-
-    margin: 0;
 
     transform: translate(-50%, -50%);
 
@@ -1142,240 +1310,329 @@ footer {
 }
 
 @keyframes introContentIn {
+
     from {
         opacity: 0;
-        transform: translate(-50%, calc(-50% + 20px));
+
+        transform:
+            translate(-50%, calc(-50% + 20px));
     }
 
     to {
         opacity: 1;
-        transform: translate(-50%, -50%);
+
+        transform:
+            translate(-50%, -50%);
     }
+
 }
 
+
+/* =========================================================
+   WELCOME TO
+   ========================================================= */
 
 .intro-label {
-    color: #9da3ad;
+    position: relative;
+    z-index: 2;
 
-    font-size: 0.68rem;
-    font-weight: 700;
+    margin-bottom: 8px;
 
-    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.95);
+
+    font-size: clamp(0.65rem, 2vw, 0.85rem);
+    font-weight: 600;
+
+    letter-spacing: 0.32em;
+
+    text-align: center;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.9),
+        0 0 18px rgba(255, 255, 255, 0.25);
 }
 
 
-.intro-content h1 {
-    margin-top: 12px;
+/* =========================================================
+   GLOW TITLE
+   ========================================================= */
 
-    font-size: clamp(4rem, 12vw, 9rem);
+.intro-content h1 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: clamp(4.5rem, 17vw, 9rem);
 
     line-height: 0.85;
 
-    letter-spacing: -0.08em;
+    font-weight: 800;
 
-    color: #f4f5f7;
+    letter-spacing: -0.055em;
+
+    text-align: center;
+
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.9),
+        0 0 15px rgba(255, 255, 255, 0.75),
+        0 0 35px rgba(255, 255, 255, 0.45),
+        0 0 70px rgba(255, 255, 255, 0.22);
+
+    filter:
+        drop-shadow(0 5px 20px rgba(0, 0, 0, 0.55));
+
+    animation:
+        glowTitlePulse 4s ease-in-out infinite alternate;
 }
 
+@keyframes glowTitlePulse {
+
+    from {
+        text-shadow:
+            0 0 5px rgba(255, 255, 255, 0.85),
+            0 0 15px rgba(255, 255, 255, 0.65),
+            0 0 35px rgba(255, 255, 255, 0.35),
+            0 0 60px rgba(255, 255, 255, 0.18);
+    }
+
+    to {
+        text-shadow:
+            0 0 8px rgba(255, 255, 255, 1),
+            0 0 22px rgba(255, 255, 255, 0.8),
+            0 0 45px rgba(255, 255, 255, 0.5),
+            0 0 90px rgba(255, 255, 255, 0.25);
+    }
+
+}
+
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
 
 .intro-subtitle {
-    margin-top: 22px;
+    position: relative;
+    z-index: 2;
 
-    color: #9da3ad;
+    margin-top: 28px;
 
-    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.95);
 
-    letter-spacing: 0.03em;
+    font-size: clamp(0.95rem, 3vw, 1.2rem);
+
+    letter-spacing: 0.02em;
+
+    text-align: center;
+
+    text-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.95),
+        0 4px 25px rgba(0, 0, 0, 0.75);
 }
 
 
-/* Enter button */
+/* =========================================================
+   ENTER GLOW BUTTON
+   ========================================================= */
 
 .intro-button {
+    position: relative;
+    z-index: 5;
+
     margin-top: 38px;
 
-    padding: 13px 28px;
+    min-width: 190px;
+    min-height: 54px;
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 14px 30px;
 
+    border: 1px solid rgba(255, 255, 255, 0.65);
     border-radius: 999px;
 
-    background: rgba(255, 255, 255, 0.04);
+    background:
+        rgba(5, 6, 8, 0.42);
 
-    color: #f4f5f7;
+    color: #ffffff;
 
-    font-family: inherit;
-
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 700;
 
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
+
+    text-align: center;
 
     cursor: pointer;
 
-    transition:
-        background 0.35s ease,
-        border-color 0.35s ease,
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
-}
-
-
-.intro-button:hover {
-    transform: translateY(-3px);
-
-    background: rgba(255, 255, 255, 0.09);
-
-    border-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.35);
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 8px 35px rgba(0, 0, 0, 0.45),
+        0 0 30px rgba(255, 255, 255, 0.08);
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.8);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.intro-button:hover {
+    transform: translateY(-3px) scale(1.03);
+
+    background:
+        rgba(255, 255, 255, 0.16);
+
+    border-color: rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 10px 45px rgba(0, 0, 0, 0.5),
+        0 0 35px rgba(255, 255, 255, 0.22);
+}
+
+.intro-button:active {
+    transform: scale(0.97);
 }
 
 
-/* Skip */
+/* =========================================================
+   SKIP INTRO
+   ========================================================= */
 
 .skip-intro {
     position: absolute;
 
-    right: 30px;
+    right: 28px;
     bottom: 25px;
 
-    z-index: 3;
+    z-index: 20;
+
+    padding: 10px 8px;
 
     border: none;
 
     background: transparent;
 
-    color: #666c75;
+    color: rgba(255, 255, 255, 0.78);
 
-    font-family: inherit;
+    font-size: 0.85rem;
 
-    font-size: 0.72rem;
+    letter-spacing: 0.03em;
 
     cursor: pointer;
 
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.9);
+
     transition:
         color 0.3s ease,
-        transform 0.3s ease;
+        transform 0.3s ease,
+        opacity 0.3s ease;
 }
-
 
 .skip-intro:hover {
-    color: #d8dbe0;
+    color: #ffffff;
 
-    transform: translateX(3px);
+    transform: translateY(-2px);
 }
+
 
 /* =========================================================
-   CINEMATIC EXIT
+   ENTER GLOW — CAMERA FLIES INTO BLACK HOLE
    ========================================================= */
 
-.cinematic-intro {
-    transition:
-        opacity 0.8s ease 1.7s,
-        visibility 0s linear 2.5s;
-}
-
 .cinematic-intro.intro-exit {
-    opacity: 0;
-    visibility: hidden;
+    animation:
+        cinematicExit 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
+
     pointer-events: none;
 }
 
-
-/* Space accelerates toward the viewer */
-
-.cinematic-intro.intro-exit .intro-space {
+.cinematic-intro.intro-exit .intro-scene {
     animation:
-        introSpaceWarp 2.4s cubic-bezier(0.65, 0, 0.2, 1) forwards;
+        blackHoleTravel 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
 }
 
-@keyframes introSpaceWarp {
+.cinematic-intro.intro-exit .intro-content {
+    animation:
+        introContentExit 0.7s ease forwards;
+}
+
+@keyframes blackHoleTravel {
 
     0% {
-        transform: scale(1.05);
+        transform: scale(1.03);
+        filter: brightness(1);
     }
 
     35% {
-        transform: scale(1.08);
+        transform: scale(1.12);
+        filter: brightness(1.05);
     }
 
     65% {
-        transform: scale(1.22);
+        transform: scale(1.55);
+        filter: brightness(1.25);
+    }
+
+    85% {
+        transform: scale(2.8);
+        filter: brightness(1.7);
     }
 
     100% {
-        transform: scale(1.65);
+        transform: scale(7);
+        filter: brightness(2.5);
     }
 
 }
 
-
-/* Atmospheric glow expands */
-
-.cinematic-intro.intro-exit .intro-space::before {
-    animation:
-        introLightWarp 2.4s cubic-bezier(0.65, 0, 0.2, 1) forwards;
-}
-
-@keyframes introLightWarp {
+@keyframes cinematicExit {
 
     0% {
-        transform: translate(-50%, -50%) scale(0.8);
-        opacity: 0.75;
+        opacity: 1;
+        visibility: visible;
     }
 
-    50% {
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 0.65;
-    }
-
-    80% {
-        transform: translate(-50%, -50%) scale(1.7);
-        opacity: 0.35;
+    72% {
+        opacity: 1;
+        visibility: visible;
     }
 
     100% {
-        transform: translate(-50%, -50%) scale(2.5);
         opacity: 0;
+        visibility: hidden;
     }
 
-}
-
-
-/* Fade the intro content slightly before the final reveal */
-
-.cinematic-intro.intro-exit .intro-content {
-    animation: introContentExit 0.7s ease forwards;
 }
 
 @keyframes introContentExit {
 
     from {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translate(-50%, -50%) scale(1);
     }
 
     to {
         opacity: 0;
-        transform: translateY(-10px);
+
+        transform:
+            translate(-50%, -50%) scale(0.7);
     }
 
 }
 
 
-/* Keep homepage completely hidden during the journey */
-
-body.intro-playing .navbar,
-body.intro-playing .hero,
-body.intro-playing .section,
-body.intro-playing .final-cta,
-body.intro-playing footer {
-    visibility: hidden;
-}
-
 /* =========================================================
-   CINEMATIC SPACE STREAKS
+   SPACE STREAKS
    ========================================================= */
 
 .space-streaks {
@@ -1436,6 +1693,37 @@ body.intro-playing footer {
 
 }
 
+
+/* =========================================================
+   INTRO TRANSITION
+   ========================================================= */
+
+.cinematic-intro {
+    transition:
+        opacity 0.8s ease 1.7s,
+        visibility 0s linear 2.5s;
+}
+
+.cinematic-intro.intro-exit {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HIDE HOMEPAGE DURING INTRO
+   ========================================================= */
+
+body.intro-playing .navbar,
+body.intro-playing .hero,
+body.intro-playing .section,
+body.intro-playing .final-cta,
+body.intro-playing footer {
+    visibility: hidden;
+}
+
+
 /* =========================================================
    INSTANT SKIP INTRO
    ========================================================= */
@@ -1449,436 +1737,141 @@ body.intro-playing footer {
     pointer-events: none !important;
 }
 
-/* =========================================================
-   CINEMATIC MINECRAFT INTRO — BLACK HOLE SCENE
-   ========================================================= */
-
-.cinematic-intro {
-    position: fixed;
-    inset: 0;
-
-    z-index: 9999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    background: #020305;
-}
-
-
-/* Main Minecraft scene */
 
 /* =========================================================
-   INTRO SCENE
+   LOCK PAGE WHILE CINEMATIC INTRO IS ACTIVE
    ========================================================= */
 
-.intro-scene {
-    position: absolute;
-    inset: 0;
-
-    background-image:
-        url("../black-hole-intro.png");
-
-    background-size: cover;
-    background-position: center;
-
-    transform: scale(1.03);
-
-    animation: introSceneFloat 12s ease-in-out infinite alternate;
-
-    will-change: transform;
-
-    z-index: 0;
-}
-
-@keyframes introSceneFloat {
-    from {
-        transform: scale(1.03);
-    }
-
-    to {
-        transform: scale(1.09);
-    }
-}
-
-
-/* Cinematic darkness around edges */
-
-.intro-vignette {
-    position: absolute;
-    inset: 0;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 45%,
-            rgba(0, 0, 0, 0.20) 70%,
-            rgba(0, 0, 0, 0.72) 100%
-        );
-
-    pointer-events: none;
-
-    z-index: 1;
-}
-
-/* Subtle moving stars */
-
-.intro-stars {
-    position: absolute;
-    inset: -20%;
-
-    background-image:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,0.7) 0 1px,
-            transparent 1.5px
-        );
-
-    background-size: 180px 180px;
-
-    opacity: 0.18;
-
-    animation:
-        starsDrift 18s linear infinite;
-
-    mix-blend-mode: screen;
-}
-
-
-@keyframes starsDrift {
-
-    from {
-        transform: translate3d(0, 0, 0) scale(1);
-    }
-
-    to {
-        transform: translate3d(-80px, 40px, 0) scale(1.08);
-    }
-
+html.intro-active,
+body.intro-active {
+    overflow: hidden !important;
 }
 
 
 /* =========================================================
-   BLACK HOLE
+   INTRO TEXT ANIMATION
    ========================================================= */
-
-.intro-black-hole {
-    position: absolute;
-
-    width: min(16vw, 170px);
-    height: min(16vw, 170px);
-
-    left: 50%;
-    top: 22%;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            #000 0 32%,
-            rgba(0,0,0,0.95) 42%,
-            rgba(255,255,255,0.12) 55%,
-            transparent 72%
-        );
-
-    box-shadow:
-        0 0 25px rgba(255,255,255,0.12),
-        0 0 70px rgba(120,150,190,0.16),
-        0 0 130px rgba(80,110,150,0.12);
-
-    animation:
-        blackHolePulse 5s ease-in-out infinite alternate;
-
-    pointer-events: none;
-}
-
-
-@keyframes blackHolePulse {
-
-    from {
-        transform:
-            translate(-50%, -50%)
-            scale(0.94)
-            rotate(0deg);
-
-        filter: brightness(0.9);
-    }
-
-    to {
-        transform:
-            translate(-50%, -50%)
-            scale(1.08)
-            rotate(8deg);
-
-        filter: brightness(1.15);
-    }
-
-}
-
-
-/* =========================================================
-   INTRO CONTENT
-   ========================================================= */
-
-.intro-content {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    z-index: 2;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    width: 100%;
-    max-width: 900px;
-    padding: 20px;
-
-    text-align: center;
-
-    transform: translate(-50%, -50%);
-
-    animation: introContentIn 1.4s ease forwards;
-}
-
-@keyframes introContentIn {
-
-    from {
-        opacity: 0;
-        transform: translate(-50%, calc(-50% + 20px));
-    }
-
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-
-}
-
 
 .intro-label {
-    color: #c4c9d1;
+    opacity: 0;
 
-    font-size: 0.68rem;
-    font-weight: 700;
+    animation:
+        introTextFade
+        0.8s
+        ease
+        forwards;
 
-    letter-spacing: 0.32em;
+    animation-delay: 0.5s;
 }
-
 
 .intro-content h1 {
-    margin-top: 10px;
+    opacity: 0;
 
-    font-size: clamp(4rem, 12vw, 9rem);
+    animation:
+        introTitleFade
+        1s
+        ease
+        forwards;
 
-    line-height: 0.85;
-
-    letter-spacing: -0.08em;
-
-    color: #f5f7fa;
-
-    text-shadow:
-        0 0 25px rgba(255,255,255,0.08);
+    animation-delay: 0.7s;
 }
-
 
 .intro-subtitle {
-    margin-top: 20px;
+    opacity: 0;
 
-    color: #b1b7c0;
+    animation:
+        introTextFade
+        0.8s
+        ease
+        forwards;
 
-    font-size: 0.95rem;
+    animation-delay: 1s;
 }
-
-
-/* =========================================================
-   ENTER BUTTON
-   ========================================================= */
 
 .intro-button {
-    margin-top: 35px;
+    opacity: 0;
 
-    padding: 13px 30px;
+    animation:
+        introButtonFade
+        0.8s
+        ease
+        forwards;
 
-    border: 1px solid rgba(255,255,255,0.25);
-
-    border-radius: 999px;
-
-    background: rgba(0,0,0,0.28);
-
-    color: #fff;
-
-    font-family: inherit;
-
-    font-size: 0.78rem;
-    font-weight: 700;
-
-    letter-spacing: 0.13em;
-
-    cursor: pointer;
-
-    backdrop-filter: blur(8px);
-
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-
-.intro-button:hover {
-
-    transform: translateY(-3px);
-
-    background: rgba(255,255,255,0.1);
-
-    border-color: rgba(255,255,255,0.45);
-
-    box-shadow:
-        0 12px 40px rgba(0,0,0,0.4);
+    animation-delay: 1.3s;
 }
 
 
 /* =========================================================
-   SKIP
+   SMALL TEXT ANIMATION
    ========================================================= */
 
-.skip-intro {
-    position: absolute;
-
-    right: 30px;
-    bottom: 25px;
-
-    z-index: 20;
-
-    border: none;
-
-    background: transparent;
-
-    color: rgba(255,255,255,0.55);
-
-    font-family: inherit;
-
-    font-size: 0.72rem;
-
-    cursor: pointer;
-
-    transition:
-        color 0.3s ease,
-        transform 0.3s ease;
-}
-
-
-.skip-intro:hover {
-    color: #fff;
-
-    transform: translateX(3px);
-}
-
-
-/* =========================================================
-   ENTER GLOW — CAMERA FLIES INTO BLACK HOLE
-   ========================================================= */
-
-.cinematic-intro.intro-exit {
-    animation:
-        cinematicExit 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
-
-    pointer-events: none;
-}
-
-
-.cinematic-intro.intro-exit .intro-scene {
-    animation:
-        blackHoleTravel 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
-}
-
-
-.cinematic-intro.intro-exit .intro-content {
-    animation:
-        introContentExit 0.7s ease forwards;
-}
-
-
-@keyframes blackHoleTravel {
-
-    0% {
-        transform: scale(1.03);
-        filter: brightness(1);
-    }
-
-    35% {
-        transform: scale(1.12);
-        filter: brightness(1.05);
-    }
-
-    65% {
-        transform: scale(1.55);
-        filter: brightness(1.25);
-    }
-
-    85% {
-        transform: scale(2.8);
-        filter: brightness(1.7);
-    }
-
-    100% {
-        transform: scale(7);
-        filter: brightness(2.5);
-    }
-
-}
-
-
-@keyframes cinematicExit {
-
-    0% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    72% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-}
-
-
-@keyframes introContentExit {
+@keyframes introTextFade {
 
     from {
-        opacity: 1;
-        transform: scale(1);
+        opacity: 0;
+        transform: translateY(12px);
     }
 
     to {
-        opacity: 0;
-        transform: scale(0.7);
+        opacity: 1;
+        transform: translateY(0);
     }
 
 }
 
 
 /* =========================================================
-   MOBILE
+   GLOW TITLE ANIMATION
+   ========================================================= */
+
+@keyframes introTitleFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   BUTTON ANIMATION
+   ========================================================= */
+
+@keyframes introButtonFade {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   BLACK HOLE ZOOM
+   ========================================================= */
+
+.cinematic-intro.intro-zoom .intro-scene {
+    transform: scale(7);
+
+    transition:
+        transform 3.2s cubic-bezier(0.65, 0, 0.15, 1);
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
    ========================================================= */
 
 @media (max-width: 650px) {
@@ -1894,296 +1887,27 @@ body.intro-playing footer {
         top: 22%;
     }
 
-    .intro-content {
-        margin-top: 38vh;
+    /*
+       IMPORTANT:
+       Keep the intro content exactly centered on mobile.
+       Do not use margin-top here.
+    */
+
+    .cinematic-intro .intro-content {
+        position: absolute;
+
+        top: 50%;
+        left: 50%;
+
+        width: 92%;
+        max-width: 900px;
+
+        margin: 0;
 
         padding: 0 20px;
-    }
 
-    .intro-content h1 {
-        font-size: clamp(4rem, 20vw, 7rem);
-    }
-
-    .intro-subtitle {
-        font-size: 0.85rem;
-    }
-
-    .skip-intro {
-        right: 20px;
-        bottom: 20px;
-    }
-
-   }
-
-/* =========================================================
-   LOCK PAGE WHILE CINEMATIC INTRO IS ACTIVE
-   ========================================================= */
-
-html.intro-active,
-body.intro-active {
-    overflow: hidden !important;
-}
-
-/* =========================================================
-   GLOW — CINEMATIC INTRO FINAL POLISH
-   ========================================================= */
-
-/* Remove the artificial black circle.
-   The black hole is already part of the background image. */
-
-.intro-space::after {
-    display: none !important;
-}
-
-
-/* =========================================================
-   INTRO CONTENT POSITION
-   ========================================================= */
-
-.intro-content {
-    position: relative;
-    z-index: 10;
-
-    width: min(90%, 700px);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    text-align: center;
-
-    /* Move the content upward */
-    transform: translateY(-7vh);
-
-    /* Make the content easier to read */
-    text-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.75),
-        0 4px 30px rgba(0, 0, 0, 0.55);
-}
-
-
-/* =========================================================
-   WELCOME TO
-   ========================================================= */
-
-.intro-label {
-    position: relative;
-    z-index: 2;
-
-    margin-bottom: 8px;
-
-    color: rgba(255, 255, 255, 0.95);
-
-    font-size: clamp(0.65rem, 2vw, 0.85rem);
-    font-weight: 600;
-
-    letter-spacing: 0.32em;
-
-    text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9),
-        0 0 18px rgba(255, 255, 255, 0.25);
-}
-
-
-/* =========================================================
-   GLOW TITLE
-   ========================================================= */
-
-.intro-content h1 {
-    position: relative;
-    z-index: 2;
-
-    margin: 0;
-
-    color: #ffffff;
-
-    font-size: clamp(4.5rem, 17vw, 9rem);
-    line-height: 0.85;
-
-    font-weight: 800;
-
-    letter-spacing: -0.055em;
-
-    /* Actual cinematic glow */
-
-    text-shadow:
-        0 0 5px rgba(255, 255, 255, 0.9),
-        0 0 15px rgba(255, 255, 255, 0.75),
-        0 0 35px rgba(255, 255, 255, 0.45),
-        0 0 70px rgba(255, 255, 255, 0.22);
-
-    filter:
-        drop-shadow(0 5px 20px rgba(0, 0, 0, 0.55));
-
-    animation: glowTitlePulse 4s ease-in-out infinite alternate;
-}
-
-
-@keyframes glowTitlePulse {
-
-    from {
-        text-shadow:
-            0 0 5px rgba(255, 255, 255, 0.85),
-            0 0 15px rgba(255, 255, 255, 0.65),
-            0 0 35px rgba(255, 255, 255, 0.35),
-            0 0 60px rgba(255, 255, 255, 0.18);
-    }
-
-    to {
-        text-shadow:
-            0 0 8px rgba(255, 255, 255, 1),
-            0 0 22px rgba(255, 255, 255, 0.8),
-            0 0 45px rgba(255, 255, 255, 0.5),
-            0 0 90px rgba(255, 255, 255, 0.25);
-    }
-
-}
-
-
-/* =========================================================
-   SUBTITLE
-   ========================================================= */
-
-.intro-subtitle {
-    position: relative;
-    z-index: 2;
-
-    margin-top: 28px;
-
-    color: rgba(255, 255, 255, 0.95);
-
-    font-size: clamp(0.95rem, 3vw, 1.2rem);
-
-    letter-spacing: 0.02em;
-
-    text-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.95),
-        0 4px 25px rgba(0, 0, 0, 0.75);
-}
-
-
-/* =========================================================
-   ENTER GLOW BUTTON
-   ========================================================= */
-
-.intro-button {
-    position: relative;
-    z-index: 5;
-
-    margin-top: 38px;
-
-    min-width: 190px;
-    min-height: 54px;
-
-    padding: 14px 30px;
-
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    border-radius: 999px;
-
-    background:
-        rgba(5, 6, 8, 0.42);
-
-    color: #ffffff;
-
-    font-size: 0.85rem;
-    font-weight: 700;
-
-    letter-spacing: 0.18em;
-
-    cursor: pointer;
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.08),
-        0 8px 35px rgba(0, 0, 0, 0.45),
-        0 0 30px rgba(255, 255, 255, 0.08);
-
-    text-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.8);
-
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        box-shadow 0.3s ease,
-        border-color 0.3s ease;
-}
-
-
-.intro-button:hover {
-    transform: translateY(-3px) scale(1.03);
-
-    background:
-        rgba(255, 255, 255, 0.16);
-
-    border-color: rgba(255, 255, 255, 0.95);
-
-    box-shadow:
-        0 10px 45px rgba(0, 0, 0, 0.5),
-        0 0 35px rgba(255, 255, 255, 0.22);
-}
-
-
-.intro-button:active {
-    transform: scale(0.97);
-}
-
-
-/* =========================================================
-   SKIP INTRO
-   ========================================================= */
-
-.skip-intro {
-    position: absolute;
-
-    right: 28px;
-    bottom: 25px;
-
-    z-index: 20;
-
-    padding: 10px 8px;
-
-    border: none;
-
-    background: transparent;
-
-    color: rgba(255, 255, 255, 0.78);
-
-    font-size: 0.85rem;
-
-    letter-spacing: 0.03em;
-
-    cursor: pointer;
-
-    text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.9);
-
-    transition:
-        color 0.3s ease,
-        transform 0.3s ease,
-        opacity 0.3s ease;
-}
-
-
-.skip-intro:hover {
-    color: #ffffff;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 650px) {
-
-    .intro-content {
-        width: 92%;
-
-        /* Move content higher on phone */
-        transform: translateY(-8vh);
+        transform:
+            translate(-50%, -50%);
     }
 
     .intro-label {
@@ -2226,322 +1950,8 @@ body.intro-active {
         font-size: 0.9rem;
     }
 
-   .intro-black-hole {
-    display: none;
-   }
-
-   /* TEST — force cinematic intro content to exact center */
-
-.cinematic-intro {
-    display: grid !important;
-    place-items: center !important;
-}
-
-.intro-content {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-
-    margin: 0 !important;
-}
-
-/* =========================================================
-   CINEMATIC INTRO — TEXT ANIMATION
-   ========================================================= */
-
-.intro-content {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    width: 100%;
-    max-width: 900px;
-
-    padding: 0 20px;
-
-    z-index: 2;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    transform: translate(-50%, -50%);
-
-    animation: introContentIn 1.4s ease forwards;
-}
-
-@keyframes introContentIn {
-
-    from {
-        opacity: 0;
-        transform: translate(-50%, calc(-50% + 20px));
-    }
-
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-
-}
-   
-/* =========================================================
-   CINEMATIC INTRO — STAGGERED TEXT
-   ========================================================= */
-
-.intro-label {
-    opacity: 0;
-
-    animation: introTextFade 0.8s ease forwards;
-    animation-delay: 0.5s;
-}
-
-.intro-content h1 {
-    opacity: 0;
-
-    animation: introTitleFade 1s ease forwards;
-    animation-delay: 0.7s;
-}
-
-.intro-subtitle {
-    opacity: 0;
-
-    animation: introTextFade 0.8s ease forwards;
-    animation-delay: 1s;
-}
-
-.intro-button {
-    opacity: 0;
-
-    animation: introButtonFade 0.8s ease forwards;
-    animation-delay: 1.3s;
-}
-
-
-/* Small text animation */
-
-@keyframes introTextFade {
-
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-
-/* GLOW title animation */
-
-@keyframes introTitleFade {
-
-    from {
-        opacity: 0;
-        transform: translateY(25px) scale(0.94);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-
-}
-
-
-/* Button animation */
-
-@keyframes introButtonFade {
-
-    from {
-        opacity: 0;
-        transform: translateY(15px) scale(0.96);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-
-}
-
-/* =========================================================
-   CINEMATIC INTRO — BLACK HOLE ZOOM
-   ========================================================= */
-
-.cinematic-intro.intro-zoom .intro-scene {
-    transform: scale(7);
-    transition:
-        transform 3.2s cubic-bezier(0.65, 0, 0.15, 1);
-}
-
-/* =========================================================
-   CINEMATIC INTRO — CENTER TEXT
-   ========================================================= */
-
-.cinematic-intro {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-}
-
-.intro-content {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    width: 90%;
-    max-width: 900px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    text-align: center;
-}
-
-/* =========================================================
-   FIX — CINEMATIC INTRO CONTENT CENTER
-   ========================================================= */
-
-.cinematic-intro {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100vw;
-    height: 100vh;
-
-    overflow: hidden;
-}
-
-.cinematic-intro .intro-content {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    width: 100%;
-    max-width: 900px;
-
-    padding: 0 20px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    z-index: 2;
-}
-
-/* =========================================================
-   CINEMATIC INTRO — FINAL CENTER FIX
-   ========================================================= */
-
-.cinematic-intro {
-    position: fixed !important;
-
-    inset: 0 !important;
-
-    width: 100vw !important;
-    height: 100vh !important;
-
-    display: grid !important;
-    place-items: center !important;
-
-    overflow: hidden !important;
-
-    z-index: 9999 !important;
-}
-
-
-/* Center the complete text group */
-
-.cinematic-intro > .intro-content {
-    position: absolute !important;
-
-    top: 50% !important;
-    left: 50% !important;
-
-    right: auto !important;
-    bottom: auto !important;
-
-    width: min(900px, 100%) !important;
-
-    margin: 0 !important;
-    padding: 0 20px !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    text-align: center !important;
-
-    z-index: 2 !important;
-
-    transform: translate(-50%, -50%) !important;
-}
-
-
-/* Keep every piece of text centered */
-
-.cinematic-intro .intro-label,
-.cinematic-intro h1,
-.cinematic-intro .intro-subtitle,
-.cinematic-intro .intro-button {
-    margin-left: auto !important;
-    margin-right: auto !important;
-
-    text-align: center !important;
-}
-
-
-/* =========================================================
-   INTRO ANIMATION
-   ========================================================= */
-
-.cinematic-intro > .intro-content {
-    animation: introContentCentered 1.4s ease forwards !important;
-}
-
-@keyframes introContentCentered {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translate(-50%, calc(-50% + 25px)) !important;
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) !important;
+    .intro-black-hole {
+        display: none;
     }
 
 }
