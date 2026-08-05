@@ -1555,8 +1555,16 @@ footer {
 }
 
 .cinematic-intro.intro-exit .intro-scene {
+
     animation:
-        blackHoleTravel 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
+        cameraIntoBlackHole
+        2.8s
+        cubic-bezier(0.65, 0, 0.15, 1)
+        forwards !important;
+
+    transform-origin: 54% 20%;
+
+    will-change: transform, filter;
 }
 
 .cinematic-intro.intro-exit .intro-content {
