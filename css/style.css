@@ -2657,3 +2657,253 @@ body.intro-playing footer {
     }
 
 }
+
+/* =========================================================
+   GLOW — FINAL CINEMATIC BLACK HOLE TRANSITION
+   ========================================================= */
+
+
+/* =========================================================
+   INTRO BASE
+   ========================================================= */
+
+.cinematic-intro {
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    overflow: hidden;
+
+    background: #020305;
+}
+
+
+/* =========================================================
+   CINEMATIC SCENE
+   ========================================================= */
+
+.cinematic-intro .intro-scene {
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1.03);
+
+    transform-origin:
+        50% 22%;
+
+    will-change:
+        transform,
+        filter;
+
+}
+
+
+/* =========================================================
+   BLACK HOLE
+   ========================================================= */
+
+.cinematic-intro .intro-black-hole {
+
+    position: absolute;
+
+    left: 50%;
+    top: 22%;
+
+    width: min(16vw, 175px);
+    height: min(16vw, 175px);
+
+    transform:
+        translate3d(-50%, -50%, 0)
+        scale(1);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+
+            #000000 0%,
+            #000000 31%,
+
+            rgba(0, 0, 0, 0.98) 40%,
+
+            rgba(3, 4, 7, 0.98) 46%,
+
+            rgba(255, 255, 255, 0.15) 52%,
+
+            rgba(170, 190, 220, 0.11) 57%,
+
+            rgba(90, 120, 165, 0.07) 65%,
+
+            transparent 76%
+        );
+
+    box-shadow:
+
+        0 0 18px
+        rgba(255, 255, 255, 0.08),
+
+        0 0 50px
+        rgba(145, 170, 205, 0.12),
+
+        0 0 110px
+        rgba(90, 120, 165, 0.10),
+
+        0 0 180px
+        rgba(60, 90, 130, 0.06);
+
+    pointer-events: none;
+
+    z-index: 7;
+
+    will-change:
+        transform,
+        filter,
+        opacity;
+
+}
+
+
+/* =========================================================
+   INNER ACCRETION RING
+   ========================================================= */
+
+.cinematic-intro .intro-black-hole::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 82%;
+    height: 82%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            from 0deg,
+
+            transparent 0deg,
+
+            rgba(255, 255, 255, 0.025) 30deg,
+
+            rgba(200, 215, 235, 0.14) 70deg,
+
+            rgba(255, 255, 255, 0.025) 110deg,
+
+            transparent 145deg,
+
+            transparent 190deg,
+
+            rgba(190, 210, 235, 0.10) 230deg,
+
+            rgba(255, 255, 255, 0.02) 270deg,
+
+            transparent 315deg,
+
+            transparent 360deg
+        );
+
+    filter:
+        blur(4px);
+
+    opacity: 0.75;
+
+}
+
+
+/* =========================================================
+   OUTER RING
+   ========================================================= */
+
+.cinematic-intro .intro-black-hole::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 106%;
+    height: 106%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(210, 225, 245, 0.075);
+
+    box-shadow:
+        0 0 25px
+        rgba(150, 175, 210, 0.08);
+
+    opacity: 0.6;
+
+}
+
+
+/* =========================================================
+   INTRO CONTENT
+   ========================================================= */
+
+.cinematic-intro .intro-content {
+
+    will-change:
+        opacity,
+        transform,
+        filter;
+
+}
+
+
+/* =========================================================
+   FINAL BLACK SCREEN
+   ========================================================= */
+
+.cinematic-intro .cinematic-black-screen {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    background: #000000;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    will-change: opacity;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .cinematic-intro .intro-black-hole {
+
+        width: 100px;
+        height: 100px;
+
+        left: 50%;
+        top: 22%;
+
+    }
+
+}
