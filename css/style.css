@@ -3708,3 +3708,23 @@ body.intro-playing footer {
 
     will-change: opacity;
 }
+
+.cinematic-intro.intro-exit .intro-scene {
+    transform-origin: 52% 22% !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+.cinematic-intro.intro-exit .intro-black-hole {
+    animation: none !important;
+    transition: none !important;
+}
+
+.cinematic-intro .intro-black-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 999999;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+}
