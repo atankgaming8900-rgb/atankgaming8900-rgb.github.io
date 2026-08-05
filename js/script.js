@@ -12,7 +12,7 @@ document.body.classList.add("intro-active");
 
 
 /* =========================================================
-   CINEMATIC INTRO
+   CINEMATIC INTRO ELEMENTS
    ========================================================= */
 
 const cinematicIntro =
@@ -31,7 +31,7 @@ const skipIntro =
 
 let introStarted = false;
 let introFinished = false;
-let cinematicFrame = null;
+let introFrame = null;
 
 
 /* =========================================================
@@ -77,17 +77,41 @@ if (!introBlackHole) {
 
 
 /* =========================================================
+   CREATE FINAL BLACK SCREEN
+   ========================================================= */
+
+let finalBlackScreen =
+    cinematicIntro.querySelector(
+        ".cinematic-black-screen"
+    );
+
+
+if (!finalBlackScreen) {
+
+    finalBlackScreen =
+        document.createElement("div");
+
+    finalBlackScreen.className =
+        "cinematic-black-screen";
+
+    cinematicIntro.appendChild(
+        finalBlackScreen
+    );
+
+}
+
+
+/* =========================================================
    CINEMATIC INTRO STYLE
    ========================================================= */
 
 const cinematicStyle =
     document.createElement("style");
 
-
 cinematicStyle.textContent = `
 
 /* =========================================================
-   CINEMATIC INTRO
+   CINEMATIC INTRO OVERRIDES
    ========================================================= */
 
 .cinematic-intro {
@@ -110,6 +134,10 @@ cinematicStyle.textContent = `
    ========================================================= */
 
 .cinematic-intro .intro-scene {
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1.03);
 
     transform-origin: 50% 22%;
 
@@ -136,33 +164,28 @@ cinematicStyle.textContent = `
 
     transform:
         translate3d(-50%, -50%, 0)
-        scale(1)
-        rotate(0deg);
+        scale(1);
 
     border-radius: 50%;
 
-    pointer-events: none;
-
-    z-index: 7;
-
     background:
         radial-gradient(
-            circle at center,
+            circle,
 
             #000000 0%,
-            #000000 30%,
+            #000000 31%,
 
-            rgba(0,0,0,0.98) 39%,
+            rgba(0,0,0,0.98) 40%,
 
-            rgba(4,5,8,0.98) 46%,
+            rgba(3,4,7,0.98) 46%,
 
-            rgba(255,255,255,0.14) 52%,
+            rgba(255,255,255,0.15) 52%,
 
-            rgba(155,175,205,0.11) 57%,
+            rgba(170,190,220,0.11) 57%,
 
-            rgba(80,105,145,0.07) 64%,
+            rgba(90,120,165,0.07) 65%,
 
-            transparent 74%
+            transparent 76%
         );
 
     box-shadow:
@@ -170,24 +193,29 @@ cinematicStyle.textContent = `
         0 0 18px
         rgba(255,255,255,0.08),
 
-        0 0 45px
-        rgba(150,175,210,0.11),
+        0 0 50px
+        rgba(145,170,205,0.12),
 
-        0 0 100px
-        rgba(90,120,165,0.09),
+        0 0 110px
+        rgba(90,120,165,0.10),
 
         0 0 180px
         rgba(60,90,130,0.06);
 
+    pointer-events: none;
+
+    z-index: 7;
+
     will-change:
         transform,
-        filter;
+        filter,
+        opacity;
 
 }
 
 
 /* =========================================================
-   BLACK HOLE INNER ACCRETION RING
+   BLACK HOLE INNER ROTATING RING
    ========================================================= */
 
 .cinematic-intro .intro-black-hole::before {
@@ -199,12 +227,11 @@ cinematicStyle.textContent = `
     left: 50%;
     top: 50%;
 
-    width: 78%;
-    height: 78%;
+    width: 82%;
+    height: 82%;
 
     transform:
-        translate(-50%, -50%)
-        rotate(0deg);
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
@@ -214,17 +241,21 @@ cinematicStyle.textContent = `
 
             transparent 0deg,
 
-            rgba(255,255,255,0.02) 35deg,
+            rgba(255,255,255,0.025) 30deg,
 
-            rgba(190,205,225,0.12) 75deg,
+            rgba(200,215,235,0.14) 70deg,
 
-            transparent 115deg,
+            rgba(255,255,255,0.025) 110deg,
 
-            transparent 180deg,
+            transparent 145deg,
 
-            rgba(255,255,255,0.10) 230deg,
+            transparent 190deg,
 
-            transparent 285deg,
+            rgba(190,210,235,0.10) 230deg,
+
+            rgba(255,255,255,0.02) 270deg,
+
+            transparent 315deg,
 
             transparent 360deg
         );
@@ -232,7 +263,7 @@ cinematicStyle.textContent = `
     filter:
         blur(4px);
 
-    opacity: 0.8;
+    opacity: 0.75;
 
 }
 
@@ -250,24 +281,23 @@ cinematicStyle.textContent = `
     left: 50%;
     top: 50%;
 
-    width: 105%;
-    height: 105%;
+    width: 106%;
+    height: 106%;
 
     transform:
-        translate(-50%, -50%)
-        rotate(0deg);
+        translate(-50%, -50%);
 
     border-radius: 50%;
 
     border:
         1px solid
-        rgba(210,225,245,0.08);
+        rgba(210,225,245,0.075);
 
     box-shadow:
         0 0 25px
         rgba(150,175,210,0.08);
 
-    opacity: 0.65;
+    opacity: 0.6;
 
 }
 
@@ -282,17 +312,6 @@ cinematicStyle.textContent = `
         opacity,
         transform,
         filter;
-
-}
-
-
-/* =========================================================
-   CAMERA FLIGHT STATE
-   ========================================================= */
-
-.cinematic-intro.camera-flight {
-
-    pointer-events: none;
 
 }
 
@@ -321,21 +340,6 @@ cinematicStyle.textContent = `
 
 
 /* =========================================================
-   HOMEPAGE REVEAL
-   ========================================================= */
-
-body.intro-revealed .navbar,
-body.intro-revealed .hero,
-body.intro-revealed .section,
-body.intro-revealed .final-cta,
-body.intro-revealed footer {
-
-    visibility: visible !important;
-
-}
-
-
-/* =========================================================
    MOBILE
    ========================================================= */
 
@@ -355,70 +359,22 @@ body.intro-revealed footer {
 
 `;
 
-
 document.head.appendChild(
     cinematicStyle
 );
 
 
 /* =========================================================
-   CREATE FINAL BLACK SCREEN
+   SMOOTH CINEMATIC EASING
    ========================================================= */
-
-let cinematicBlackScreen =
-    cinematicIntro.querySelector(
-        ".cinematic-black-screen"
-    );
-
-
-if (!cinematicBlackScreen) {
-
-    cinematicBlackScreen =
-        document.createElement("div");
-
-    cinematicBlackScreen.className =
-        "cinematic-black-screen";
-
-    cinematicIntro.appendChild(
-        cinematicBlackScreen
-    );
-
-}
-
-
-/* =========================================================
-   CINEMATIC MATH
-   ========================================================= */
-
-/*
-   This is deliberately NOT a normal CSS ease curve.
-
-   The camera starts extremely gently,
-   gradually builds momentum,
-   and becomes powerful near the black hole.
-
-   This avoids the visible:
-       zoom → pause → zoom → pause
-   feeling.
-*/
-
 
 function cinematicEase(t) {
 
-    t = Math.max(
-        0,
-        Math.min(1, t)
-    );
-
-
-    /*
-       Smooth acceleration.
-
-       Zero velocity at the beginning,
-       continuous acceleration,
-       continuous deceleration
-       toward the final frame.
-    */
+    t =
+        Math.max(
+            0,
+            Math.min(1, t)
+        );
 
     return (
         t * t * t *
@@ -433,116 +389,81 @@ function cinematicEase(t) {
 
 
 /* =========================================================
-   CAMERA PROGRESS
+   CAMERA CURVE
    ========================================================= */
 
-function cameraProgress(t) {
+function cameraCurve(t) {
 
-    t = Math.max(
-        0,
-        Math.min(1, t)
-    );
-
-
-    /*
-       Very subtle beginning.
-       Strong acceleration toward the end.
-    */
-
-    const smooth =
-        t * t * (
-            3 - 2 * t
+    t =
+        Math.max(
+            0,
+            Math.min(1, t)
         );
 
 
-    const cinematic =
-        Math.pow(
-            smooth,
-            0.72
-        );
-
-
-    return cinematic;
-
-}
-
-
-/* =========================================================
-   BLACK HOLE PROGRESS
-   ========================================================= */
-
-function blackHoleProgress(t) {
-
-    t = Math.max(
-        0,
-        Math.min(1, t)
-    );
-
-
     /*
-       The black hole stays almost normal
-       while the camera approaches.
+       First part:
+       very slow and deliberate.
 
-       It begins expanding only when
-       the camera is close enough.
+       Middle:
+       camera begins gaining momentum.
+
+       Final:
+       powerful acceleration.
     */
 
-    const start = 0.64;
+    if (t < 0.18) {
 
-    if (t <= start) {
-        return 0;
+        const p =
+            t / 0.18;
+
+        return (
+            p *
+            p *
+            0.055
+        );
+
     }
 
 
-    const local =
-        (t - start) /
-        (1 - start);
+    if (t < 0.55) {
+
+        const p =
+            (t - 0.18) /
+            0.37;
+
+        return (
+            0.055 +
+            cinematicEase(p) *
+            0.23
+        );
+
+    }
 
 
-    return (
-        local *
-        local *
-        local *
-        (
-            local *
-            (
-                local * 6 - 15
-            ) + 10
-        )
-    );
+    if (t < 0.82) {
 
-}
+        const p =
+            (t - 0.55) /
+            0.27;
+
+        return (
+            0.285 +
+            cinematicEase(p) *
+            0.36
+        );
+
+    }
 
 
-/* =========================================================
-   BLACK HOLE SCALE
-   ========================================================= */
-
-function getBlackHoleScale(progress) {
-
-    /*
-       Start:
-           1
-
-       End:
-           enormous
-
-       Exponential growth gives the feeling
-       that the camera is actually entering it,
-       rather than simply enlarging a circle.
-    */
-
-    const startScale = 1;
-
-    const endScale = 48;
-
+    const p =
+        (t - 0.82) /
+        0.18;
 
     return (
-        startScale *
-        Math.pow(
-            endScale / startScale,
-            progress
-        )
+        0.645 +
+        cinematicEase(p) *
+        0.355
     );
 
 }
@@ -554,27 +475,67 @@ function getBlackHoleScale(progress) {
 
 function getCameraScale(progress) {
 
-    /*
-       Camera begins at 1.03.
-
-       Final value is large enough that
-       the black hole completely dominates
-       the frame.
-    */
-
-    const startScale =
+    const start =
         1.03;
 
-    const endScale =
-        8.4;
+    const end =
+        7.6;
 
 
     return (
-        startScale *
+        start *
         Math.pow(
-            endScale / startScale,
+            end / start,
             progress
         )
+    );
+
+}
+
+
+/* =========================================================
+   BLACK HOLE EXPANSION
+   ========================================================= */
+
+function getBlackHoleScale(t) {
+
+    /*
+       The black hole remains almost unchanged
+       during the first part of the camera flight.
+
+       Only once the camera is genuinely close
+       does the event horizon begin dominating
+       the frame.
+    */
+
+    if (t < 0.68) {
+
+        return 1;
+
+    }
+
+
+    const local =
+        (t - 0.68) /
+        0.32;
+
+
+    const eased =
+        cinematicEase(
+            local
+        );
+
+
+    /*
+       Only a controlled final enlargement.
+
+       This is intentionally much smaller than
+       the previous 35x / 48x expansion.
+    */
+
+    return (
+        1 +
+        eased * 7.5
     );
 
 }
@@ -584,18 +545,11 @@ function getCameraScale(progress) {
    CAMERA BRIGHTNESS
    ========================================================= */
 
-function getCameraBrightness(progress) {
-
-    /*
-       Very subtle brightness increase.
-
-       This prevents the image from looking
-       like a normal CSS zoom.
-    */
+function getBrightness(progress) {
 
     return (
         1 +
-        progress * 0.075
+        progress * 0.055
     );
 
 }
@@ -605,29 +559,32 @@ function getCameraBrightness(progress) {
    CAMERA CONTRAST
    ========================================================= */
 
-function getCameraContrast(progress) {
+function getContrast(progress) {
 
     return (
         1 +
-        progress * 0.045
+        progress * 0.035
     );
 
 }
 
 
 /* =========================================================
-   START CINEMATIC CAMERA
+   START CINEMATIC TRANSITION
    ========================================================= */
 
-function startCinematicCamera() {
+function startCinematicTransition() {
 
-    if (cinematicFrame) {
+    if (introFinished) {
+        return;
+    }
+
+
+    if (introFrame) {
 
         cancelAnimationFrame(
-            cinematicFrame
+            introFrame
         );
-
-        cinematicFrame = null;
 
     }
 
@@ -649,26 +606,19 @@ function startCinematicCamera() {
 
 
     /*
-       Total cinematic movement.
-
-       Long enough to feel deliberate,
-       short enough to remain cinematic.
+       Deliberate cinematic duration.
     */
 
-    const CAMERA_DURATION =
-        3850;
+    const duration =
+        3900;
 
 
     /*
-       Black screen is intentionally
-       very short.
+       Very short final black.
     */
 
-    const BLACK_SCREEN_DURATION =
-        280;
-
-
-    let blackStarted = false;
+    const blackDuration =
+        340;
 
 
     cinematicIntro.classList.add(
@@ -676,7 +626,7 @@ function startCinematicCamera() {
     );
 
 
-    function animateCamera(now) {
+    function animate(now) {
 
         if (introFinished) {
             return;
@@ -684,31 +634,17 @@ function startCinematicCamera() {
 
 
         const elapsed =
-            now - startTime;
+            now -
+            startTime;
 
 
-        let rawProgress =
-            elapsed /
-            CAMERA_DURATION;
-
-
-        rawProgress =
+        const raw =
             Math.max(
                 0,
                 Math.min(
                     1,
-                    rawProgress
+                    elapsed / duration
                 )
-            );
-
-
-        /*
-           Main cinematic camera curve.
-        */
-
-        const progress =
-            cameraProgress(
-                rawProgress
             );
 
 
@@ -716,35 +652,31 @@ function startCinematicCamera() {
            CAMERA
            ----------------------------------------- */
 
+        const progress =
+            cameraCurve(raw);
+
+
         const cameraScale =
             getCameraScale(
                 progress
             );
 
 
-        const brightness =
-            getCameraBrightness(
-                progress
-            );
-
-
-        const contrast =
-            getCameraContrast(
-                progress
-            );
-
-
         scene.style.transform =
             `
-            translate3d(0, 0, 0)
+            translate3d(0,0,0)
             scale(${cameraScale})
             `;
 
 
         scene.style.filter =
             `
-            brightness(${brightness})
-            contrast(${contrast})
+            brightness(
+                ${getBrightness(progress)}
+            )
+            contrast(
+                ${getContrast(progress)}
+            )
             `;
 
 
@@ -752,46 +684,40 @@ function startCinematicCamera() {
            BLACK HOLE
            ----------------------------------------- */
 
-        const holeProgress =
-            blackHoleProgress(
-                rawProgress
-            );
-
-
         const holeScale =
             getBlackHoleScale(
-                holeProgress
+                raw
             );
 
 
         /*
-           Slow continuous rotation.
+           Very slow axial rotation.
 
-           The black hole stays fixed in the sky.
-           Only its axis rotates.
+           Importantly:
+           no x/y movement.
         */
 
         const rotation =
-            elapsed * 0.012;
+            elapsed *
+            0.009;
 
 
         introBlackHole.style.transform =
             `
-            translate3d(-50%, -50%, 0)
+            translate3d(-50%,-50%,0)
             scale(${holeScale})
             rotate(${rotation}deg)
             `;
 
 
         /*
-           Make the black hole slightly
-           more intense as the camera approaches.
+           Very subtle increase in intensity.
         */
 
         introBlackHole.style.filter =
             `
             brightness(
-                ${1 + holeProgress * 0.12}
+                ${1 + raw * 0.12}
             )
             `;
 
@@ -800,61 +726,53 @@ function startCinematicCamera() {
            TEXT
            ----------------------------------------- */
 
-        /*
-           Text disappears BEFORE the
-           camera really accelerates.
-        */
-
         let textOpacity = 1;
 
+        let textScale = 1;
 
-        if (rawProgress < 0.18) {
-
-            const textProgress =
-                rawProgress /
-                0.18;
+        let textBlur = 0;
 
 
-            const easedText =
-                textProgress *
-                textProgress *
-                (
-                    3 -
-                    2 *
-                    textProgress
-                );
+        /*
+           Text disappears during the first
+           part of the shot.
+
+           The camera does NOT immediately
+           accelerate.
+        */
+
+        if (raw < 0.20) {
+
+            const p =
+                raw / 0.20;
+
+
+            const e =
+                cinematicEase(p);
 
 
             textOpacity =
+                1 - e;
+
+
+            textScale =
                 1 -
-                easedText;
+                e * 0.025;
+
+
+            textBlur =
+                e * 1.8;
 
         }
         else {
 
             textOpacity = 0;
 
+            textScale = 0.975;
+
+            textBlur = 1.8;
+
         }
-
-
-        /*
-           Very slight cinematic pullback
-           before disappearing.
-        */
-
-        const textScale =
-            1 -
-            Math.min(
-                0.025,
-                rawProgress * 0.04
-            );
-
-
-        const textBlur =
-            Math.min(
-                2,
-                rawProgress * 8
-            );
 
 
         content.style.opacity =
@@ -863,7 +781,7 @@ function startCinematicCamera() {
 
         content.style.transform =
             `
-            translate3d(-50%, -50%, 0)
+            translate3d(-50%,-50%,0)
             scale(${textScale})
             `;
 
@@ -875,38 +793,36 @@ function startCinematicCamera() {
 
 
         /* -----------------------------------------
-           BLACK SCREEN
+           FINAL BLACK
            ----------------------------------------- */
 
-        if (
-            rawProgress >= 0.93 &&
-            !blackStarted
-        ) {
+        /*
+           The black screen begins very late,
+           when the black hole is already
+           dominating the frame.
+        */
 
-            blackStarted = true;
+        if (raw > 0.955) {
 
-        }
-
-
-        if (blackStarted) {
-
-            const blackProgress =
+            const p =
                 (
-                    rawProgress -
-                    0.93
+                    raw -
+                    0.955
                 ) /
-                0.07;
+                0.045;
 
 
-            const blackOpacity =
+            finalBlackScreen.style.opacity =
                 Math.min(
                     1,
-                    blackProgress
+                    p
                 );
 
+        }
+        else {
 
-            cinematicBlackScreen.style.opacity =
-                blackOpacity;
+            finalBlackScreen.style.opacity =
+                0;
 
         }
 
@@ -915,26 +831,19 @@ function startCinematicCamera() {
            FINISH
            ----------------------------------------- */
 
-        if (
-            elapsed >= CAMERA_DURATION
-        ) {
+        if (elapsed >= duration) {
 
-            cinematicBlackScreen.style.opacity =
-                "1";
+            finalBlackScreen.style.opacity =
+                1;
 
 
             setTimeout(
                 () => {
 
-                    if (introFinished) {
-                        return;
-                    }
-
-
-                    finishCinematicIntro();
+                    finishCinematicTransition();
 
                 },
-                BLACK_SCREEN_DURATION
+                blackDuration
             );
 
 
@@ -943,27 +852,27 @@ function startCinematicCamera() {
         }
 
 
-        cinematicFrame =
+        introFrame =
             requestAnimationFrame(
-                animateCamera
+                animate
             );
 
     }
 
 
-    cinematicFrame =
+    introFrame =
         requestAnimationFrame(
-            animateCamera
+            animate
         );
 
 }
 
 
 /* =========================================================
-   FINISH CINEMATIC INTRO
+   FINISH CINEMATIC TRANSITION
    ========================================================= */
 
-function finishCinematicIntro() {
+function finishCinematicTransition() {
 
     if (introFinished) {
         return;
@@ -973,40 +882,27 @@ function finishCinematicIntro() {
     introFinished = true;
 
 
-    if (cinematicFrame) {
+    if (introFrame) {
 
         cancelAnimationFrame(
-            cinematicFrame
+            introFrame
         );
 
-        cinematicFrame = null;
+        introFrame = null;
 
     }
 
 
-    cinematicBlackScreen.style.opacity =
-        "1";
+    finalBlackScreen.style.opacity =
+        1;
 
-
-    /*
-       Hide cinematic intro.
-    */
 
     cinematicIntro.style.display =
         "none";
 
 
-    /*
-       Reveal homepage.
-    */
-
     document.body.classList.remove(
         "intro-playing"
-    );
-
-
-    document.body.classList.add(
-        "intro-revealed"
     );
 
 
@@ -1036,11 +932,7 @@ enterGlow.addEventListener(
         );
 
 
-        /*
-           Start the cinematic camera.
-        */
-
-        startCinematicCamera();
+        startCinematicTransition();
 
     }
 );
@@ -1055,9 +947,8 @@ skipIntro.addEventListener(
     () => {
 
         /*
-           Skip must work even if the
-           cinematic animation has already
-           started.
+           Skip works before OR during
+           the cinematic transition.
         */
 
         if (introFinished) {
@@ -1069,32 +960,22 @@ skipIntro.addEventListener(
         introFinished = true;
 
 
-        /*
-           Stop RAF animation.
-        */
-
-        if (cinematicFrame) {
+        if (introFrame) {
 
             cancelAnimationFrame(
-                cinematicFrame
+                introFrame
             );
 
-            cinematicFrame = null;
+            introFrame = null;
 
         }
 
-
-        /*
-           Completely remove cinematic
-           animation state.
-        */
 
         cinematicIntro.style.animation =
             "none";
 
         cinematicIntro.style.transition =
             "none";
-
 
         cinematicIntro.style.opacity =
             "0";
@@ -1109,17 +990,8 @@ skipIntro.addEventListener(
             "none";
 
 
-        /*
-           Show homepage immediately.
-        */
-
         document.body.classList.remove(
             "intro-playing"
-        );
-
-
-        document.body.classList.add(
-            "intro-revealed"
         );
 
 
@@ -1164,7 +1036,9 @@ const heroDescription =
     document.getElementById("heroDescription");
 
 const sliderDots =
-    document.querySelectorAll("#sliderDots button");
+    document.querySelectorAll(
+        "#sliderDots button"
+    );
 
 
 function setHeroImage(image) {
@@ -1186,9 +1060,11 @@ function setHeroImage(image) {
 
 slides.forEach(slide => {
 
-    const image = new Image();
+    const image =
+        new Image();
 
-    image.src = slide.image;
+    image.src =
+        slide.image;
 
 });
 
@@ -1196,89 +1072,128 @@ slides.forEach(slide => {
 function showSlide(index) {
 
     currentSlide =
-        (index + slides.length) % slides.length;
+        (index + slides.length) %
+        slides.length;
 
-    const slide = slides[currentSlide];
+
+    const slide =
+        slides[currentSlide];
 
 
-    /* Fade everything */
+    heroTitle.style.opacity =
+        "0";
 
-    heroTitle.style.opacity = "0";
-    heroDescription.style.opacity = "0";
-    heroBackground.style.opacity = "0";
+    heroDescription.style.opacity =
+        "0";
+
+    heroBackground.style.opacity =
+        "0";
 
 
     setTimeout(() => {
 
-        heroTitle.textContent = slide.title;
-        heroDescription.textContent = slide.description;
+        heroTitle.textContent =
+            slide.title;
 
-        setHeroImage(slide.image);
+        heroDescription.textContent =
+            slide.description;
 
-        heroTitle.style.opacity = "1";
-        heroDescription.style.opacity = "1";
-        heroBackground.style.opacity = "1";
+        setHeroImage(
+            slide.image
+        );
+
+        heroTitle.style.opacity =
+            "1";
+
+        heroDescription.style.opacity =
+            "1";
+
+        heroBackground.style.opacity =
+            "1";
 
     }, 350);
 
 
-    /* Update dots */
+    sliderDots.forEach(
+        (dot, i) => {
 
-    sliderDots.forEach((dot, i) => {
+            dot.classList.toggle(
+                "active",
+                i === currentSlide
+            );
 
-        dot.classList.toggle(
-            "active",
-            i === currentSlide
+        }
+    );
+
+
+    clearTimeout(
+        slideTimer
+    );
+
+
+    slideTimer =
+        setTimeout(
+            () => {
+
+                showSlide(
+                    currentSlide + 1
+                );
+
+            },
+            4000
         );
-
-    });
-
-
-    /* Restart automatic slideshow */
-
-    clearTimeout(slideTimer);
-
-    slideTimer = setTimeout(() => {
-
-        showSlide(currentSlide + 1);
-
-    }, 4000);
 
 }
 
 
 /* Dot navigation */
 
-sliderDots.forEach((dot, index) => {
+sliderDots.forEach(
+    (dot, index) => {
 
-    dot.addEventListener("click", () => {
+        dot.addEventListener(
+            "click",
+            () => {
 
-        showSlide(index);
+                showSlide(
+                    index
+                );
 
-    });
+            }
+        );
 
-});
+    }
+);
 
 
 /* Start slideshow */
 
-setHeroImage(slides[0].image);
+setHeroImage(
+    slides[0].image
+);
 
-sliderDots.forEach((dot, i) => {
 
-    dot.classList.toggle(
-        "active",
-        i === 0
+sliderDots.forEach(
+    (dot, i) => {
+
+        dot.classList.toggle(
+            "active",
+            i === 0
+        );
+
+    }
+);
+
+
+slideTimer =
+    setTimeout(
+        () => {
+
+            showSlide(1);
+
+        },
+        4000
     );
-
-});
-
-
-slideTimer = setTimeout(() => {
-
-    showSlide(1);
-
-}, 4000);
 
 
 /* =========================================================
@@ -1286,62 +1201,99 @@ slideTimer = setTimeout(() => {
    ========================================================= */
 
 const searchButton =
-    document.getElementById("searchButton");
+    document.getElementById(
+        "searchButton"
+    );
 
 const searchOverlay =
-    document.getElementById("searchOverlay");
+    document.getElementById(
+        "searchOverlay"
+    );
 
 const closeSearch =
-    document.getElementById("closeSearch");
+    document.getElementById(
+        "closeSearch"
+    );
 
 const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
 
 const searchResults =
-    document.getElementById("searchResults");
+    document.getElementById(
+        "searchResults"
+    );
 
 
 /* Open search */
 
-searchButton.addEventListener("click", () => {
+searchButton.addEventListener(
+    "click",
+    () => {
 
-    searchOverlay.classList.add("active");
+        searchOverlay.classList.add(
+            "active"
+        );
 
-    setTimeout(() => {
 
-        searchInput.focus();
+        setTimeout(
+            () => {
 
-    }, 300);
+                searchInput.focus();
 
-});
+            },
+            300
+        );
+
+    }
+);
 
 
 /* Close search */
 
-closeSearch.addEventListener("click", () => {
+closeSearch.addEventListener(
+    "click",
+    () => {
 
-    searchOverlay.classList.remove("active");
+        searchOverlay.classList.remove(
+            "active"
+        );
 
-    searchInput.value = "";
-    searchResults.innerHTML = "";
+        searchInput.value =
+            "";
 
-});
+        searchResults.innerHTML =
+            "";
+
+    }
+);
 
 
 /* Close search with Escape */
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener(
+    "keydown",
+    (event) => {
 
-    if (event.key === "Escape") {
+        if (
+            event.key === "Escape"
+        ) {
 
-        searchOverlay.classList.remove("active");
+            searchOverlay.classList.remove(
+                "active"
+            );
 
-        searchInput.value = "";
-        searchResults.innerHTML = "";
+            searchInput.value =
+                "";
+
+            searchResults.innerHTML =
+                "";
+
+        }
 
     }
-
-});
+);
 
 
 /* =========================================================
@@ -1381,7 +1333,8 @@ searchInput.addEventListener(
                 .trim();
 
 
-        searchResults.innerHTML = "";
+        searchResults.innerHTML =
+            "";
 
 
         if (!query) {
@@ -1390,32 +1343,36 @@ searchInput.addEventListener(
 
 
         const results =
-            shaders.filter(shader => {
+            shaders.filter(
+                shader => {
 
-                return (
+                    return (
 
-                    shader.name
-                        .toLowerCase()
-                        .includes(query)
+                        shader.name
+                            .toLowerCase()
+                            .includes(query)
 
-                    ||
+                        ||
 
-                    shader.category
-                        .toLowerCase()
-                        .includes(query)
+                        shader.category
+                            .toLowerCase()
+                            .includes(query)
 
-                    ||
+                        ||
 
-                    shader.description
-                        .toLowerCase()
-                        .includes(query)
+                        shader.description
+                            .toLowerCase()
+                            .includes(query)
 
-                );
+                    );
 
-            });
+                }
+            );
 
 
-        if (results.length === 0) {
+        if (
+            results.length === 0
+        ) {
 
             searchResults.innerHTML = `
                 <p style="
@@ -1431,47 +1388,51 @@ searchInput.addEventListener(
         }
 
 
-        results.forEach(shader => {
+        results.forEach(
+            shader => {
 
-            const result =
-                document.createElement("div");
-
-
-            result.style.marginTop =
-                "25px";
-
-            result.style.padding =
-                "20px";
-
-            result.style.border =
-                "1px solid rgba(255,255,255,0.09)";
-
-            result.style.borderRadius =
-                "14px";
+                const result =
+                    document.createElement(
+                        "div"
+                    );
 
 
-            result.innerHTML = `
+                result.style.marginTop =
+                    "25px";
 
-                <strong>
-                    ${shader.name}
-                </strong>
+                result.style.padding =
+                    "20px";
 
-                <p style="
-                    margin-top: 5px;
-                    color: #9da3ad;
-                    font-size: 0.85rem;
-                ">
-                    ${shader.description}
-                </p>
+                result.style.border =
+                    "1px solid rgba(255,255,255,0.09)";
 
-            `;
+                result.style.borderRadius =
+                    "14px";
 
 
-            searchResults.appendChild(
-                result
-            );
+                result.innerHTML = `
 
-        });
+                    <strong>
+                        ${shader.name}
+                    </strong>
+
+                    <p style="
+                        margin-top: 5px;
+                        color: #9da3ad;
+                        font-size: 0.85rem;
+                    ">
+                        ${shader.description}
+                    </p>
+
+                `;
+
+
+                searchResults.appendChild(
+                    result
+                );
+
+            }
+        );
 
     }
 );
@@ -1491,23 +1452,25 @@ const revealObserver =
     new IntersectionObserver(
         (entries, observer) => {
 
-            entries.forEach(entry => {
+            entries.forEach(
+                entry => {
 
-                if (
-                    entry.isIntersecting
-                ) {
+                    if (
+                        entry.isIntersecting
+                    ) {
 
-                    entry.target.classList.add(
-                        "revealed"
-                    );
+                        entry.target.classList.add(
+                            "revealed"
+                        );
 
-                    observer.unobserve(
-                        entry.target
-                    );
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
 
                 }
-
-            });
+            );
 
         },
         {
@@ -1516,17 +1479,19 @@ const revealObserver =
     );
 
 
-revealElements.forEach(element => {
+revealElements.forEach(
+    element => {
 
-    element.classList.add(
-        "reveal"
-    );
+        element.classList.add(
+            "reveal"
+        );
 
-    revealObserver.observe(
-        element
-    );
+        revealObserver.observe(
+            element
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -1534,7 +1499,9 @@ revealElements.forEach(element => {
    ========================================================= */
 
 const revealStyle =
-    document.createElement("style");
+    document.createElement(
+        "style"
+    );
 
 
 revealStyle.textContent = `
@@ -1586,15 +1553,17 @@ document
     .querySelectorAll(
         'a[href="#"]'
     )
-    .forEach(link => {
+    .forEach(
+        link => {
 
-        link.addEventListener(
-            "click",
-            event => {
+            link.addEventListener(
+                "click",
+                event => {
 
-                event.preventDefault();
+                    event.preventDefault();
 
-            }
-        );
+                }
+            );
 
-    });
+        }
+    );
