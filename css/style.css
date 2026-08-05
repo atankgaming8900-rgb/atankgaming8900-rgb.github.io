@@ -1118,6 +1118,11 @@ footer {
     overflow: hidden;
 
     background: #020305;
+
+    opacity: 1;
+    visibility: visible;
+
+    pointer-events: auto;
 }
 
 
@@ -1216,14 +1221,14 @@ footer {
 
 
 /* =========================================================
-   BLACK HOLE
+   MOVING BLACK HOLE
    ========================================================= */
 
 .intro-black-hole {
     position: absolute;
 
-    width: min(16vw, 170px);
-    height: min(16vw, 170px);
+    width: min(17vw, 180px);
+    height: min(17vw, 180px);
 
     left: 50%;
     top: 22%;
@@ -1235,41 +1240,64 @@ footer {
     background:
         radial-gradient(
             circle,
-            #000 0 32%,
-            rgba(0,0,0,0.95) 42%,
-            rgba(255,255,255,0.12) 55%,
-            transparent 72%
+            #000 0 30%,
+            #010101 38%,
+            rgba(0,0,0,0.98) 45%,
+            rgba(255,255,255,0.16) 53%,
+            rgba(160,180,210,0.10) 60%,
+            transparent 73%
         );
 
     box-shadow:
-        0 0 25px rgba(255,255,255,0.12),
-        0 0 70px rgba(120,150,190,0.16),
-        0 0 130px rgba(80,110,150,0.12);
+        0 0 22px rgba(255,255,255,0.14),
+        0 0 55px rgba(180,200,230,0.15),
+        0 0 100px rgba(100,130,170,0.13);
 
     animation:
-        blackHolePulse 5s ease-in-out infinite alternate;
+        blackHoleMove 8s ease-in-out infinite alternate;
 
     pointer-events: none;
+
+    z-index: 5;
+
+    will-change: transform;
 }
 
-@keyframes blackHolePulse {
+@keyframes blackHoleMove {
 
-    from {
+    0% {
         transform:
             translate(-50%, -50%)
-            scale(0.94)
-            rotate(0deg);
-
-        filter: brightness(0.9);
+            translate3d(-10px, 0, 0)
+            scale(0.96);
     }
 
-    to {
+    25% {
         transform:
             translate(-50%, -50%)
-            scale(1.08)
-            rotate(8deg);
+            translate3d(5px, 4px, 0)
+            scale(1);
+    }
 
-        filter: brightness(1.15);
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translate3d(12px, -3px, 0)
+            scale(1.03);
+    }
+
+    75% {
+        transform:
+            translate(-50%, -50%)
+            translate3d(-3px, 5px, 0)
+            scale(0.99);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate3d(-12px, -2px, 0)
+            scale(1.04);
     }
 
 }
@@ -1544,182 +1572,6 @@ footer {
 
 
 /* =========================================================
-   ENTER GLOW — CAMERA FLIES INTO BLACK HOLE
-   ========================================================= */
-
-.cinematic-intro.intro-exit {
-    animation:
-        cinematicExit 2.4s cubic-bezier(0.65,0,0.2,1) forwards;
-
-    pointer-events: none;
-}
-
-.cinematic-intro.intro-exit .intro-scene {
-
-    animation:
-        cameraIntoBlackHole
-        2.8s
-        cubic-bezier(0.65, 0, 0.15, 1)
-        forwards !important;
-
-    transform-origin: 54% 20%;
-
-    will-change: transform, filter;
-}
-
-.cinematic-intro.intro-exit .intro-content {
-    animation:
-        introContentExit 0.7s ease forwards;
-}
-
-@keyframes blackHoleTravel {
-
-    0% {
-        transform: scale(1.03);
-        filter: brightness(1);
-    }
-
-    35% {
-        transform: scale(1.12);
-        filter: brightness(1.05);
-    }
-
-    65% {
-        transform: scale(1.55);
-        filter: brightness(1.25);
-    }
-
-    85% {
-        transform: scale(2.8);
-        filter: brightness(1.7);
-    }
-
-    100% {
-        transform: scale(7);
-        filter: brightness(2.5);
-    }
-
-}
-
-@keyframes cinematicExit {
-
-    0% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    72% {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-}
-
-@keyframes introContentExit {
-
-    from {
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%) scale(1);
-    }
-
-    to {
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%) scale(0.7);
-    }
-
-}
-
-
-/* =========================================================
-   SPACE STREAKS
-   ========================================================= */
-
-.space-streaks {
-    position: absolute;
-
-    inset: -50%;
-
-    background:
-        linear-gradient(
-            105deg,
-            transparent 0%,
-            transparent 48%,
-            rgba(255, 255, 255, 0.035) 49%,
-            transparent 50%
-        ),
-        linear-gradient(
-            75deg,
-            transparent 0%,
-            transparent 53%,
-            rgba(180, 200, 220, 0.025) 54%,
-            transparent 55%
-        );
-
-    opacity: 0.45;
-
-    pointer-events: none;
-}
-
-.cinematic-intro.intro-exit .space-streaks {
-    animation:
-        spaceStreakWarp
-        2.4s
-        cubic-bezier(0.65, 0, 0.2, 1)
-        forwards;
-}
-
-@keyframes spaceStreakWarp {
-
-    0% {
-        transform: scale(1);
-        opacity: 0.25;
-    }
-
-    45% {
-        transform: scale(1.25);
-        opacity: 0.4;
-    }
-
-    75% {
-        transform: scale(2);
-        opacity: 0.65;
-    }
-
-    100% {
-        transform: scale(4);
-        opacity: 0;
-    }
-
-}
-
-
-/* =========================================================
-   INTRO TRANSITION
-   ========================================================= */
-
-.cinematic-intro {
-    transition:
-        opacity 0.8s ease 1.7s,
-        visibility 0s linear 2.5s;
-}
-
-.cinematic-intro.intro-exit {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-
-/* =========================================================
    HIDE HOMEPAGE DURING INTRO
    ========================================================= */
 
@@ -1728,26 +1580,12 @@ body.intro-playing .hero,
 body.intro-playing .section,
 body.intro-playing .final-cta,
 body.intro-playing footer {
-    visibility: hidden;
-}
-
-
-/* =========================================================
-   INSTANT SKIP INTRO
-   ========================================================= */
-
-.cinematic-intro.skip-intro-now {
-    animation: none !important;
-    transition: none !important;
-
-    opacity: 0 !important;
     visibility: hidden !important;
-    pointer-events: none !important;
 }
 
 
 /* =========================================================
-   LOCK PAGE WHILE CINEMATIC INTRO IS ACTIVE
+   PAGE LOCK
    ========================================================= */
 
 html.intro-active,
@@ -1757,7 +1595,7 @@ body.intro-active {
 
 
 /* =========================================================
-   INTRO TEXT ANIMATION
+   TEXT ANIMATIONS
    ========================================================= */
 
 .intro-label {
@@ -1809,10 +1647,6 @@ body.intro-active {
 }
 
 
-/* =========================================================
-   SMALL TEXT ANIMATION
-   ========================================================= */
-
 @keyframes introTextFade {
 
     from {
@@ -1828,10 +1662,6 @@ body.intro-active {
 }
 
 
-/* =========================================================
-   GLOW TITLE ANIMATION
-   ========================================================= */
-
 @keyframes introTitleFade {
 
     from {
@@ -1846,10 +1676,6 @@ body.intro-active {
 
 }
 
-
-/* =========================================================
-   BUTTON ANIMATION
-   ========================================================= */
 
 @keyframes introButtonFade {
 
@@ -1867,14 +1693,371 @@ body.intro-active {
 
 
 /* =========================================================
-   BLACK HOLE ZOOM
+   ENTER GLOW — CINEMATIC EXIT
    ========================================================= */
 
-.cinematic-intro.intro-zoom .intro-scene {
-    transform: scale(7);
+/*
+   0.00s — button clicked
+   0.00–0.65s — all intro text disappears
+   0.65–3.10s — camera smoothly travels toward black hole
+   ~2.15s — black hole begins rapidly expanding
+   3.10s — complete black
+   3.10–4.10s — black screen
+   4.10s — homepage appears
+*/
 
-    transition:
-        transform 3.2s cubic-bezier(0.65, 0, 0.15, 1);
+
+.cinematic-intro.intro-exit {
+    pointer-events: none;
+
+    animation:
+        cinematicBlackHoleExit
+        4.1s
+        linear
+        forwards;
+}
+
+
+/* =========================================================
+   CAMERA — TARGET THE BLACK HOLE
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-scene {
+
+    animation:
+        cameraIntoBlackHole
+        3.1s
+        cubic-bezier(0.22, 0.61, 0.36, 1)
+        forwards !important;
+
+    transform-origin: 50% 22%;
+
+    will-change: transform, filter;
+}
+
+
+/* =========================================================
+   BLACK HOLE — GROWS AS CAMERA REACHES IT
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-black-hole {
+
+    animation:
+        blackHoleExpand
+        3.1s
+        cubic-bezier(0.22, 0.61, 0.36, 1)
+        forwards !important;
+
+    will-change: transform, opacity, filter;
+
+    transform-origin: center;
+}
+
+
+/* =========================================================
+   TEXT DISAPPEARS FIRST
+   ========================================================= */
+
+.cinematic-intro.intro-exit .intro-content {
+
+    animation:
+        introContentDisappear
+        0.65s
+        cubic-bezier(0.4, 0, 1, 1)
+        forwards !important;
+}
+
+
+/* =========================================================
+   CAMERA MOVEMENT
+   ========================================================= */
+
+@keyframes cameraIntoBlackHole {
+
+    0% {
+        transform:
+            scale(1.03)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1);
+    }
+
+    15% {
+        transform:
+            scale(1.08)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.01);
+    }
+
+    30% {
+        transform:
+            scale(1.18)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.03);
+    }
+
+    45% {
+        transform:
+            scale(1.38)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.05);
+    }
+
+    60% {
+        transform:
+            scale(1.72)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.08);
+    }
+
+    72% {
+        transform:
+            scale(2.2)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.12);
+    }
+
+    82% {
+        transform:
+            scale(2.9)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.16);
+    }
+
+    90% {
+        transform:
+            scale(4.2)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.22);
+    }
+
+    96% {
+        transform:
+            scale(6)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.28);
+    }
+
+    100% {
+        transform:
+            scale(8)
+            translate3d(0, 0, 0);
+
+        filter: brightness(1.35);
+    }
+
+}
+
+
+/* =========================================================
+   BLACK HOLE EXPANSION
+   ========================================================= */
+
+@keyframes blackHoleExpand {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 1;
+
+        filter: brightness(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.25);
+
+        opacity: 1;
+
+        filter: brightness(1.05);
+    }
+
+    68% {
+        transform:
+            translate(-50%, -50%)
+            scale(2.5);
+
+        opacity: 1;
+
+        filter: brightness(1.1);
+    }
+
+    78% {
+        transform:
+            translate(-50%, -50%)
+            scale(6);
+
+        opacity: 1;
+
+        filter: brightness(1.15);
+    }
+
+    86% {
+        transform:
+            translate(-50%, -50%)
+            scale(15);
+
+        opacity: 1;
+
+        filter: brightness(1.2);
+    }
+
+    93% {
+        transform:
+            translate(-50%, -50%)
+            scale(32);
+
+        opacity: 1;
+
+        filter: brightness(1.25);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(60);
+
+        opacity: 1;
+
+        filter: brightness(1.3);
+    }
+
+}
+
+
+/* =========================================================
+   TEXT DISAPPEAR
+   ========================================================= */
+
+@keyframes introContentDisappear {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.92);
+    }
+
+}
+
+
+/* =========================================================
+   FINAL BLACK SCREEN
+   ========================================================= */
+
+.cinematic-intro.intro-exit::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    background: #000;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    animation:
+        finalBlackScreen
+        4.1s
+        linear
+        forwards;
+}
+
+
+@keyframes finalBlackScreen {
+
+    0% {
+        opacity: 0;
+    }
+
+    72% {
+        opacity: 0;
+    }
+
+    78% {
+        opacity: 0.15;
+    }
+
+    84% {
+        opacity: 0.55;
+    }
+
+    90% {
+        opacity: 0.92;
+    }
+
+    92% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================================
+   INTRO DISAPPEARS AFTER BLACK
+   ========================================================= */
+
+@keyframes cinematicBlackHoleExit {
+
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    92% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+}
+
+
+/* =========================================================
+   INSTANT SKIP
+   ========================================================= */
+
+.cinematic-intro.skip-intro-now {
+
+    animation: none !important;
+    transition: none !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 
 
@@ -1894,12 +2077,6 @@ body.intro-active {
 
         top: 22%;
     }
-
-    /*
-       IMPORTANT:
-       Keep the intro content exactly centered on mobile.
-       Do not use margin-top here.
-    */
 
     .cinematic-intro .intro-content {
         position: absolute;
@@ -1959,340 +2136,8 @@ body.intro-active {
     }
 
     .intro-black-hole {
-        display: none;
-    }
-
-}
-
-/* =========================================================
-   GLOW — FINAL BLACK HOLE CINEMATIC TRANSITION
-   ========================================================= */
-
-/*
-   Sequence:
-
-   0.00s — normal intro
-   0.00–2.40s — camera rushes toward black hole
-   2.40–2.80s — black hole fills the screen
-   2.80–3.20s — complete black screen
-   3.20s — homepage appears
-*/
-
-
-/* ---------------------------------------------------------
-   MAIN CINEMATIC TRANSITION
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit {
-
-    pointer-events: none;
-
-    animation:
-        cinematicBlackHoleExit
-        3.2s
-        cubic-bezier(0.65, 0, 0.15, 1)
-        forwards !important;
-}
-
-
-/* ---------------------------------------------------------
-   CAMERA MOVEMENT
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit .intro-scene {
-
-    animation:
-        cameraIntoBlackHole
-        2.8s
-        cubic-bezier(0.65, 0, 0.15, 1)
-        forwards !important;
-
-    transform-origin: 50% 22%;
-
-    will-change: transform, filter;
-}
-
-
-/* ---------------------------------------------------------
-   BLACK HOLE BECOMES THE CAMERA TARGET
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit .intro-black-hole {
-
-    animation:
-        blackHoleExpand
-        2.8s
-        cubic-bezier(0.65, 0, 0.15, 1)
-        forwards !important;
-
-    transform-origin: center;
-}
-
-
-/* ---------------------------------------------------------
-   HIDE INTRO TEXT DURING CAMERA FLIGHT
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit .intro-content {
-
-    animation:
-        introContentDisappear
-        0.7s
-        ease
-        forwards !important;
-}
-
-
-/* ---------------------------------------------------------
-   CAMERA FLIES INTO BLACK HOLE
-   --------------------------------------------------------- */
-
-@keyframes cameraIntoBlackHole {
-
-    0% {
-        transform: scale(1.03);
-        filter: brightness(1);
-    }
-
-    20% {
-        transform: scale(1.08);
-        filter: brightness(1.02);
-    }
-
-    40% {
-        transform: scale(1.22);
-        filter: brightness(1.05);
-    }
-
-    58% {
-        transform: scale(1.55);
-        filter: brightness(1.08);
-    }
-
-    72% {
-        transform: scale(2.05);
-        filter: brightness(1.12);
-    }
-
-    84% {
-        transform: scale(2.9);
-        filter: brightness(1.18);
-    }
-
-    93% {
-        transform: scale(4.2);
-        filter: brightness(1.3);
-    }
-
-    100% {
-        transform: scale(7.5);
-        filter: brightness(1.5);
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   BLACK HOLE EXPANDS INTO THE SCREEN
-   --------------------------------------------------------- */
-
-@keyframes blackHoleExpand {
-
-    0% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-
-        opacity: 1;
-
-    }
-
-    40% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(2);
-
-        opacity: 1;
-
-    }
-
-    65% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(5);
-
-        opacity: 1;
-
-    }
-
-    82% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(12);
-
-        opacity: 1;
-
-    }
-
-    100% {
-
-        transform:
-            translate(-50%, -50%)
-            scale(35);
-
-        opacity: 1;
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   TEXT DISAPPEARS
-   --------------------------------------------------------- */
-
-@keyframes introContentDisappear {
-
-    0% {
-
-        opacity: 1;
-
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%)
-            scale(0.75);
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   COMPLETE CINEMATIC EXIT
-   --------------------------------------------------------- */
-
-@keyframes cinematicBlackHoleExit {
-
-    0% {
-
-        opacity: 1;
-
-        visibility: visible;
-
-    }
-
-    75% {
-
-        opacity: 1;
-
-        visibility: visible;
-
-    }
-
-    87% {
-
-        opacity: 1;
-
-        visibility: visible;
-
-        background: #020305;
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        visibility: hidden;
-
-        background: #000;
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   HOMEPAGE STAYS HIDDEN DURING TRANSITION
-   --------------------------------------------------------- */
-
-body.intro-playing .navbar,
-body.intro-playing .hero,
-body.intro-playing .section,
-body.intro-playing .final-cta,
-body.intro-playing footer {
-
-    visibility: hidden !important;
-
-}
-
-
-/* ---------------------------------------------------------
-   BLACK SCREEN MOMENT
-   --------------------------------------------------------- */
-
-.cinematic-intro.intro-exit::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 100;
-
-    background: #000;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    animation:
-        finalBlackScreen
-        3.2s
-        ease
-        forwards;
-
-}
-
-
-@keyframes finalBlackScreen {
-
-    0% {
-        opacity: 0;
-    }
-
-    72% {
-        opacity: 0;
-    }
-
-    80% {
-        opacity: 0.15;
-    }
-
-    86% {
-        opacity: 0.55;
-    }
-
-    92% {
-        opacity: 0.9;
-    }
-
-    100% {
-        opacity: 1;
+        width: 100px;
+        height: 100px;
     }
 
 }
